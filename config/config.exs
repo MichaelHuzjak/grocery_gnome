@@ -27,12 +27,3 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-
-# config :guardian, Guardian,
-#   allowed_algos: ["HS512"], # hs512 is the default, probably works well enough
-#   verify_module: Guardian,JWT, # mechanism to setup validations for items in the token
-#   issuer: "GroceryGnome" # put into token as issuer
-#   ttl: {30, :days}, # time to live
-# 	verify_issuer: true,
-# 	secret_key: # some secret key to sign the tokens
-# 	serializer: GroceryGnome.GuardianSerializer # serializes thesubject field into and out of the token
