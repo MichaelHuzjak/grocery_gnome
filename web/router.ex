@@ -39,6 +39,7 @@ defmodule GroceryGnome.Router do
 
     get "/", PageController, :index
 		delete "/logout", AuthController, :logout
+		get "/", PageController, :splash
 		get "/test", PageController, :test
 
 		# resources "/users", UserController
