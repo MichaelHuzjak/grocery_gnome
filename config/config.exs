@@ -14,6 +14,13 @@ config :grocery_gnome, GroceryGnome.Endpoint,
   pubsub: [name: GroceryGnome.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :grocery_gnome, GroceryGnome.Repo,
+  adapter: Ecto.Adapters.Postgres,
+	database: "ecto_simple",
+	username: "postgres",
+	password: "postgres",
+	hostname: "localhost"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -27,3 +34,12 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+# config :guardian, Guardian,
+#   allowed_algos: ["HS512"], # optional
+#   verify_module: Guardian.JWT,  # optional
+#   issuer: "GroceryGnome",
+#   ttl: { 30, :days },
+#   verify_issuer: true, # optional
+#   secret_key: <guardian secret key>,
+#   serializer: MyApp.GuardianSerializer
