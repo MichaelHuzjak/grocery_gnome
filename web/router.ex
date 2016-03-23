@@ -19,12 +19,6 @@ defmodule GroceryGnome.Router do
     get "/", PageController, :index
 		delete "/logout", AuthController, :logout
 		get "/test", PageController, :test
-
-		# resources "/users", UserController
-		# resources "/authorizations", AuthorizationController
-		# resources "/tokens", TokenController
-
-		# get "/private", PrivatePageController, :index
   end
 
   # Other scopes may use custom stacks.
