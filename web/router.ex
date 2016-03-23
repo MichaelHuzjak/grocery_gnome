@@ -19,6 +19,12 @@ defmodule GroceryGnome.Router do
     get "/", PageController, :index
 		delete "/logout", AuthController, :logout
 		get "/test", PageController, :test
+
+		get "/kitchen", KitchenController, :index
+		get "/pantry", PantryController, :index
+		get "/grocerylist", ListController, :index
+		get "/u/:user", UserController, :index
+
   end
 
   # Other scopes may use custom stacks.
