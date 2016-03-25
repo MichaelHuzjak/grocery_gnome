@@ -1,0 +1,128 @@
+html {
+	height: 100vh;
+}
+
+.navbar {background-color: black;}
+
+.navbar .nav > li > a {
+	color: white;
+	font-size: 18px;
+	text-align: left;
+}
+
+.navbar-inverse .navbar-brand  {
+	font-size: 50px;
+	font-family: "Goudy Old Style", serif;
+	color: white;
+ 	text-shadow: 0    0   2px #fefcc9,
+              	     1px -1px 3px #00ff00,
+                    -2px -2px 4px #00cc00,
+                     2px -4px 5px #009900,
+                    -2px -6px 6px #006600,
+                     0   -8px 7px #003300,
+                     1px -9px 8px #000000;
+}
+
+.col-sm-4 {
+	height: 100%;
+}
+
+.col-sm-4 button {
+	display: block;
+	width: 100px;
+	font-size: 22px;
+	font-weight: bold;
+	margin: 0 auto;
+}
+
+
+p {
+	margin: auto;
+	color: black;
+	font-size: 18px;
+	font-family: "Verdana", sans-serif;
+	padding-top: 24px;
+	padding-left: 14px;
+	padding-right: 14px;
+	padding-bottom: 14px;
+}
+
+img {
+	padding-top: 24px;
+	margin: auto;
+	width: 50%;
+}
+
+
+#gColumn {
+	text-align: center;
+	height: 100vh;
+	background-color: #00cc33;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+}
+
+#gContent {
+	text-align: center;
+	margin: auto;
+	position: absolute;
+	top: 80px;
+}
+
+#gContent h1 {
+	font-family: "Papyrus", fantasy;
+	font-style: italic;
+	font-size: 50px;
+	text-decoration: underline;
+	color: black
+}
+
+#pColumn {
+	text-align: center;	
+	height:100vh;
+	background-color: #00ff33;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+}
+
+#pContent {
+	text-align: center;
+	margin: auto;
+	position: absolute;
+	top: 80px;
+}	
+
+#pContent h1 {
+	font-family: "Papyrus", fantasy;
+	font-style: italic;
+	font-size: 50px;
+	text-decoration: underline;
+	color: black
+}
+
+#kColumn {
+	text-align: center;	
+	height:100vh;
+	background-color: #00cc33;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+	width: 33%;
+}
+
+#kContent {
+	text-align:center;
+	margin: auto;
+	position: absolute;
+	top: 80px;
+}
+
+#kContent h1 {
+	font-family: "Papyrus", fantasy;
+	font-style: italic;
+	font-size: 50px;
+	text-decoration: underline;
+	color: black;
+}
