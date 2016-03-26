@@ -17,6 +17,7 @@ defmodule GroceryGnome.Router do
     pipe_through [:browser]
 
     get "/", PageController, :index
+		get "/home", PageController, :home
 		delete "/logout", AuthController, :logout
 		get "/test", PageController, :test
 
