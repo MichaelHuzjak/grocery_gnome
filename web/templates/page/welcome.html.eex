@@ -1,32 +1,29 @@
-<title>GroceryGnome</title>
-  <body>
-    <span style="width: 100%;">
-      <div id="welcomeImage" style="width:50%;float:left;">
-          <img src ="images/groceryGnome.jpg" style="height:75%;">
-      </div>
-      <div style="width: 50%;float: right;">
+<span style="width: 100%;">
+    <div id="welcomeImage" style="width:50%;float:left;">
+        <img src ="images/groceryGnome.jpg" style="height:75%;">
+    </div>
+    <div style="width: 50%;float: right;">
         <div id="login" style="float:right;">
-          <form>
-            <input type="email" name="email" required>
-            <input type="password" name="password" pattern="[A-Za-z0-9]*" required>
-            <input type="submit" value="Login" id="loginButton">
-          </form>
+            <form>
+		<input type="email" name="email" required>
+		<input type="password" name="password" pattern="[A-Za-z0-9]*" required>
+		<input type="submit" value="Login" id="loginButton">
+            </form>
         </div>
         <div id="signUp" style="float:right;">
-          <form>
-            <input type="text" name="firstName" pattern="[A-Za-z0-9]*" required>
-            <input type="text" name="lastName" pattern="[A-Za-z0-9]*" required>
-            <br>
-            <input type="email" name="email" required>
-            <br>
-            <input type="password" name="password" pattern="[A-Za-z0-9]*" required>
-            <input type="password" name="confirmPassword" pattern="[A-Za-z0-9]*" required>
-            <br>
-            <input type="number" name="householdSize" min="1" required>
-            <br>
-            <input type="submit" value="Sign Up" id="signUpButton" style="align:center;">
-          </form>
+            <form>
+		<input type="text" name="firstName" pattern="[A-Za-z0-9]*" required>
+		<input type="text" name="lastName" pattern="[A-Za-z0-9]*" required>
+		<br>
+		<input type="email" name="email" required>
+		<br>
+		<input type="password" name="password" pattern="[A-Za-z0-9]*" required>
+		<input type="password" name="confirmPassword" pattern="[A-Za-z0-9]*" required>
+		<br>
+		<input type="number" name="householdSize" min="1" required>
+		<br>
+		<input type="submit" value="Sign Up" id="signUpButton" style="align:center;">
+            </form>
         </div>
-      </div>
-    </span>
-  </body>
+    </div>
+</span>

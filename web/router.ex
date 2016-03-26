@@ -18,13 +18,16 @@ defmodule GroceryGnome.Router do
 
     get "/", PageController, :login
 		get "/home", PageController, :home
-
-		delete "/logout", AuthController, :logout
 		get "/test", PageController, :test
 
+		delete "/logout", AuthController, :logout
+
 		get "/kitchen", KitchenController, :index
+
 		get "/pantry", PantryController, :index
+
 		get "/grocerylist", ListController, :index
+
 		get "/u/:user", UserController, :index
 
   end
