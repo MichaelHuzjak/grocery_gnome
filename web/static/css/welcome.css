@@ -18,7 +18,7 @@ body {
 	background-size: 100%;
 	background-repeat: no-repeat;
 	border-right-style: solid;
-	border-right-size: 2px;
+	border-right-size: 3px;
 	border-right-color: white;
 	z-index: 9999;
 }
