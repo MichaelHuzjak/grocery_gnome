@@ -1,1 +1,4 @@
-test page
+<%= form_for @conn, page_path(@conn, :new), [as: :search], fn f -> %>
+    <%= text_input f, :for %>
+    <%= submit "Search" %>
+<% end %>

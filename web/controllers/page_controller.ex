@@ -12,4 +12,10 @@ defmodule GroceryGnome.PageController do
   def test(conn, _params) do
     render conn, "test.html"
   end
+
+	# def new(conn, _params) do
+	# 	changeset = User.changeset(%User{})
+	# 	render conn, "new.html", changeset: changeset
+	# end
+
 end
