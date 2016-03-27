@@ -5,40 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11">
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" type="text/css" href="welcome.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="welcomeAlternate.css">
 </head>
   <body>
+​
+​
     <span style="width: 100%;">
-      <div id="welcomeImage" style="width:70%;float:left;">
-        <img src ="welcome.jpg" style="height:100%;">
-	<h1>GroceryGnome</h1>
+      <div id="welcomeImage" style="width: 60%; float:left;">
+        
+	<h1>Grocery Gnome</h1>
+	
       </div>
-      <div id="bothForms" style="width: 30%;float: right;">
-        <div id="login">
-	  <h2>Login</h2>
-          <form action="/home" method="POST">
-            <label>Email:</label> <input type="email" name="email" required>
-            <label>Password:</label> <input type="password" name="password" pattern="[A-Za-z0-9]*" required>
-            <input type="submit" value="Login" id="loginButton">
-          </form>
-        </div>
-        <div id="signUp">
-	  <h3>Sign Up</h3>
-          <form>
-            <label>First Name:</label> <input type="text" name="firstName" pattern="[A-Za-z0-9]*" required>
-            <label>Last Name:</label> <input type="text" name="lastName" pattern="[A-Za-z0-9]*" required>
-            <br>
-            <label>Email:</label> <input type="email" name="email" required>
-            <br>
-            <label>Password:</label> <input type="password" name="password" pattern="[A-Za-z0-9]*" required>
-            <label>Confirm Password:</label> <input type="password" name="confirmPassword" pattern="[A-Za-z0-9]*" required>
-            <br>
-            <label>Household Size:</label> <input type="number" name="householdSize" min="1" required>
-            <br>
-            <input type="submit" value="Sign Up" id="signUpButton" style="align:center;">
-          </form>
-        </div>
-      </div>
+<div id="bothForms" style="width: 40%; float: right;">
+  <form role="form">
+  <h3>Login</h3>
+  <div id="login" class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email" required>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" pattern="[A-Za-z0-9]*" required>
+  </div>
+  <input type="submit" value="Login" id="loginButton">	
+  </form>
+​
+  <form role="form">
+    <h2>Sign Up</h2>
+    <div class="form-group">
+      <label>First Name:</label>
+      <input type="text" class="form-control" id="first" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label>Last Name:</label>
+      <input type="text" class="form-control" id="last" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="mail" required>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pass" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Confirm Password:</label>
+      <input type="password" class="form-control" id="confirm" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label>Household Size:</label>
+      <input type="number" class="form-control" id="size" min="1" required>
+    </div>  
+    <input type="submit" value="Sign Up" id="signUpButton" style="align:center;">
+  </form>
+</div>
+​
     </span>
   </body>
 </html>

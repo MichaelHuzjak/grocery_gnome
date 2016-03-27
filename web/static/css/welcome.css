@@ -1,108 +1,105 @@
 html {
     overflow-x: auto; 
-    overflow-y: hidden;
+    overflow-y: auto;
+    height: 100%;
+​
 }
 ​
 body {
-	background-color: LimeGreen
-​
-}
-​
-img {
-	border-right-style: groove;
-	border-right-width: 5px;
-	border-right-color: black;
-}
-​
-welcomeImage {
+	background-image: url(green.jpg);
 	
-	border-style: groove;
-	border-width: 5px;
-	border-color: #003300;
+	height: 100%;
 }
 ​
-form {
-	padding-left: 50px;
-	margin: auto;
+#welcomeImage {
+	position: relative;
+	height: 100%;
+	background-image: url(welcome.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	border-right-style: solid;
+	border-right-size: 2px;
+	border-right-color: white;
+	z-index: 9999;
 }
 ​
-#login {
-	margin-bottom: 200px;
-​
-}
-​
-signUp {
-	border-top-style: groove;
-	border-top-width: 5px;
-	border-top-color: black;
-}
-​
-#login * {
-	margin-bottom: 10px;
-} 
-​
-#signUp * {
-	margin-bottom: 10px;
-} 
 ​
 label {
-	display: inline-block;
-	float: left;
-        clear: left;
-        width: 250px;
-        text-align: right;
+	color: black;
 }
+​
+​
+form {
+	padding-top: 0px;
+	padding-right: 125px;
+	padding-left: 125px;
+	
+}
+​
 input {
-        display: inline-block;
-        float: left;
+	height: 25px;
 }
+​
+pwd {
+	height: 50px;
+}
+​
+​
 ​
 bothForms {
-	
-	background-color: #C0C0C0;
+	text-align: center;
 	align: center;
-​
-}
-​
-loginButton {
-	position: absolute;
-	bottom: 200px;
-	right 100px;
-}
-​
-signUpButton {
-	position: absolute;
-	bottom: 200px;
-	right 100px;
-}
-​
-​
-​
-#loginButton {
+	overflow-x: auto;
+	display: inline-block;
 	
 }
+​
+​
+​
 ​
 h1 {
-	font-size: 100px;
+	position: absolute;
+	top: 0px;
+	right: 20px;
+	font-size: 70px;
 	font-family: "Goudy Old Style", serif;
-	color: black;
+	color: white;
+ 	text-shadow: 0    0   2px #fefcc9,
+              	     1px -1px 3px #00ff00,
+                    -2px -2px 4px #00cc00,
+                     2px -4px 5px #009900,
+                    -2px -6px 6px #006600,
+                     0   -8px 7px #003300,
+                     1px -9px 8px #000000;
 ​
 ​
 }
 ​
 h2 {
-	font-size: 40px;
-	font-family: "Goudy Old Style", serif;
+	padding-left: 120px;
+	font-size: 26px;
+	font-family: "Verdana", sans-serif;
 	color: black;
-	position: relative;
-	left: 105px;
 ​
 }
 ​
 h3 {
-	font-size: 40px;
-	font-family: "Goudy Old Style", serif;
+	padding-left: 130px;
+	font-size: 26px;
+	font-family: "Verdana", sans-serif;
 	color: black;
-	position: relative;
 	left: 105px;
+​
+}
+​
+​
+​
+input[type="submit] {
+	color: green;
+	border-radius: 20%;
+	border: 2px solid black;
+}
+​
+loginButton:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);	
 }
