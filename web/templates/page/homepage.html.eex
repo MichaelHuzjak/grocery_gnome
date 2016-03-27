@@ -12,7 +12,7 @@
 	  If you don't know where to start, you can always shop by recipes, which are located in
 	  the Kitchen section.  Your Meal Scheduler will also make suggestions for you.
       </p>
-      <button type="button" class="btn btn-md" action="<%= list_path(@conn, :index) %>" method="POST">Go!<span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+       <a href="/grocerylist" class="btn btn-md">Go!</a><span class="glyphicon glyphicon-circle-arrow-right"></span>
     </div>
   </div>
   
@@ -25,7 +25,7 @@
 	  something? Don't be!  The Pantry will inform you of low stock food items, as well as
 	  nearly expired foods, at your request.
       </p>
-     <button type="button" class="btn btn-md" action="<%= pantry_path(@conn, :index) %>" method="POST">Go!<span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+     <a href="/pantry" class="btn btn-md">Go!</a><span class="glyphicon glyphicon-circle-arrow-right"></span>
     </div>
   </div>
 
@@ -37,8 +37,7 @@
 	  and create your own recipes or find public recipes.  In addition, you can add leftovers
 	  into the Pantry.
       </p>
-      <button type="button" class="btn btn-md">Go!<span class="glyphicon glyphicon-circle-arrow-right"></span>
-      </button>
+       <a href="/kitchen" class="btn btn-md">Go!</a><span class="glyphicon glyphicon-circle-arrow-right"></span>
     </div>
   </div>
 </div>
