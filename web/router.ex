@@ -19,7 +19,7 @@ defmodule GroceryGnome.Router do
     get "/", PageController, :login
 		get "/home", PageController, :home
 		get "/test", PageController, :test
-
+		resources "/persons", PersonController
 		delete "/logout", AuthController, :logout
 
 		get "/kitchen", KitchenController, :index
