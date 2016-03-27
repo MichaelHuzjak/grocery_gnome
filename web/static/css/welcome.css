@@ -1,0 +1,108 @@
+html {
+    overflow-x: auto; 
+    overflow-y: hidden;
+}
+​
+body {
+	background-color: LimeGreen
+​
+}
+​
+img {
+	border-right-style: groove;
+	border-right-width: 5px;
+	border-right-color: black;
+}
+​
+welcomeImage {
+	
+	border-style: groove;
+	border-width: 5px;
+	border-color: #003300;
+}
+​
+form {
+	padding-left: 50px;
+	margin: auto;
+}
+​
+#login {
+	margin-bottom: 200px;
+​
+}
+​
+signUp {
+	border-top-style: groove;
+	border-top-width: 5px;
+	border-top-color: black;
+}
+​
+#login * {
+	margin-bottom: 10px;
+} 
+​
+#signUp * {
+	margin-bottom: 10px;
+} 
+​
+label {
+	display: inline-block;
+	float: left;
+        clear: left;
+        width: 250px;
+        text-align: right;
+}
+input {
+        display: inline-block;
+        float: left;
+}
+​
+bothForms {
+	
+	background-color: #C0C0C0;
+	align: center;
+​
+}
+​
+loginButton {
+	position: absolute;
+	bottom: 200px;
+	right 100px;
+}
+​
+signUpButton {
+	position: absolute;
+	bottom: 200px;
+	right 100px;
+}
+​
+​
+​
+#loginButton {
+	
+}
+​
+h1 {
+	font-size: 100px;
+	font-family: "Goudy Old Style", serif;
+	color: black;
+​
+​
+}
+​
+h2 {
+	font-size: 40px;
+	font-family: "Goudy Old Style", serif;
+	color: black;
+	position: relative;
+	left: 105px;
+​
+}
+​
+h3 {
+	font-size: 40px;
+	font-family: "Goudy Old Style", serif;
+	color: black;
+	position: relative;
+	left: 105px;
+}
