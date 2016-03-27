@@ -17,7 +17,9 @@ defmodule GroceryGnome.Router do
     pipe_through [:browser]
 
     get "/", PageController, :login
+		post "/", PageController, :login
 		get "/home", PageController, :home
+		post "/home", PageController, :home
 		get "/test", PageController, :test
 		resources "/persons", PersonController
 		delete "/logout", AuthController, :logout
@@ -28,7 +30,7 @@ defmodule GroceryGnome.Router do
 
 		get "/grocerylist", ListController, :index
 
-		get "/u/:user", UserController, :index
+		get "/u", UserController, :index
 
   end
 
