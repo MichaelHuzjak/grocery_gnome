@@ -59,6 +59,10 @@ function deleteRow(btn) {
     </tbody>
   </table>
   </div>
-  <button class="btn btn-success" onclick="addFood()">Add Food Item</button>
-  <button class="btn btn-primary">Move selected items to Pantry</button>
+  <div style="float: left">
+    <button class="btn btn-success" onclick="addFood()">Add Food Item</button>
+    </div>
+  <div class="text-right">
+    <button class="btn btn-link">Move selected items to Pantry</button>
+  </div>
 </div>
