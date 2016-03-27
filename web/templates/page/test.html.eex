@@ -1,4 +1,11 @@
-<%= form_for @conn, page_path(@conn, :new), [as: :search], fn f -> %>
-    <%= text_input f, :for %>
-    <%= submit "Search" %>
-<% end %>
+<%= text_input :user, :name, value: "default" %>
+<br>
+<%= date_select :date, :wow %>
+<br>
+<%= datetime_select :datetime, :wow %>
+<br>
+<%= email_input :email, :stuff %>
+<br>
+<%= color_input :color, :more %>
+<br>
+<%= time_select :time, :and %>
