@@ -10,7 +10,7 @@
   <body>
     <span style="width: 100%;">
       <div id="welcomeImage" style="width:70%;float:left;">
-        <img src ="welcome.jpg" style="height:100%;">
+        <img src ="images/forest.jpg" style="height:100%;">
 	<h1>GroceryGnome</h1>
       </div>
       <div id="bothForms" style="width: 30%;float: right;">
