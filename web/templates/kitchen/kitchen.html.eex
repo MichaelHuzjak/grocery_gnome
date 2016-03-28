@@ -1,0 +1,20 @@
+<%= render GroceryGnome.SharedView, "navbar.html" %>
+
+<div id="kitchenNav">
+<div id="planner" class="jumbotron">
+  <div class="container">
+    <span id="plannerButton"class="kitchenButtons glyphicon glyphicon-list-alt"></span>
+    <h2>Meal Planner</h2>
+	<button class="btn btn-default full-width"><span class="glyphicon glyphicon-ok"></span></button>
+  </div>
+</div>
+<div id="recipes" class="jumbotron">
+  <div class="container">
+    <span id="recipeButton" class="glyphicon glyphicon-cutlery"></span>
+    <h2 id="recipeButtonTitle">Recipes</h2>
+    <button class="btn btn-default full-width"><span class="glyphicon glyphicon-ok"></span></button>
+  </div>
+</div>
+</div>
+
+<%= render GroceryGnome.SharedView, "logo.html" %>

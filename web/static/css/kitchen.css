@@ -1,0 +1,58 @@
+#kitchenNav {
+    padding-top: 100px;
+    font-family: Helvetica;
+}
+
+.jumbotron {
+    text-align: center;
+    height: 350px;
+	width: 30rem;
+	border-radius: 0.5rem;
+	position: relative;
+	background-color: #fff;
+	padding: 30px;
+}
+
+#planner {
+    float: left;
+}
+
+#recipes {
+    float: right;
+}
+
+#kitchenNav .glyphicon-cutlery {
+	font-size: 10rem;
+	color: #009970;
+}
+
+#kitchenNav .glyphicon-list-alt {
+	font-size: 10rem;
+	color: #009970;
+}
+
+h2 {
+        padding: 20px;
+	font-weight: bold;
+	font-family: Helvetica, sans-serif;
+	color: #ababab;
+}
+.btn {
+	border-radius: 0.2rem;
+}
+.btn .glyphicon {
+	font-size: 3rem;
+	color: #fff;
+}
+.full-width {
+    background-color: #009970;
+    width: 100%;
+}
+
+.full-width:hover {
+    background-color: #005e45;
+}
+
+#recipeButtonTitle{
+    padding-bottom: 53px;
+}
