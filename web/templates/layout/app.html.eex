@@ -9,6 +9,7 @@
 
     <title>Grocery Gnome</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Lobster|Shadows+Into+Light|Pacifico|Amatic+SC|Sacramento|Waiting+for+the+Sunrise|Schoolbell|Annie+Use+Your+Telescope|Sue+Ellen+Francisco|Just+Me+Again+Down+Here|Loved+by+the+King|Kranky|Codystar' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -24,5 +25,15 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
      <script src="<%= static_path(@conn, "/js/app.js") %>">
+
+       <div id="logo" style="bottom: 0px;">
+  <div id="logoText">
+    <h3>Grocery Gnome</h3>
+  </div>
+  <div>
+   <img src="images/groceryGnome.png" style="width: 15%; height: 15%; float: right;"></img>
+ </div>
+</div>
+
   </body>
 </html>

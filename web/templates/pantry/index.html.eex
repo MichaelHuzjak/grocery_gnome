@@ -49,3 +49,4 @@
     <button class="btn btn-success" onclick="addFood()">Add Food Item</button>
 </div>
 
+<%= render GroceryGnome.SharedView, "logo.html" %>

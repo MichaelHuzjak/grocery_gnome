@@ -66,3 +66,4 @@ function deleteRow(btn) {
     <button class="btn btn-link">Move selected items to Pantry</button>
   </div>
 </div>
+<%= render GroceryGnome.SharedView, "logo.html" %>

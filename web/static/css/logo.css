@@ -1,0 +1,16 @@
+
+#logo
+{
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+}
+
+#logoText h3
+{
+    position: absolute;
+    bottom:0;
+    right:90px;
+    font-family: 'Amatic SC', cursive;
+    font-size: 350%;
+}
