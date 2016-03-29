@@ -1,6 +1,6 @@
 defmodule GroceryGnome.Mixfile do
   use Mix.Project
-	# asdfasdf
+
   def project do
     [app: :grocery_gnome,
      version: "0.0.1",
