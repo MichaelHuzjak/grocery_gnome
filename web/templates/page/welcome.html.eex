@@ -1,32 +1,56 @@
-<title>GroceryGnome</title>
-  <body>
+
+   <link rel="stylesheet" href="<%= static_path(@conn, "/css/welcome.css") %>">
+
+​
+​
     <span style="width: 100%;">
-      <div id="welcomeImage" style="width:50%;float:left;">
-        <img src ="/home/diana/groceryGnome/web/templates/page/groceryGnome.jpg" style="height:75%;">
+      <div id="welcomeImage" style="width: 60%; float:left;">
+        
+	<h1>Grocery Gnome</h1>
+	
       </div>
-      <div style="width: 50%;float: right;">
-        <div id="login" style="float:right;">
-          <form>
-            <input type="email" name="email" required>
-            <input type="password" name="password" pattern="[A-Za-z0-9]*" required>
-            <input type="submit" value="Login" id="loginButton">
-          </form>
-        </div>
-        <div id="signUp" style="float:right;">
-          <form>
-            <input type="text" name="firstName" pattern="[A-Za-z0-9]*" required>
-            <input type="text" name="lastName" pattern="[A-Za-z0-9]*" required>
-            <br>
-            <input type="email" name="email" required>
-            <br>
-            <input type="password" name="password" pattern="[A-Za-z0-9]*" required>
-            <input type="password" name="confirmPassword" pattern="[A-Za-z0-9]*" required>
-            <br>
-            <input type="number" name="householdSize" min="1" required>
-            <br>
-            <input type="submit" value="Sign Up" id="signUpButton" style="align:center;">
-          </form>
-        </div>
-      </div>
+<div id="bothForms" style="width: 40%; float: right;">
+  <form role="form" action="/home" method="POST">
+  <h3>Login</h3>
+  <div id="login" class="form-group">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email" required>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" pattern="[A-Za-z0-9]*" required>
+  </div>
+  <input type="submit" value="Login" id="loginButton">	
+  </form>
+​
+  <form role="form" action="/home" method="POST">
+    <h2>Sign Up</h2>
+    <div class="form-group">
+      <label>First Name:</label>
+      <input type="text" class="form-control" id="first" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label>Last Name:</label>
+      <input type="text" class="form-control" id="last" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="mail" required>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pass" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Confirm Password:</label>
+      <input type="password" class="form-control" id="confirm" pattern="[A-Za-z0-9]*" required>
+    </div>
+    <div class="form-group">
+      <label>Household Size:</label>
+      <input type="number" class="form-control" id="size" min="1" required>
+    </div>  
+    <input type="submit" value="Sign Up" id="signUpButton" style="align:center;">
+  </form>
+</div>
+​
     </span>
-  </body>
