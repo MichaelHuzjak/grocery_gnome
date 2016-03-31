@@ -29,6 +29,7 @@ defmodule GroceryGnome.Web do
     quote do
       use Phoenix.Controller
 
+			alias GroceryGnome.User
       alias GroceryGnome.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
