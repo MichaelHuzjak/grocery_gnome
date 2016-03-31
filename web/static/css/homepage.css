@@ -126,3 +126,16 @@ img {
 	text-decoration: underline;
 	color: black;
 }
+
+.btn-md {
+    color: white;
+    font-size: 18px;
+    background-color: black;
+}
+
+.btn-primary {
+    color: white;
+    font-size: 18px;
+    background-color: black;
+    border-style: none;
+}
