@@ -18,8 +18,8 @@ defmodule GroceryGnome.FooditemController do
   end
 
   def create(conn, %{"fooditem" => fooditem_params}) do
-    changeset = Fooditem.changeset(%Fooditem{}, fooditem_params)
-    #changeset = Fooditem.changeset(%Fooditem{}, %{user_id: conn.assigns.current_user.id, title: post_params["foodname"]})
+    #changeset = Fooditem.changeset(%Fooditem{}, fooditem_params)
+    changeset = Fooditem.changeset(%Fooditem{}, %{user_id: conn.assigns.current_user.id, foodname: fooditem_params["foodname"]})
 
 		
     case Repo.insert(changeset) do
