@@ -36,9 +36,6 @@ defmodule GroceryGnome.Router do
 		get "/pantry", PantryController, :index
 
 		get "/grocerylist", ListController, :index
-
-		get "/u", UserController, :index
-
   end
 
   # Other scopes may use custom stacks.
