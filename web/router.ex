@@ -19,17 +19,16 @@ defmodule GroceryGnome.Router do
     get "/", SessionController, :new
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
+
     get "/registration", RegistrationController, :new
     post "/registration", RegistrationController, :create
+
 	  resources "/fooditems", FooditemController
 
-
-		
 		get "/home", PageController, :home
 		post "/home", PageController, :home
 		get "/test", PageController, :test
 		resources "/persons", PersonController
-		delete "/logout", AuthController, :logout
 
 		get "/kitchen", KitchenController, :index
 
