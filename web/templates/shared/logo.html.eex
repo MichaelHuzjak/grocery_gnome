@@ -1,0 +1,8 @@
+<div id="logo" style="bottom: 0px;">
+  <div id="logoText">
+    <h3>Grocery Gnome</h3>
+  </div>
+  <div>
+   <img src="images/groceryGnome.png" style="width: 15%; height: 15%; float: right;"></img>
+ </div>
+</div>

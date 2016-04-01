@@ -1,0 +1,42 @@
+body
+{
+  background: #F0F0F0;
+}
+
+#navbar
+{
+  background: #009970;
+  border: 0px;
+}
+
+#myNavbar > ul > li > a {
+  color: white;
+}
+
+#myNavbar > ul > li > a:hover
+{
+  color: #005e45;
+}
+
+#myNavbar > ul > li > a > span
+{
+  padding-right: 5px;
+}
+
+
+#settingsDropdown > button
+{
+  font-family: Helvetica;
+  padding-top: 15px;
+  background: transparent;
+  border: 0px;
+}
+#settingsDropdown > button:hover
+{
+  color: #005e45;
+}
+
+.dropdown-menu > li > a:hover
+{
+  background: #D8D8D8;
+}
