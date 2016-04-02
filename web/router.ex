@@ -28,7 +28,6 @@ defmodule GroceryGnome.Router do
 		get "/home", PageController, :home
 		post "/home", PageController, :home
 		get "/test", PageController, :test
-		resources "/persons", PersonController
 
 		get "/kitchen", KitchenController, :index
 
