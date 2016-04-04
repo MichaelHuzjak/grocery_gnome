@@ -23,3 +23,9 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
 Persons is a simple/test database relation currently
 You must create your database locally with mix ecto.create
 any further updates to the databse requires mix.migrate
+
+if there is any database errors or some updates to migration files. I recommend doing ecto.drop . This can only be done when the the server is not running. Otherwise you will need to manually drop the tables in either psql or a GUI tool such as pgadmin3 or adminer.
+
+## Michael's things to do
+- Find the double insertion bug for database
+- Sending a connection(@conn) into the navbar and properly gaining access to the current_user
