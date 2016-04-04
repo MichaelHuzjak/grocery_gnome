@@ -37,7 +37,7 @@ defmodule GroceryGnome.SessionController do
         conn
           |> put_session(:current_user, user)
           |> put_flash(:info, 'You are now signed in.')
-          |> redirect(to: fooditem_path(conn, :index))
+          |> redirect(to: page_path(conn, :home))
       true ->
         conn
           |> put_flash(:error, 'Username or password are incorrect.')
