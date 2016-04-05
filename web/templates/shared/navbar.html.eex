@@ -9,81 +9,82 @@
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
 	    <ul class="nav navbar-nav">
-          <li><a href="/home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-          <li><a href="/grocerylist"><span class="glyphicon glyphicon-shopping-cart"></span>Grocery</a></li>
-          <li><a href="/pantry"><span class="glyphicon glyphicon-apple"></span>Pantry</a></li>
-          <li><a href="/kitchen"><span class="glyphicon glyphicon-cutlery"></span>Kitchen</a></li>
+		<!-- <li><a href="/home"><span class="glyphicon"></span><= @current_user.username %></a></li> -->
+		<li><a href="/home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+		<li><a href="/grocerylist"><span class="glyphicon glyphicon-shopping-cart"></span>Grocery</a></li>
+		<li><a href="/pantry"><span class="glyphicon glyphicon-apple"></span>Pantry</a></li>
+		<li><a href="/kitchen"><span class="glyphicon glyphicon-cutlery"></span>Kitchen</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 		<li><div id="settingsDropdown" class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Settings
-  <span class="glyphicon glyphicon-cog"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#" data-toggle="modal" data-target="#changePassword">Change Password</a></li>
-    <li><a href="#" data-toggle="modal" data-target="#managePrivacy">Manage Privacy Settings</a></li>
-    <li><a href="#" data-toggle="modal" data-target="#logout">Logout</a></li>
-  </ul>
-</div></li>
+		    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Settings
+			<span class="glyphicon glyphicon-cog"></span></button>
+		    <ul class="dropdown-menu">
+			<li><a href="#" data-toggle="modal" data-target="#changePassword">Change Password</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#managePrivacy">Manage Privacy Settings</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#logout">Logout</a></li>
+		    </ul>
+		</div></li>
 	    </ul>
 	</div>
     </div>
 </nav>
 <div id="changePassword" class="modal">
-  <div class="modal-content">
+    <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Change Password</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Change Password</h4>
         </div>
         <div class="modal-body">
-          <form>
-	    <input type="password" placeholder="Old Password">
-	    <br>
-	    <br>
-	    <input type="password" placeholder="New Password">
-	    <br>
-	    <input type="password" placeholder="Confirm New Password">
-	  </form>
+            <form>
+		<input type="password" placeholder="Old Password">
+		<br>
+		<br>
+		<input type="password" placeholder="New Password">
+		<br>
+		<input type="password" placeholder="Confirm New Password">
+	    </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
         </div>
-      </div>
+    </div>
 </div>
 
 <div id="managePrivacy" class="modal">
-  <div class="modal-content">
+    <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Privacy Settings</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Privacy Settings</h4>
         </div>
         <div class="modal-body">
-	  <p2>Recipe Access:</p2>
-          <form>
-	    <div class="radio">
-	      <label><input type="radio" name="optradio">Public</label>
-	    </div>
-	    <div class="radio">
-	      <label><input type="radio" name="optradio">Private</label>
-	    </div>
+	    <p2>Recipe Access:</p2>
+            <form>
+		<div class="radio">
+		    <label><input type="radio" name="optradio">Public</label>
+		</div>
+		<div class="radio">
+		    <label><input type="radio" name="optradio">Private</label>
+		</div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
         </div>
-      </div>
+    </div>
 </div>
 
 <div id="logout" class="modal">
-  <div class="modal-content">
+    <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Logout</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Logout</h4>
         </div>
         <div class="modal-body">
-	  <p1>Are you sure you want to logout of Grocery Gnome?
+	    <p1>Are you sure you want to logout of Grocery Gnome?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
-	  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+	    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
         </div>
-      </div>
+    </div>
 </div>
