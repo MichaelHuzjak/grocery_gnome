@@ -4,9 +4,9 @@ defmodule GroceryGnome.Repo.Migrations.CreateDailyMealPlan do
   def change do
     create table(:dailymealplans) do
       add :DailyMealPlanID, :integer
-      add :BreakfastID, :integer
-      add :LunchID, :integer
-      add :DinnerID, :integer
+      add :BreakfastID, references(:meals)
+      add :LunchID, references(:meals)
+      add :DinnerID, references(:meals)
 
       timestamps
     end

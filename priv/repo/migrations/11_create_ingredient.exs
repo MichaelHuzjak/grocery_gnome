@@ -4,8 +4,8 @@ defmodule GroceryGnome.Repo.Migrations.CreateIngredient do
   def change do
     create table(:ingredients) do
       add :IngredientID, :integer
-      add :Ingredient_RecipeID, :integer
-      add :Ingredient_FoodID, :integer
+      add :Ingredient_RecipeID, references(:recipecatalogs)
+      add :Ingredient_FoodID, references(:foodcatalogs)
 
       timestamps
     end
