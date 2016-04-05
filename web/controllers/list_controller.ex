@@ -1,4 +1,4 @@
-defmodule GroceryGnome.ListController do
+defmodule GroceryGnome.GrocerylistController do
 	use GroceryGnome.Web, :controller
 
 	def index(conn, _params) do

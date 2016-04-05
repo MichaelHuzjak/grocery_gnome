@@ -2,7 +2,7 @@ defmodule GroceryGnome.Router do
   use GroceryGnome.Web, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+		plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     # plug :protect_from_forgery
@@ -19,23 +19,21 @@ defmodule GroceryGnome.Router do
     get "/", SessionController, :new
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
+
     get "/registration", RegistrationController, :new
     post "/registration", RegistrationController, :create
+
 	  resources "/fooditems", FooditemController
 
-
-		
 		get "/home", PageController, :home
 		post "/home", PageController, :home
 		get "/test", PageController, :test
-		resources "/persons", PersonController
-		delete "/logout", AuthController, :logout
 
 		get "/kitchen", KitchenController, :index
 
 		get "/pantry", PantryController, :index
 
-		get "/grocerylist", ListController, :index
+		get "/grocerylist", GrocerylistController, :index
   end
 
   # Other scopes may use custom stacks.

@@ -4,11 +4,14 @@ defmodule GroceryGnome.FooditemController do
 	plug GroceryGnome.Plug.Authenticate
   plug :action
   alias GroceryGnome.Fooditem
+	import Ecto.Query
 
   plug :scrub_params, "fooditem" when action in [:create, :update]
 
   def index(conn, _params) do
-    fooditems = Repo.all(Fooditem)
+		userid = conn.assigns.current_user.id
+
+    fooditems = Repo.all(from f in Fooditem, where: f.user_id == ^userid, select: f)
     render(conn, "index.html", fooditems: fooditems)
   end
 
@@ -21,7 +24,6 @@ defmodule GroceryGnome.FooditemController do
     #changeset = Fooditem.changeset(%Fooditem{}, fooditem_params)
     changeset = Fooditem.changeset(%Fooditem{}, %{user_id: conn.assigns.current_user.id, foodname: fooditem_params["foodname"]})
 
-		
     case Repo.insert(changeset) do
       {:ok, _fooditem} ->
         conn
