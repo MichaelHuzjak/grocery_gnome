@@ -6,7 +6,7 @@ defmodule GroceryGnome.GroceryList do
     field :GroceryList_AccountID, :integer
     field :GroceryList_FoodID, :integer
     field :GroceryList_RecipeID, :string
-    field :integer, :string
+    # field :integer, :string			# fix me
 
     timestamps
   end
