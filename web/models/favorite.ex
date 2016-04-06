@@ -2,7 +2,6 @@ defmodule GroceryGnome.Favorite do
   use GroceryGnome.Web, :model
 
   schema "favorites" do
-    field :FavoriteID, :integer
     field :Favorite_AccountID, :integer
     field :Favorite_RecipeID, :integer
     field :RatingScore, :integer

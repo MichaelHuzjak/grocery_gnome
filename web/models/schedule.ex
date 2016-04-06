@@ -2,7 +2,6 @@ defmodule GroceryGnome.Schedule do
   use GroceryGnome.Web, :model
 
   schema "schedules" do
-    field :ScheduleID, :integer
     field :Schedule_AccountID, :integer
     field :WeekDate, :string
     field :SundayMealPlanID, :integer

@@ -2,7 +2,6 @@ defmodule GroceryGnome.Account do
   use GroceryGnome.Web, :model
 
   schema "accounts" do
-    field :AccountID, :integer
     field :AccountHolderFirstName, :string
     field :AccountHolderLastName, :string
     field :EmailAddress, :string

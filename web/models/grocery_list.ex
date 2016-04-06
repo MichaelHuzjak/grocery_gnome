@@ -2,7 +2,6 @@ defmodule GroceryGnome.GroceryList do
   use GroceryGnome.Web, :model
 
   schema "grocerylists" do
-    field :GroceryListID, :integer
     field :GroceryList_AccountID, :integer
     field :GroceryList_FoodID, :integer
     field :GroceryList_RecipeID, :string

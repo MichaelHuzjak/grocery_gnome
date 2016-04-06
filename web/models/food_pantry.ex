@@ -2,7 +2,6 @@ defmodule GroceryGnome.FoodPantry do
   use GroceryGnome.Web, :model
 
   schema "foodpantries" do
-    field :FoodPantryID, :integer
     field :FoodPantry_FoodID, :integer
     field :Quantity, :decimal
     field :Units, :string

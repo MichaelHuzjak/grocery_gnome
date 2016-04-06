@@ -2,7 +2,6 @@ defmodule GroceryGnome.RecipeCatalog do
   use GroceryGnome.Web, :model
 
   schema "recipecatalogs" do
-    field :RecipeID, :integer
     field :RecipeName, :string
     field :PreparationTimeInMinues, :integer
 

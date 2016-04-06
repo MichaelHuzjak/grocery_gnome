@@ -2,7 +2,6 @@ defmodule GroceryGnome.Ingredient do
   use GroceryGnome.Web, :model
 
   schema "ingredients" do
-    field :IngredientID, :integer
     field :Ingredient_RecipeID, :integer
     field :Ingredient_FoodID, :integer
 

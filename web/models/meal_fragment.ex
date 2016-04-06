@@ -2,7 +2,6 @@ defmodule GroceryGnome.MealFragment do
   use GroceryGnome.Web, :model
 
   schema "mealfragments" do
-    field :MealFragmentID, :integer
     field :MealFragment_MealID, :integer
     field :MealFragment_RecipeID, :integer
 

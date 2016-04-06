@@ -2,7 +2,6 @@ defmodule GroceryGnome.DailyMealPlan do
   use GroceryGnome.Web, :model
 
   schema "dailymealplans" do
-    field :DailyMealPlanID, :integer
     field :BreakfastID, :integer
     field :LunchID, :integer
     field :DinnerID, :integer
