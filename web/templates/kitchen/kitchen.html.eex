@@ -1,4 +1,4 @@
-<%= render GroceryGnome.SharedView, "navbar.html", current_user: @current_user %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
 
 <div id="kitchenNav">
     <div id="planner" class="jumbotron">
