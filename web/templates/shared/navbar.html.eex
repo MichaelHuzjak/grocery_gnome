@@ -18,7 +18,7 @@
 		<li><a href ="<%= fooditem_path @conn, :index %>"><span class="glyphicon glyphicon-home"></span>Home</a></li>
 		<li><a href="<%= grocerylist_path @conn, :index %>"><span class="glyphicon glyphicon-shopping-cart"></span>Grocery</a></li>
 		<li><a href="<%= pantry_path @conn, :index %>"><span class="glyphicon glyphicon-apple"></span>Pantry</a></li>
-		<li><a href="<%= kitchen_path @conn, :index %>"><span class="glyphicon glyphicon-cutlery"></span>Kitchen</a></li>
+		<li><a href="/kitchen"><span class="glyphicon glyphicon-cutlery"></span>Kitchen</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">
 		<li><div id="settingsDropdown" class="dropdown">
