@@ -9,7 +9,7 @@
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
 	    <ul class="nav navbar-nav">
-		<li><a href="/home"><span class="glyphicon"></span><%= @current_user.username %></a></li>
+		<li><a href="/home"><span class="glyphicon"></span><%= @conn.assigns.current_user.username %></a></li>
 		<li><a href="/home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
 		<li><a href="/grocerylist"><span class="glyphicon glyphicon-shopping-cart"></span>Grocery</a></li>
 		<li><a href="/pantry"><span class="glyphicon glyphicon-apple"></span>Pantry</a></li>
@@ -83,7 +83,8 @@
 	    <p1>Are you sure you want to logout of Grocery Gnome?
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+<%= link "Yes", to: session_path(@conn, :delete) , class: "btn btn-success" %>
+
 	    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
         </div>
     </div>
