@@ -1,3 +1,5 @@
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
+
 <div><h2>Hello, <%= @current_user.username %></h2></div>
 
 
@@ -33,3 +35,5 @@
 <div>
 <%= link "Logout", to: session_path(@conn, :delete) %>
 </div>
+
+

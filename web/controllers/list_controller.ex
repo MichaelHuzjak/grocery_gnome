@@ -5,7 +5,6 @@ defmodule GroceryGnome.GrocerylistController do
 	
 	def index(conn, _params) do
 		
-
-		render conn, "grocerylist.html"
+    render(conn, "grocerylist.html")
 	end
 end

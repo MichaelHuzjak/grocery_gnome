@@ -1,4 +1,4 @@
-<%= render GroceryGnome.SharedView, "navbar.html", current_user: @current_user %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
 <!-- this line allows more modularized html
    use it!
    -->

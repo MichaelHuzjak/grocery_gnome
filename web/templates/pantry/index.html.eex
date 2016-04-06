@@ -1,4 +1,4 @@
-<%= render GroceryGnome.SharedView, "navbar.html" %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn%>
 
 <script>
  function addFood() {
