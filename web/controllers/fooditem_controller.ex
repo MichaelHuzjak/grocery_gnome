@@ -2,7 +2,7 @@ defmodule GroceryGnome.FooditemController do
   use GroceryGnome.Web, :controller
 
 	plug GroceryGnome.Plug.Authenticate
-  plug :action
+  # plug :action
   alias GroceryGnome.Fooditem
 	import Ecto.Query
 

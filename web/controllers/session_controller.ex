@@ -2,7 +2,6 @@ defmodule GroceryGnome.SessionController do
   use GroceryGnome.Web, :controller
 
   plug :scrub_params, "user" when action in [:create]
-  plug :action
 
   def new(conn, _params) do
     render conn, changeset: User.changeset(%User{})

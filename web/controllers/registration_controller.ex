@@ -4,7 +4,6 @@ defmodule GroceryGnome.RegistrationController do
   alias GroceryGnome.Password
 
   plug :scrub_params, "user" when action in [:create]
-  plug :action
 
   def new(conn, _params) do
     changeset = User.changeset(%User{})

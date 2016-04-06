@@ -1,7 +1,6 @@
 defmodule GroceryGnome.PageController do
   use GroceryGnome.Web, :controller
 	plug GroceryGnome.Plug.Authenticate
-  plug :action
 
   def login(conn, _params) do
     render conn, "welcome.html"
