@@ -9,7 +9,6 @@ defmodule GroceryGnome.PantryController do
 
 	def index(conn, _params) do
 		userid = conn.assigns.current_user.id
-		pantryitems = Repo.all(from f in )
 		render conn, "index.html"
 	end
 end
