@@ -1,13 +1,16 @@
 defmodule GroceryGnome.Spoonacular do
 
+	@doc "The chosen API key. (This one is mine so if you it should work out of the box already)"
 	defp key do
 		"o2vpkxCWj6mshXM1QuGyixd8L9Flp1tCOvejsn1xpmMUymypZy"
 	end
 
+	@doc "default headers to be used in "
 	defp dh do
 		["X-Mashape-Key": key]
 	end
 
+	@doc "supplied a %{\"title\": some_string} the api will deduce ingredients"
 	def classify_grocery(description) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/classify"
 		{:ok, desc_json} = Poison.encode(description)
@@ -42,6 +45,13 @@ defmodule GroceryGnome.Spoonacular do
 		|> Map.get(:body)
 		|> Poison.decode
 	end
+
+	def caloried_meal_plan(daily_calories, time_frame) do
+		# time_frame = "week" or "day"
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate"
+		
+		HTTPotion.get(endpoint)
+		
 
 end
 # [%{one: "one"}, %{two: 2}]
