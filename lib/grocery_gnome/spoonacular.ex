@@ -1,4 +1,5 @@
 defmodule GroceryGnome.Spoonacular do
+
 	defp key do
 		"o2vpkxCWj6mshXM1QuGyixd8L9Flp1tCOvejsn1xpmMUymypZy"
 	end
@@ -41,5 +42,6 @@ defmodule GroceryGnome.Spoonacular do
 		|> Map.get(:body)
 		|> Poison.decode
 	end
+
 end
 # [%{one: "one"}, %{two: 2}]
