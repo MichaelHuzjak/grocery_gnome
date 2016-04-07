@@ -15,11 +15,11 @@
     </tr>
   </thead>
   <tbody>
-<%= for fooditem <- @fooditems do %>
+<%= for fooditem <- @foodcatalogs do %>
     <tr>
-      <td><%= fooditem.foodname %></td>
-      <td><%= fooditem.user_id %></td>
-
+      <td><%= fooditem.foodName %></td>
+      <td><%= fooditem.foodQuantity %></td>
+      <td><%= fooditem.foodUnit %></td>
       <td class="text-right">
         <%= link "Show", to: fooditem_path(@conn, :show, fooditem), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: fooditem_path(@conn, :edit, fooditem), class: "btn btn-default btn-xs" %>
