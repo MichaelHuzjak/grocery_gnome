@@ -9,7 +9,7 @@ defmodule GroceryGnome.FoodPantry do
     timestamps
   end
 
-  @required_fields ~w(FoodPantryID FoodPantry_FoodID Quantity Units)
+  @required_fields ~w(FoodPantry_FoodID Quantity Units)
   @optional_fields ~w()
 
   @doc """
