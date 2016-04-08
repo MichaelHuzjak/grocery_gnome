@@ -11,18 +11,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :foodname, "Foodname", class: "control-label" %>
-    <%= text_input f, :foodname, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :foodquantity, "Foodquantity", class: "control-label" %>
-    <%= number_input f, :foodquantity, step: "any", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :foodunit, "Foodunit", class: "control-label" %>
-    <%= text_input f, :foodunit, class: "form-control" %>
+    <%= label f, :groceryquantity, "Groceryquantity", class: "control-label" %>
+    <%= number_input f, :groceryquantity, step: "any", class: "form-control" %>
   </div>
 
   <div class="form-group">

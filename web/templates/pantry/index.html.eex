@@ -1,52 +1,36 @@
 <%= render GroceryGnome.SharedView, "navbar.html", conn: @conn%>
 
-<script>
- function addFood() {
-     var table = document.getElementById("pTable");
-     var row = table.insertRow(1);
-     var cell1 = row.insertCell(0);
-     var cell2 = row.insertCell(1);
-     var cell3 = row.insertCell(2);
-     var cell4 = row.insertCell(3)
-	 cell1.innerHTML = "New Food Name";
-     cell1.contentEditable = "true";
-     cell2.innerHTML = "Amount/Units";
-     cell2.contentEditable = "true";
-     cell3.innerHTML = "N/A";
-     cell3.contentEditable = "true";
-     cell4.innerHTML = '<input type="button" value="Delete" onclick="deleteRow(this)"/>';
- }
+<h2>Pantry</h2>
 
-
- function deleteRow(btn) {
-     var row = btn.parentNode.parentNode;
-     row.parentNode.removeChild(row);
- }
-</script>
-
-<div class="container">
-    <h2>Pantry</h2>                                                                              
-    <div class="table-responsive">          
+ <div class="table-responsive">          
 	<table class="table table-hover table-condensed" id="pTable">
-	    <thead>
-		<tr>
-		    <th>Food name</th>
-		    <th>Food Amount</th>
-		    <th>Exp. Date</th>
-		    <th></th>
-		</tr>
-	    </thead>
-	    <tbody>
-		<tr>
-		    <td contenteditable="true">Milk</td>
-		    <td contenteditable="true">1 gal</td>
-		    <td>3/21/2016</td>
-		    <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
-		</tr>
-	    </tbody>
-	</table>
-    </div>
-    <button class="btn btn-success" onclick="addFood()">Add Food Item</button>
-</div>
+	    
+  <thead>
+    <tr>
+      <th>Food Name</th>
+      <th>Food Quantity</th>
+      <th>Food Units</th>
+      <th>User</th>
 
-<%= render GroceryGnome.SharedView, "logo.html" %>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for foodcatalog <- @foodcatalogs do %>
+    <tr>
+      <td><%= foodcatalog.foodname %></td>
+      <td><%= foodcatalog.foodquantity %></td>
+      <td><%= foodcatalog.foodunit %></td>
+      <td><%= foodcatalog.user_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: pantry_path(@conn, :show, foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: pantry_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: pantry_path(@conn, :delete, foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+</div>
+<%= link "New foodcatalog", to: pantry_path(@conn, :new), class: "btn btn-success" %>

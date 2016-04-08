@@ -1,0 +1,28 @@
+<h2>Show foodcatalog</h2>
+
+<ul>
+
+  <li>
+    <strong>Foodname:</strong>
+    <%= @foodcatalog.foodname %>
+  </li>
+
+  <li>
+    <strong>Foodquantity:</strong>
+    <%= @foodcatalog.foodquantity %>
+  </li>
+
+  <li>
+    <strong>Foodunit:</strong>
+    <%= @foodcatalog.foodunit %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @foodcatalog.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: pantry_path(@conn, :edit, @foodcatalog) %>
+<%= link "Back", to: pantry_path(@conn, :index) %>

@@ -1,0 +1,23 @@
+<h2>Show groceryitem</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @groceryitem.user_id %>
+  </li>
+
+  <li>
+    <strong>Foodcatalog:</strong>
+    <%= @groceryitem.foodcatalog_id %>
+  </li>
+
+  <li>
+    <strong>Groceryquantity:</strong>
+    <%= @groceryitem.groceryquantity %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: groceryitem_path(@conn, :edit, @groceryitem) %>
+<%= link "Back", to: groceryitem_path(@conn, :index) %>
