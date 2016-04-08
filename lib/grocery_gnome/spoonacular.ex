@@ -50,8 +50,14 @@ defmodule GroceryGnome.Spoonacular do
 		# time_frame = "week" or "day"
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate"
 		
-		HTTPotion.get(endpoint, dh)
+		HTTPotion.get(get_params(endpoint, [targetCalories: daily_calories, timeFrame: time_frame]), [
+					headers: dh])
+		|> Map.get(:body)
+		|> Poison.decode
 	end
 
+	def get_params(url, params) do
+		url <> "?" <> Enum.join((for {k, v} <- params, do: to_string(k) <> "=" <> to_string(v)), "&")
+	end
 end
 # [%{one: "one"}, %{two: 2}]
