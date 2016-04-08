@@ -50,8 +50,8 @@ defmodule GroceryGnome.Spoonacular do
 		# time_frame = "week" or "day"
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate"
 		
-		HTTPotion.get(endpoint)
-		
+		HTTPotion.get(endpoint, dh)
+	end
 
 end
 # [%{one: "one"}, %{two: 2}]
