@@ -2,13 +2,14 @@ defmodule GroceryGnome.FoodCatalog do
   use GroceryGnome.Web, :model
 
   schema "foodcatalogs" do
-    field :FoodName, :string
-    field :foodPrice, :decimal
+    field :foodName, :string
+    field :foodQuantity, :decimal
+		field :foodUnit, :string
 
     timestamps
   end
 
-  @required_fields ~w(FoodID FoodName foodPrice)
+  @required_fields ~w(foodName foodQuantity foodUnit)
   @optional_fields ~w()
 
   @doc """

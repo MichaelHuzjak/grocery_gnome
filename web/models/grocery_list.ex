@@ -10,7 +10,7 @@ defmodule GroceryGnome.GroceryList do
     timestamps
   end
 
-  @required_fields ~w(GroceryListID GroceryList_AccountID GroceryList_FoodID GroceryList_RecipeID integer)
+  @required_fields ~w(GroceryList_AccountID GroceryList_FoodID GroceryList_RecipeID integer)
   @optional_fields ~w()
 
   @doc """
