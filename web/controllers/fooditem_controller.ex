@@ -2,10 +2,7 @@ defmodule GroceryGnome.FooditemController do
   use GroceryGnome.Web, :controller
 
 	plug GroceryGnome.Plug.Authenticate
-  # plug :action
   alias GroceryGnome.Fooditem
-	alias GroceryGnome.FoodCatalog
-	alias GroceryGnome.GroceryList
 	import Ecto.Query
 
   plug :scrub_params, "fooditem" when action in [:create, :update]
@@ -13,7 +10,7 @@ defmodule GroceryGnome.FooditemController do
   def index(conn, _params) do
 		userid = conn.assigns.current_user.id
 
-    fooditems = Repo.all(from f in FoodCatolog, join: g in GroceryList, on: g.account_id == ^userid, select: f)
+    fooditems = Repo.all(from f in Fooditem, where: f.user_id == ^userid, select: f)
     render(conn, "index.html", fooditems: fooditems)
   end
 
