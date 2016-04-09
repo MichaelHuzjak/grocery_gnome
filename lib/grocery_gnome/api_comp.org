@@ -1,0 +1,28 @@
+* Compute
+** DONE Classify a Grocery Product
+** DONE Classify Cuisine
+   * maybe
+** TODO Classify Grocery Products (Batch)
+** TODO Create Recipe Card
+** DONE Map Ingredients to Grocery Products
+** DONE Match Recipes to Daily Calories
+** TODO Quick Answer
+** TODO Summarize Recipe
+   timing out for some reason
+** TODO Visualize Ingredients
+** TODO Visualize Nutrition
+** TODO Visualize Price Breakdown
+* Extract
+** TODO Analyze a recipe search query
+** TODO Extract Recipe from Website
+** TODO Parse Ingredients
+* Search
+** TODO Autocomplete Ingredient Search
+** TODO Complex Recipe Search
+** TODO Find By Ingredients
+** TODO Find By Nutrients
+** TODO Find Similar Recipes
+** TODO Search Grocery Products
+* Data
+** TODO Get Product Information
+** TODO Recipe Information

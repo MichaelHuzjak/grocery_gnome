@@ -22,17 +22,20 @@ defmodule GroceryGnome.Spoonacular do
 		|> Map.get(:body)
 		|> Poison.decode
 	end
-	### this isn't working yet. supplying parameters have me stumped ...
-	# def classify_cuisine do
-	# 	endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/cuisine"
 
-	# 	HTTPotion.post(endpoint, [
-	# 				headers: ["X-Mashape-Key": key,
-	# 									"Content-Type": "application/x-www-form-urlencoded"],
-	# 				body: Poison.encode(%{"ingredientList": "3 oz pork shoulder", 
-	# 															"title": "Pork roast with green beans"})
-	# 			])
-	# end
+	### this isn't working yet. supplying parameters have me stumped ...
+	def classify_cuisine(ingredient_list, title) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/cuisine"
+
+		HTTPotion.post(endpoint, [
+					headers: ["X-Mashape-Key": key,
+										"Content-Type": "application/x-www-form-urlencoded"],
+					body: parse_params%{"ingredientList": ingredient_list, 
+															"title": title}
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
 
 	def map_grocery_ingredients(mapping) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/map"
@@ -63,7 +66,7 @@ defmodule GroceryGnome.Spoonacular do
 	end
 
 	# parses just the parameters so they're in the standard format
-	defp parse_params(params) do
+	def parse_params(params) do
  		Enum.join((for {k, v} <- params, do: to_string(k) <> "=" <> to_string(v)), "&")
 	end
 	
@@ -84,6 +87,17 @@ defmodule GroceryGnome.Spoonacular do
 					header: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh
 				])
 	end
+	# example: 
+	def vis_ing_ex do
+		%{defaultCss: :checked,
+			ingredientList: "3 oz flour",
+			measure: "metric",
+			servings: 2,
+			view: "grid"
+		 }
+	end
+
+	
 
 end
 # [%{one: "one"}, %{two: 2}]
