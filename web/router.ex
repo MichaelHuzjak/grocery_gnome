@@ -24,8 +24,6 @@ defmodule GroceryGnome.Router do
     get "/registration", RegistrationController, :new
     post "/registration", RegistrationController, :create
 
-	  resources "/fooditems", FooditemController
-
 		get "/home", PageController, :home
 		post "/home", PageController, :home
 		get "/test", PageController, :test
