@@ -3,7 +3,7 @@ defmodule GroceryGnome.FoodCatalogTest do
 
   alias GroceryGnome.FoodCatalog
 
-  @valid_attrs %{FoodID: 42, FoodName: "some content", foodPrice: "120.5"}
+  @valid_attrs %{info: "some content", name: "some content", units: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

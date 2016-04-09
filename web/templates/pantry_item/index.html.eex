@@ -1,0 +1,32 @@
+<h2>Listing pantry items</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Food catalog</th>
+      <th>Quantity</th>
+      <th>Expiration</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for pantry_item <- @pantry_items do %>
+    <tr>
+      <td><%= pantry_item.user_id %></td>
+      <td><%= pantry_item.food_catalog_id %></td>
+      <td><%= pantry_item.quantity %></td>
+      <td><%= pantry_item.expiration %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: pantry_item_path(@conn, :show, pantry_item), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: pantry_item_path(@conn, :edit, pantry_item), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: pantry_item_path(@conn, :delete, pantry_item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New pantry item", to: pantry_item_path(@conn, :new) %>

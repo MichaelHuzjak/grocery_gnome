@@ -1,0 +1,28 @@
+<h2>Show pantry item</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @pantry_item.user_id %>
+  </li>
+
+  <li>
+    <strong>Food catalog:</strong>
+    <%= @pantry_item.food_catalog_id %>
+  </li>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @pantry_item.quantity %>
+  </li>
+
+  <li>
+    <strong>Expiration:</strong>
+    <%= @pantry_item.expiration %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: pantry_item_path(@conn, :edit, @pantry_item) %>
+<%= link "Back", to: pantry_item_path(@conn, :index) %>

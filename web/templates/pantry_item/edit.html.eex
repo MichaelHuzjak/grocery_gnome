@@ -1,0 +1,6 @@
+<h2>Edit pantry item</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: pantry_item_path(@conn, :update, @pantry_item) %>
+
+<%= link "Back", to: pantry_item_path(@conn, :index) %>

@@ -1,0 +1,6 @@
+<h2>Edit food catalog</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: food_catalog_path(@conn, :update, @food_catalog) %>
+
+<%= link "Back", to: food_catalog_path(@conn, :index) %>
