@@ -1,11 +1,11 @@
 defmodule GroceryGnome.Spoonacular do
 
-	@doc "The chosen API key. (This one is mine so if you it should work out of the box already)"
+	# The chosen API key. (This one is mine so if you it should work out of the box already)
 	defp key do
 		"o2vpkxCWj6mshXM1QuGyixd8L9Flp1tCOvejsn1xpmMUymypZy"
 	end
 
-	@doc "default headers to be used in "
+	# default headers to be used in various api requests
 	defp dh do
 		["X-Mashape-Key": key]
 	end
@@ -51,13 +51,39 @@ defmodule GroceryGnome.Spoonacular do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate"
 		
 		HTTPotion.get(get_params(endpoint, [targetCalories: daily_calories, timeFrame: time_frame]), [
-					headers: dh])
+					headers: dh
+				])
 		|> Map.get(:body)
 		|> Poison.decode
 	end
 
+	# constructs the full url with params (for get requests mainly)
 	def get_params(url, params) do
-		url <> "?" <> Enum.join((for {k, v} <- params, do: to_string(k) <> "=" <> to_string(v)), "&")
+		"#{url}?#{parse_params(params)}"
 	end
+
+	# parses just the parameters so they're in the standard format
+	defp parse_params(params) do
+ 		Enum.join((for {k, v} <- params, do: to_string(k) <> "=" <> to_string(v)), "&")
+	end
+	
+	# request times out, unsure why
+	def summarize_recipe(id) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/#{id}/summary"
+
+		HTTPotion.get(endpoint, [
+					headers: dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
+	def visualize_ingredients(params) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/visualizeIngredients"
+		HTTPotion.post(get_params(endpoint, params), [
+					header: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh
+				])
+	end
+
 end
 # [%{one: "one"}, %{two: 2}]
