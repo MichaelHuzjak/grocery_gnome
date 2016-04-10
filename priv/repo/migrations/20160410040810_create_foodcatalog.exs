@@ -9,6 +9,6 @@ defmodule GroceryGnome.Repo.Migrations.CreateFoodcatalog do
 
       timestamps
     end
-
+		create unique_index(:foodcatalogs, [:foodname], name: :foodname_index)
   end
 end
