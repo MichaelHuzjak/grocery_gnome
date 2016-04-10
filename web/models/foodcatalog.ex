@@ -1,14 +1,15 @@
-defmodule GroceryGnome.Meal do
+defmodule GroceryGnome.Foodcatalog do
   use GroceryGnome.Web, :model
 
-  schema "meals" do
-    field :Meal_RecipeID, :integer
-    field :Meal_FoodPantryID, :integer
+  schema "foodcatalogs" do
+    field :foodname, :string
+    field :info, :string
+    field :unit, :string
 
     timestamps
   end
 
-  @required_fields ~w(MealID Meal_RecipeID Meal_FoodPantryID)
+  @required_fields ~w(foodname info unit)
   @optional_fields ~w()
 
   @doc """

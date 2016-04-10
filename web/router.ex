@@ -25,8 +25,9 @@ defmodule GroceryGnome.Router do
     post "/registration", RegistrationController, :create
 
 	  resources "/fooditems", FooditemController
+		resources "/foodcatalog", FoodcatalogController
+		resources "/pantryitems", PantryitemController
 
-	  resources "/mealplans", MealplanController, except: [:new, :edit]
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home
