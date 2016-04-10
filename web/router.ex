@@ -27,7 +27,8 @@ defmodule GroceryGnome.Router do
 	  resources "/fooditems", FooditemController
 		resources "/foodcatalog", FoodcatalogController
 		resources "/pantryitems", PantryitemController
-
+    resources "/recipes", RecipeController
+    resources "/days", DayController
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home

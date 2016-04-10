@@ -1,0 +1,33 @@
+<h2>Show recipe</h2>
+
+<ul>
+
+  <li>
+    <strong>Ingredients:</strong>
+    <%= @recipe.ingredients %>
+  </li>
+
+  <li>
+    <strong>Instructions:</strong>
+    <%= @recipe.instructions %>
+  </li>
+
+  <li>
+    <strong>Prep time:</strong>
+    <%= @recipe.prep_time %>
+  </li>
+
+  <li>
+    <strong>Cook time:</strong>
+    <%= @recipe.cook_time %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @recipe.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: recipe_path(@conn, :edit, @recipe) %>
+<%= link "Back", to: recipe_path(@conn, :index) %>

@@ -1,0 +1,33 @@
+<h2>Show day</h2>
+
+<ul>
+
+  <li>
+    <strong>Breakfast:</strong>
+    <%= @day.breakfast %>
+  </li>
+
+  <li>
+    <strong>Lunch:</strong>
+    <%= @day.lunch %>
+  </li>
+
+  <li>
+    <strong>Dinner:</strong>
+    <%= @day.dinner %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @day.date %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @day.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: day_path(@conn, :edit, @day) %>
+<%= link "Back", to: day_path(@conn, :index) %>
