@@ -21,6 +21,7 @@ defmodule GroceryGnome.Foodcatalog do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-		|> unique_constraint(:foodname, name: :foodcatalog_index, on: GroceryGnome.Repo)
+		|> unique_constraint(:foodname, name: :foodname_index, on: GroceryGnome.Repo, downcase: true)
+
   end
 end

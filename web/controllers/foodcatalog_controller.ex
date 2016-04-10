@@ -24,7 +24,7 @@ defmodule GroceryGnome.FoodcatalogController do
         |> put_flash(:info, "Foodcatalog created successfully.")
         |> redirect(to: foodcatalog_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, conn: @conn)
     end
   end
 
