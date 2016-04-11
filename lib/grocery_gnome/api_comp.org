@@ -20,7 +20,7 @@
 ** TODO Autocomplete Ingredient Search
 ** TODO Complex Recipe Search
 ** TODO Find By Ingredients
-** TODO Find By Nutrients
+** DONE Find By Nutrients
 ** DONE Find Similar Recipes
 ** DONE Search Grocery Products
 * Data

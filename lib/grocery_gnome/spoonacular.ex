@@ -106,6 +106,16 @@ defmodule GroceryGnome.Spoonacular do
 		|> Poison.decode
 	end
 
+	@doc "Finds recipes by limits in macronutrients"
+	def find_by_nutrients(parameters) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByNutrients"
+		HTTPotion.get(get_params(endpoint, parameters), [
+					headers: dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
 	def search_grocery(num_results, offset, query) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/search"
 		HTTPotion.get(
