@@ -21,8 +21,8 @@
 ** TODO Complex Recipe Search
 ** TODO Find By Ingredients
 ** TODO Find By Nutrients
-** TODO Find Similar Recipes
-** TODO Search Grocery Products
+** DONE Find Similar Recipes
+** DONE Search Grocery Products
 * Data
 ** DONE Get Product Information
 ** DONE Recipe Information

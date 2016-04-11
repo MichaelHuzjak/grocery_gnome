@@ -30,7 +30,7 @@ defmodule GroceryGnome.Spoonacular do
 		HTTPotion.post(endpoint, [
 					headers: ["X-Mashape-Key": key,
 										"Content-Type": "application/x-www-form-urlencoded"],
-					body: parse_params%{"ingredientList": ingredient_list, 
+					body: parse_params%{"ingredientList": ingredient_list,
 															"title": title}
 				])
 		|> Map.get(:body)
@@ -66,11 +66,11 @@ defmodule GroceryGnome.Spoonacular do
 
 	# parses just the parameters so they're in the standard format
 	def parse_params(params) do
-		(for {k, v} <- params, do: to_string(k) <> "=" <> 
+		(for {k, v} <- params, do: to_string(k) <> "=" <>
 			String.replace(to_string(v), " ", "+"))
  		|> Enum.join("&")
 	end
-	
+
 	# request times out, unsure why
 	def summarize_recipe(id) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/#{id}/summary"
@@ -87,7 +87,7 @@ defmodule GroceryGnome.Spoonacular do
 					headers: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh
 				])
 	end
-	# example: 
+	# example:
 	def vis_ing_ex do
 		%{defaultCss: :checked,
 			ingredientList: "3 oz flour",
@@ -102,6 +102,17 @@ defmodule GroceryGnome.Spoonacular do
 		HTTPotion.get(get_params(endpoint, q: question), [
 					headers: dh
 				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
+	def search_grocery(num_results, offset, query) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/search"
+		HTTPotion.get(
+			get_params(endpoint,
+								 number: num_results, offset: offset, query: query), [
+				headers: dh
+			])
 		|> Map.get(:body)
 		|> Poison.decode
 	end
