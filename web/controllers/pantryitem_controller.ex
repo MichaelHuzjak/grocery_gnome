@@ -2,18 +2,46 @@ defmodule GroceryGnome.PantryitemController do
   use GroceryGnome.Web, :controller
 
   alias GroceryGnome.Pantryitem
+	alias GroceryGnome.Foodcatalog
 
-  plug :scrub_params, "pantryitem" when action in [:create, :update]
+
+  #plug :scrub_params, "pantryitem" when action in [:create, :update]
+  plug :scrub_params, "foodcatalog" when action in [:new]
 
   def index(conn, _params) do
     pantryitems = Repo.all(Pantryitem)
-    render(conn, "index.html", pantryitems: pantryitems)
+
+				query = from f in Foodcatalog
+				foodcatalogs = Repo.all(query)
+				
+    render(conn, "index.html", pantryitems: pantryitems, foodcatalogs: foodcatalogs)
   end
 
-  def new(conn, _params) do
-    changeset = Pantryitem.changeset(%Pantryitem{})
-    render(conn, "new.html", changeset: changeset)
+	# food catalog list
+	def fcindex(conn, _params) do
+		#query = from f in Foodcatalog, where: f.foodname != "cheese"
+		query = from f in Foodcatalog
+		foodcatalogs = Repo.all(query)
+    render(conn, "fcindex.html", foodcatalogs: foodcatalogs)
   end
+
+ # def new(conn, _params) do
+ #   changeset = Pantryitem.changeset(%Pantryitem{})
+ #   render(conn, "new.html", changeset: changeset)
+	# end
+	
+	def new(conn,  %{"foodcatalog" => foodcatalog_params}) do
+		id = foodcatalog_params.id
+    foodcatalog = Repo.get!(Foodcatalog, id)
+		changeset = Pantryitem.changeset(%Pantryitem{})
+		render(conn, "new.html", changeset: changeset)
+	 end
+
+	#def editfood(conn, %{"id" => id}) do
+  #  foodcatalog = Repo.get!(Foodcatalog, id)
+  #  changeset = Foodcatalog.changeset(foodcatalog)
+  #  render(conn, "edit.html", foodcatalog: foodcatalog, changeset: changeset)
+  #end
 
   def create(conn, %{"pantryitem" => pantryitem_params}) do
     changeset = Pantryitem.changeset(%Pantryitem{}, pantryitem_params)

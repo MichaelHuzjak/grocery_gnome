@@ -2,11 +2,15 @@ defmodule GroceryGnome.FoodcatalogController do
   use GroceryGnome.Web, :controller
 
   alias GroceryGnome.Foodcatalog
+		import Ecto.Query
+
 
   plug :scrub_params, "foodcatalog" when action in [:create, :update]
 
   def index(conn, _params) do
-    foodcatalogs = Repo.all(Foodcatalog)
+		#query = from f in Foodcatalog, where: f.foodname != "cheese"
+		query = from f in Foodcatalog
+		foodcatalogs = Repo.all(query)
     render(conn, "index.html", foodcatalogs: foodcatalogs)
   end
 
