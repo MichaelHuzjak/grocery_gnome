@@ -52,7 +52,6 @@ defmodule GroceryGnome.Spoonacular do
 	def caloried_meal_plan(daily_calories, time_frame) do
 		# time_frame = "week" or "day"
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate"
-		
 		HTTPotion.get(get_params(endpoint, [targetCalories: daily_calories, timeFrame: time_frame]), [
 					headers: dh
 				])
@@ -67,13 +66,14 @@ defmodule GroceryGnome.Spoonacular do
 
 	# parses just the parameters so they're in the standard format
 	def parse_params(params) do
- 		Enum.join((for {k, v} <- params, do: to_string(k) <> "=" <> to_string(v)), "&")
+		(for {k, v} <- params, do: to_string(k) <> "=" <> 
+			String.replace(to_string(v), " ", "+"))
+ 		|> Enum.join("&")
 	end
 	
 	# request times out, unsure why
 	def summarize_recipe(id) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/#{id}/summary"
-
 		HTTPotion.get(endpoint, [
 					headers: dh
 				])
@@ -84,7 +84,7 @@ defmodule GroceryGnome.Spoonacular do
 	def visualize_ingredients(params) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/visualizeIngredients"
 		HTTPotion.post(get_params(endpoint, params), [
-					header: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh
+					headers: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh
 				])
 	end
 	# example: 
@@ -97,7 +97,14 @@ defmodule GroceryGnome.Spoonacular do
 		 }
 	end
 
-	
+	def quick_answer(question) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/quickAnswer"
+		HTTPotion.get(get_params(endpoint,[q: question]), [
+					headers: dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
 
 end
 # [%{one: "one"}, %{two: 2}]

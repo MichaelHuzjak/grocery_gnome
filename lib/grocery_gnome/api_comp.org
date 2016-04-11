@@ -6,7 +6,7 @@
 ** TODO Create Recipe Card
 ** DONE Map Ingredients to Grocery Products
 ** DONE Match Recipes to Daily Calories
-** TODO Quick Answer
+** DONE Quick Answer
 ** TODO Summarize Recipe
    timing out for some reason
 ** TODO Visualize Ingredients
