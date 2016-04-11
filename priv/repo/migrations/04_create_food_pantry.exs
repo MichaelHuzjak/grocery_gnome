@@ -4,7 +4,7 @@ defmodule GroceryGnome.Repo.Migrations.CreateMeal do
   def change do
     create table(:foodpantries) do
 			add :FoodPantryID, :integer
-			add :FoodPnatry_FoodID, references(:foodcatalogs)
+			add :FoodPantry_FoodID, references(:foodcatalogs)
 			add :Quantity, :decimal
 			add :Units, :string
 

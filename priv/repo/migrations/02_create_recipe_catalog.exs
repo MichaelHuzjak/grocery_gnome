@@ -5,7 +5,7 @@ defmodule GroceryGnome.Repo.Migrations.CreateRecipeCatalog do
     create table(:recipecatalogs) do
       add :RecipeID, :integer
       add :RecipeName, :string
-      add :PreparationTimeInMinues, :integer
+      add :PreparationTimeInMinutes, :integer
 
       timestamps
     end
