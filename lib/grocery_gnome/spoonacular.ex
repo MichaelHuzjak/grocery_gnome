@@ -99,7 +99,16 @@ defmodule GroceryGnome.Spoonacular do
 
 	def quick_answer(question) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/quickAnswer"
-		HTTPotion.get(get_params(endpoint,[q: question]), [
+		HTTPotion.get(get_params(endpoint, q: question), [
+					headers: dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
+	def search_recipes(parameters) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search"
+		HTTPotion.get(get_params(endpoint, parameters), [
 					headers: dh
 				])
 		|> Map.get(:body)
