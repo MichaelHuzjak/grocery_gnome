@@ -68,4 +68,11 @@ defmodule GroceryGnome.FoodcatalogController do
     |> put_flash(:info, "Foodcatalog deleted successfully.")
     |> redirect(to: foodcatalog_path(conn, :index))
   end
+
+  def newpantry(conn, %{"id" => id}) do
+    foodcatalog = Repo.get!(Foodcatalog, id)
+    changeset = Foodcatalog.changeset(foodcatalog)
+    render(conn, "edit.html", foodcatalog: foodcatalog, changeset: changeset)
+  end
+	
 end

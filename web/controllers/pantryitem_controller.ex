@@ -3,10 +3,12 @@ defmodule GroceryGnome.PantryitemController do
 
   alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
+		import Ecto.Query
 
 
-  #plug :scrub_params, "pantryitem" when action in [:create, :update]
-  plug :scrub_params, "foodcatalog" when action in [:new]
+  plug :scrub_params, "foodcatalog" when action in [:create, :update]
+  plug :scrub_params, "pantryitem" when action in [:create, :update]
+#  plug :scrub_params, "foodcatalog" when action in [:new]
 
   def index(conn, _params) do
     pantryitems = Repo.all(Pantryitem)
@@ -25,17 +27,17 @@ defmodule GroceryGnome.PantryitemController do
     render(conn, "fcindex.html", foodcatalogs: foodcatalogs)
   end
 
- # def new(conn, _params) do
- #   changeset = Pantryitem.changeset(%Pantryitem{})
- #   render(conn, "new.html", changeset: changeset)
-	# end
+  def new(conn, _params) do
+   changeset = Pantryitem.changeset(%Pantryitem{})
+   render(conn, "new.html", changeset: changeset)
+	end
 	
-	def new(conn,  %{"foodcatalog" => foodcatalog_params}) do
-		id = foodcatalog_params.id
-    foodcatalog = Repo.get!(Foodcatalog, id)
-		changeset = Pantryitem.changeset(%Pantryitem{})
-		render(conn, "new.html", changeset: changeset)
-	 end
+	#def new(conn, %{"foodcatalog" => foodcatalog_params}) do
+		#id = _params.foodcatalog.id
+    #foodcatalog = Repo.get!(Foodcatalog, id)
+	#	changeset = Pantryitem.changeset(%Pantryitem{})
+	#	render(conn, "new.html", changeset: changeset)
+	# end
 
 	#def editfood(conn, %{"id" => id}) do
   #  foodcatalog = Repo.get!(Foodcatalog, id)
@@ -92,4 +94,12 @@ defmodule GroceryGnome.PantryitemController do
     |> put_flash(:info, "Pantryitem deleted successfully.")
     |> redirect(to: pantryitem_path(conn, :index))
   end
+
+  def newtest(conn, %{"id" => id}) do
+    foodcatalog = Repo.get!(Foodcatalog, id)
+    changeset = Foodcatalog.changeset(foodcatalog)
+    render(conn, "newtest.html", foodcatalog: foodcatalog, changeset: changeset)
+  end
+
+
 end
