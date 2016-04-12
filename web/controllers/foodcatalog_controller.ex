@@ -2,7 +2,7 @@ defmodule GroceryGnome.FoodcatalogController do
   use GroceryGnome.Web, :controller
 
   alias GroceryGnome.Foodcatalog
-		import Ecto.Query
+	import Ecto.Query
 
 
   plug :scrub_params, "foodcatalog" when action in [:create, :update]
@@ -69,7 +69,8 @@ defmodule GroceryGnome.FoodcatalogController do
     |> redirect(to: foodcatalog_path(conn, :index))
   end
 
-  def newpantry(conn, foodcatalog) do
+  def newpantry(conn, _params) do
+    foodcatalog = Repo.get!(Foodcatalog, _params["foodcatalog"])
     changeset = Foodcatalog.changeset(foodcatalog)
     render(conn, "edit.html", foodcatalog: foodcatalog, changeset: changeset)
   end
