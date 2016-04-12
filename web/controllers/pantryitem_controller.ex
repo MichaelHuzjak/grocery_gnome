@@ -1,5 +1,6 @@
 defmodule GroceryGnome.PantryitemController do
   use GroceryGnome.Web, :controller
+	plug GroceryGnome.Plug.Authenticate
 
   alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
@@ -27,9 +28,10 @@ defmodule GroceryGnome.PantryitemController do
     render(conn, "fcindex.html", foodcatalogs: foodcatalogs)
   end
 
-  def new(conn, _params) do
+  def new(conn, new_params) do
+		foodcatalog = Repo.get!(Foodcatalog, new_params["foodcatalog"])
    changeset = Pantryitem.changeset(%Pantryitem{})
-   render(conn, "new.html", changeset: changeset)
+   render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
 	end
 	
 	#def new(conn, %{"foodcatalog" => foodcatalog_params}) do
@@ -45,8 +47,9 @@ defmodule GroceryGnome.PantryitemController do
   #  render(conn, "edit.html", foodcatalog: foodcatalog, changeset: changeset)
   #end
 
-  def create(conn, %{"pantryitem" => pantryitem_params}) do
-    changeset = Pantryitem.changeset(%Pantryitem{}, pantryitem_params)
+  def create(conn, %{"pantryitem" => pantryitem_params, "foodcatalog" => id}) do
+		foodcatalog = Repo.get!(Foodcatalog, id)
+		changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: pantryitem_params["expiration"], foodcatalog_id: id, user_id: conn.assigns.current_user.id})
 
     case Repo.insert(changeset) do
       {:ok, _pantryitem} ->
@@ -54,7 +57,7 @@ defmodule GroceryGnome.PantryitemController do
         |> put_flash(:info, "Pantryitem created successfully.")
         |> redirect(to: pantryitem_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, conn: conn)
     end
   end
 

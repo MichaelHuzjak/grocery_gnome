@@ -10,7 +10,7 @@ defmodule GroceryGnome.Pantryitem do
     timestamps
   end
 
-  @required_fields ~w(pantryquantity expiration)
+  @required_fields ~w(pantryquantity expiration foodcatalog_id user_id)
   @optional_fields ~w()
 
   @doc """

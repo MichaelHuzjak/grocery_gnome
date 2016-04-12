@@ -51,7 +51,7 @@
       <td><%= foodcatalog.unit %></td>
 
       <td class="text-right">
-        <%= link "Add", to: foodcatalog_path(@conn, :newpantry, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Add", to: pantryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: foodcatalog_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: foodcatalog_path(@conn, :delete, foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>

@@ -69,8 +69,8 @@ defmodule GroceryGnome.FoodcatalogController do
     |> redirect(to: foodcatalog_path(conn, :index))
   end
 
-  def newpantry(conn, _params) do
-    foodcatalog = Repo.get!(Foodcatalog, _params["foodcatalog"])
+  def newpantry(conn, new_params) do
+    foodcatalog = Repo.get!(Foodcatalog, new_params["foodcatalog"])
     changeset = Foodcatalog.changeset(foodcatalog)
     render(conn, "edit.html", foodcatalog: foodcatalog, changeset: changeset)
   end
