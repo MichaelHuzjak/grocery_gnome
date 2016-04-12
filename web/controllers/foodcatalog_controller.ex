@@ -1,6 +1,8 @@
 defmodule GroceryGnome.FoodcatalogController do
   use GroceryGnome.Web, :controller
 
+		plug GroceryGnome.Plug.Authenticate
+
   alias GroceryGnome.Foodcatalog
 	import Ecto.Query
 
@@ -58,6 +60,7 @@ defmodule GroceryGnome.FoodcatalogController do
   end
 
   def delete(conn, %{"id" => id}) do
+		#id = params["foodcatalog"]
     foodcatalog = Repo.get!(Foodcatalog, id)
 
     # Here we use delete! (with a bang) because we expect
@@ -68,6 +71,31 @@ defmodule GroceryGnome.FoodcatalogController do
     |> put_flash(:info, "Foodcatalog deleted successfully.")
     |> redirect(to: foodcatalog_path(conn, :index))
   end
+
+
+	def delete2(conn, params) do
+		id = params["foodcatalog"]
+    foodcatalog = Repo.get!(Foodcatalog, id)
+
+    Repo.delete!(foodcatalog)
+
+    conn
+    |> put_flash(:info, "Foodcatalog deleted successfully.")
+    |> redirect(to: foodcatalog_path(conn, :index))
+
+	end
+
+	 # def delete(conn, %{"id" => id}) do
+   # foodcatalog = Repo.get!(Foodcatalog, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    #Repo.delete!(foodcatalog)
+
+    #conn
+    #|> put_flash(:info, "Foodcatalog deleted successfully.")
+   # |> redirect(to: foodcatalog_path(conn, :index))
+  #end
 
 	
 end

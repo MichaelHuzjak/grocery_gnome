@@ -20,7 +20,7 @@
       <td class="text-right">
         <%= link "Show", to: foodcatalog_path(@conn, :show, foodcatalog), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: foodcatalog_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: foodcatalog_path(@conn, :delete, foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: foodcatalog_path(@conn, :delete2, foodcatalog: foodcatalog), class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
