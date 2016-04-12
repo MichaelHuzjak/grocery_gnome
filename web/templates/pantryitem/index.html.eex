@@ -22,7 +22,7 @@
       <td class="text-right">
         <%= link "Show", to: pantryitem_path(@conn, :show, pantryitem), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: pantryitem_path(@conn, :edit, pantryitem), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: pantryitem_path(@conn, :delete, pantryitem), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: pantryitem_path(@conn, :pantrydelete, pantryitem: pantryitem),  class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
@@ -53,7 +53,7 @@
       <td class="text-right">
         <%= link "Add", to: pantryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: foodcatalog_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: foodcatalog_path(@conn, :delete, foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: foodcatalog_path(@conn, :delete2, foodcatalog: foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>

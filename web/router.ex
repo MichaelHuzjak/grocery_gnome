@@ -41,6 +41,7 @@ defmodule GroceryGnome.Router do
 		get "/grocerylist", GrocerylistController, :index
 
 		get "/delete2", FoodcatalogController, :delete2
+		get "/pantrydelete", PantryitemController, :pantrydelete
   end
 
   # Other scopes may use custom stacks.

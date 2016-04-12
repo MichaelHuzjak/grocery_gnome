@@ -92,4 +92,18 @@ defmodule GroceryGnome.PantryitemController do
     |> redirect(to: pantryitem_path(conn, :index))
   end
 
+	def pantrydelete(conn, delete_param) do
+		id = delete_param["pantryitem"]
+    pantryitem = Repo.get!(Pantryitem, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    Repo.delete!(pantryitem)
+
+    conn
+    |> put_flash(:info, "Pantryitem deleted successfully.")
+    |> redirect(to: pantryitem_path(conn, :index))
+	end
+	
+
 end
