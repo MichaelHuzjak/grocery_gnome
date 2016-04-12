@@ -26,3 +26,14 @@ any further updates to the databse requires mix.migrate
 
 if there is any database errors or some updates to migration files. I recommend doing ecto.drop . This can only be done when the the server is not running. Otherwise you will need to manually drop the tables in either psql or a GUI tool such as pgadmin3 or adminer.
 
+
+
+## New Model
+
+Food Catalog - /foodcatalog
+
+Pantry Item - /pantryitems
+
+Recipes - /recipes
+
+Days - /days

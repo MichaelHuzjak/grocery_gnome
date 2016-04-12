@@ -1,0 +1,23 @@
+<h2>Show foodcatalog</h2>
+
+<ul>
+
+  <li>
+    <strong>Foodname:</strong>
+    <%= @foodcatalog.foodname %>
+  </li>
+
+  <li>
+    <strong>Info:</strong>
+    <%= @foodcatalog.info %>
+  </li>
+
+  <li>
+    <strong>Unit:</strong>
+    <%= @foodcatalog.unit %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: foodcatalog_path(@conn, :edit, @foodcatalog) %>
+<%= link "Back", to: foodcatalog_path(@conn, :index) %>

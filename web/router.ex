@@ -25,8 +25,10 @@ defmodule GroceryGnome.Router do
     post "/registration", RegistrationController, :create
 
 	  resources "/fooditems", FooditemController
-
-	  resources "/mealplans", MealplanController, except: [:new, :edit]
+		resources "/foodcatalog", FoodcatalogController
+		resources "/pantryitems", PantryitemController
+    resources "/recipes", RecipeController
+    resources "/days", DayController
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home
@@ -37,6 +39,9 @@ defmodule GroceryGnome.Router do
 		get "/pantry", PantryController, :index
 
 		get "/grocerylist", GrocerylistController, :index
+
+		get "/fcindex", PantryitemController, :fcindex
+		get "/newpantry", FoodcatalogController, :newpantry
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,34 @@
+<h2>Listing days</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Breakfast</th>
+      <th>Lunch</th>
+      <th>Dinner</th>
+      <th>Date</th>
+      <th>User</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for day <- @days do %>
+    <tr>
+      <td><%= day.breakfast %></td>
+      <td><%= day.lunch %></td>
+      <td><%= day.dinner %></td>
+      <td><%= day.date %></td>
+      <td><%= day.user_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: day_path(@conn, :show, day), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: day_path(@conn, :edit, day), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: day_path(@conn, :delete, day), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New day", to: day_path(@conn, :new) %>

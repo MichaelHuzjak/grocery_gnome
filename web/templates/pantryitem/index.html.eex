@@ -1,0 +1,64 @@
+<h2>Listing pantryitems</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Pantryquantity</th>
+      <th>Expiration</th>
+      <th>User</th>
+      <th>Foodcatalog</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for pantryitem <- @pantryitems do %>
+    <tr>
+      <td><%= pantryitem.pantryquantity %></td>
+      <td><%= pantryitem.expiration %></td>
+      <td><%= pantryitem.user_id %></td>
+      <td><%= pantryitem.foodcatalog_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: pantryitem_path(@conn, :show, pantryitem), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: pantryitem_path(@conn, :edit, pantryitem), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: pantryitem_path(@conn, :delete, pantryitem), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<h2>Listing foodcatalogs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+	<th>ID</th>
+      <th>Foodname</th>
+      <th>Info</th>
+      <th>Unit</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for foodcatalog <- @foodcatalogs do %>
+    <tr>
+	<td><%= foodcatalog.id %></td>
+      <td><%= foodcatalog.foodname %></td>
+      <td><%= foodcatalog.info %></td>
+      <td><%= foodcatalog.unit %></td>
+
+      <td class="text-right">
+        <%= link "Add", to: pantryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: foodcatalog_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: foodcatalog_path(@conn, :delete, foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %>
+
