@@ -1,5 +1,6 @@
 defmodule GroceryGnome.PantryitemController do
   use GroceryGnome.Web, :controller
+	
 	plug GroceryGnome.Plug.Authenticate
 
   alias GroceryGnome.Pantryitem
@@ -12,10 +13,11 @@ defmodule GroceryGnome.PantryitemController do
 #  plug :scrub_params, "foodcatalog" when action in [:new]
 
   def index(conn, _params) do
-    pantryitems = Repo.all(Pantryitem)
-
-				query = from f in Foodcatalog
-				foodcatalogs = Repo.all(query)
+				userid = conn.assigns.current_user.id
+		query = from p in Pantryitem, where: p.user_id == ^userid
+    pantryitems = Repo.all(query)
+		query2 = from f in Foodcatalog
+		foodcatalogs = Repo.all(query2)
 				
     render(conn, "index.html", pantryitems: pantryitems, foodcatalogs: foodcatalogs)
   end
