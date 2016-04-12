@@ -22,14 +22,6 @@ defmodule GroceryGnome.PantryitemController do
     render(conn, "index.html", pantryitems: pantryitems, foodcatalogs: foodcatalogs)
   end
 
-	# food catalog list
-	def fcindex(conn, _params) do
-		#query = from f in Foodcatalog, where: f.foodname != "cheese"
-		query = from f in Foodcatalog
-		foodcatalogs = Repo.all(query)
-    render(conn, "fcindex.html", foodcatalogs: foodcatalogs)
-  end
-
   def new(conn, new_params) do
 		foodcatalog = Repo.get!(Foodcatalog, new_params["foodcatalog"])
    changeset = Pantryitem.changeset(%Pantryitem{})
@@ -59,7 +51,7 @@ defmodule GroceryGnome.PantryitemController do
         |> put_flash(:info, "Pantryitem created successfully.")
         |> redirect(to: pantryitem_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, conn: conn)
+        render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, conn: @conn)
     end
   end
 
@@ -99,12 +91,5 @@ defmodule GroceryGnome.PantryitemController do
     |> put_flash(:info, "Pantryitem deleted successfully.")
     |> redirect(to: pantryitem_path(conn, :index))
   end
-
-  def newtest(conn, %{"id" => id}) do
-    foodcatalog = Repo.get!(Foodcatalog, id)
-    changeset = Foodcatalog.changeset(foodcatalog)
-    render(conn, "newtest.html", foodcatalog: foodcatalog, changeset: changeset)
-  end
-
 
 end
