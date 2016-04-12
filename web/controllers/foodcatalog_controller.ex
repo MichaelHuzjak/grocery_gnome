@@ -2,7 +2,7 @@ defmodule GroceryGnome.FoodcatalogController do
   use GroceryGnome.Web, :controller
 
 		plug GroceryGnome.Plug.Authenticate
-
+  alias GroceryGnome.Pantryitem
   alias GroceryGnome.Foodcatalog
 	import Ecto.Query
 
@@ -77,6 +77,16 @@ defmodule GroceryGnome.FoodcatalogController do
 		id = params["foodcatalog"]
     foodcatalog = Repo.get!(Foodcatalog, id)
 
+
+
+		# query all known tables that have this foodcatalog's id and delete them
+		query = from p in Pantryitem, where: p.foodcatalog_id == ^id
+		pantryitems = Repo.all(query)
+
+		for pantryitem <- pantryitems do
+			Repo.delete!(pantryitem)
+		end
+		
     Repo.delete!(foodcatalog)
 
     conn
