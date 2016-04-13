@@ -13,7 +13,7 @@ defmodule GroceryGnome.PantryitemController do
 #  plug :scrub_params, "foodcatalog" when action in [:new]
 
   def index(conn, _params) do
-				userid = conn.assigns.current_user.id
+		userid = conn.assigns.current_user.id
 		query = from p in Pantryitem, where: p.user_id == ^userid
     pantryitems = Repo.all(query)
 		query2 = from f in Foodcatalog

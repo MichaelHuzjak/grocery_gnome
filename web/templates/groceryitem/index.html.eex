@@ -27,4 +27,36 @@
   </tbody>
 </table>
 
-<%= link "New groceryitem", to: groceryitem_path(@conn, :new) %>
+<h2>Listing foodcatalogs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+	<th>ID</th>
+      <th>Foodname</th>
+      <th>Info</th>
+      <th>Unit</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for foodcatalog <- @foodcatalogs do %>
+    <tr>
+	<td><%= foodcatalog.id %></td>
+      <td><%= foodcatalog.foodname %></td>
+      <td><%= foodcatalog.info %></td>
+      <td><%= foodcatalog.unit %></td>
+
+      <td class="text-right">
+        <%= link "Add", to: groceryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: foodcatalog_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: foodcatalog_path(@conn, :delete2, foodcatalog: foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %>
+
