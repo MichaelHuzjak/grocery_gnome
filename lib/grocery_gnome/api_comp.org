@@ -9,7 +9,7 @@
 ** DONE Quick Answer
 ** TODO Summarize Recipe
    timing out for some reason
-** TODO Visualize Ingredients
+** DONE Visualize Ingredients
 ** DONE Visualize Nutrition
 ** DONE Visualize Price Breakdown
 * Extract
