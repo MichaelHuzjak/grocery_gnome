@@ -106,6 +106,58 @@ defmodule GroceryGnome.Spoonacular do
 		|> Poison.decode
 	end
 
+	@doc "Search through hundreds of thousands of recipes using advanced filtering and ranking. NOTE: Since this method combines three other functionalities, each request counts as 3 requests.
+
+PARAMETERS:
+cuisine (STRING) -- The cuisine(s) of the recipes. One or more (comma separated) of the following: african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middle eastern, jewish, american, cajun, southern, greek, german, nordic, eastern european, caribbean, or latin american.
+
+diet (STRING) -- The diet to which the recipes must be compliant. Possible values are: pescetarian, lacto vegetarian, ovo vegetarian, vegan, paleo, primal, and vegetarian.
+
+excludeIngredients (STRING) -- An comma-separated list of ingredients that must not be contained in the recipes.
+
+fillIngredients (BOOLEAN) -- Add information about the used and missing ingredients in each recipe.
+
+includeIngredients (STRING) -- A comma-separated list of ingredients that should/must be contained in the recipe.
+
+intolerances (STRING) -- A comma-separated list of intolerances. All found recipes must not have ingredients that could cause problems for people with one of the given tolerances. Possible values are: dairy, egg, gluten, peanut, sesame, seafood, shellfish, soy, sulfite, tree nut, and wheat.
+
+limitLicense (BOOLEAN) -- Whether the recipes should have an open license that allows for displaying with proper attribution.
+
+maxCalories, maxCarbs, maxFat, maxProtein, minCalories, minCarbs, minFat, minProtein (NUMBER) -- Setting limits on named macronutrients.
+
+number (NUMBER) -- The number of results to return (between 1 and 100).
+
+offset (NUMBER) -- The number of results to skip (between 0 and 900).
+
+query (STRING) -- The recipe search query.
+
+ranking (NUMBER) -- Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+
+type (STRING) -- The type of the recipes. One of the following: main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink."
+	def complex_recipe_search(parameters) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex"
+		HTTPotion.get(get_params(endpoint, parameters), [
+					headers: dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
+	@doc "Parameters are:
+fillIngredients (BOOLEAN) -- Add information about the used and missing ingredients in each recipe
+ingredients (STRING) -- A comma separated list of ingredients that the recipes should contain
+limitLicense (BOOLEAN) -- Whether to only show recipes with an attribution license.
+number (NUMBER) -- Amount of recipes to return.
+ranking (NUMBER) -- Whether to maximize used ingredients (1) or minimize missing ingredients (2) first."
+	def find_by_ingredients(parameters) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients"
+		HTTPotion.get(get_params(endpoint, parameters), [
+					headers: ["Accept": "application/json"] ++ dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
 	@doc "Finds recipes by limits in macronutrients"
 	def find_by_nutrients(parameters) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByNutrients"
