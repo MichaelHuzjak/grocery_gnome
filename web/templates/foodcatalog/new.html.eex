@@ -1,3 +1,5 @@
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
+
 <h2>New foodcatalog</h2>
 
 <%= render "form.html", changeset: @changeset,
