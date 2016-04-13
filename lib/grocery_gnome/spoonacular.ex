@@ -106,6 +106,18 @@ defmodule GroceryGnome.Spoonacular do
 		|> Poison.decode
 	end
 
+	
+
+	def parse_ingredients(ingredientList, servings) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/parseIngredients"
+		HTTPotion.post(endpoint, [
+					headers: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh,
+					body: parse_params(ingredientList: ingredientList, servings: servings)
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+	
 	def autocomplete_ingredient(query) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete"
 		HTTPotion.get(get_params(endpoint, query: query), [

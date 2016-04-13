@@ -15,7 +15,7 @@
 * Extract
 ** TODO Analyze a recipe search query
 ** TODO Extract Recipe from Website
-** TODO Parse Ingredients
+** DONE Parse Ingredients
 * Search
 ** DONE Autocomplete Ingredient Search
 ** DONE Complex Recipe Search
