@@ -20,7 +20,7 @@
       <td class="text-right">
         <%= link "Show", to: groceryitem_path(@conn, :show, groceryitem), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: groceryitem_path(@conn, :edit, groceryitem), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: groceryitem_path(@conn, :delete, groceryitem), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: groceryitem_path(@conn, :deletegrocery, groceryitem: groceryitem),  class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>

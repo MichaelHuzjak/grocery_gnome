@@ -24,7 +24,7 @@
       <td class="text-right">
         <%= link "Show", to: recipe_path(@conn, :show, recipe), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: recipe_path(@conn, :edit, recipe), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: recipe_path(@conn, :delete, recipe), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: recipe_path(@conn, :deleterecipe, recipe: recipe), class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>

@@ -11,7 +11,7 @@ defmodule GroceryGnome.Recipe do
     timestamps
   end
 
-  @required_fields ~w(ingredients instructions prep_time cook_time)
+  @required_fields ~w(instructions prep_time cook_time user_id)
   @optional_fields ~w()
 
   @doc """

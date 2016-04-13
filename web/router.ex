@@ -43,6 +43,8 @@ defmodule GroceryGnome.Router do
 
 		get "/delete2", FoodcatalogController, :delete2
 		get "/pantrydelete", PantryitemController, :pantrydelete
+		get "/deleterecipe", RecipeController, :deleterecipe
+		get "deletegrocery", GroceryitemController, :deletegrocery
 		get "/movetopantry", GroceryitemController, :movetopantry
   end
 
