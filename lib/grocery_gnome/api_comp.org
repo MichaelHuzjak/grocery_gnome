@@ -10,8 +10,8 @@
 ** TODO Summarize Recipe
    timing out for some reason
 ** TODO Visualize Ingredients
-** TODO Visualize Nutrition
-** TODO Visualize Price Breakdown
+** DONE Visualize Nutrition
+** DONE Visualize Price Breakdown
 * Extract
 ** DONE Analyze a recipe search query
 ** TODO Extract Recipe from Website

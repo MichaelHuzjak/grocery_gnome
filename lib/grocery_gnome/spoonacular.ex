@@ -83,18 +83,11 @@ defmodule GroceryGnome.Spoonacular do
 
 	def visualize_ingredients(params) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/visualizeIngredients"
-		HTTPotion.post(get_params(endpoint, params), [
-					headers: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh
+		HTTPotion.post(endpoint, [
+					headers: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh,
+					body: parse_params(params)
 				])
-	end
-	# example:
-	def vis_ing_ex do
-		%{defaultCss: :checked,
-			ingredientList: "3 oz flour",
-			measure: "metric",
-			servings: 2,
-			view: "grid"
-		 }
+		|> Map.get(:body)
 	end
 
 	def quick_answer(question) do
@@ -106,6 +99,16 @@ defmodule GroceryGnome.Spoonacular do
 		|> Poison.decode
 	end
 
+	def visualize_nutrition(defaultCss, ingredientList, servings) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/visualizeNutrition"
+		HTTPotion.post(endpoint, [
+					headers: ["Content-Type": "application/x-www-form-urlencoded"] ++ dh,
+					body: parse_params(defaultCss: defaultCss, ingredientList: ingredientList, servings: servings)
+				])
+		|> Map.get(:body)
+		# |> Poison.decode
+	end
+
 	def analyze_recipe_query(query) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/queries/analyze"
 		HTTPotion.get(get_params(endpoint, q: query), [
@@ -114,7 +117,7 @@ defmodule GroceryGnome.Spoonacular do
 		|> Map.get(:body)
 		|> Poison.decode
 	end
-		
+
 	def parse_ingredients(ingredientList, servings) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/parseIngredients"
 		HTTPotion.post(endpoint, [
@@ -124,7 +127,7 @@ defmodule GroceryGnome.Spoonacular do
 		|> Map.get(:body)
 		|> Poison.decode
 	end
-	
+
 	def autocomplete_ingredient(query) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete"
 		HTTPotion.get(get_params(endpoint, query: query), [
