@@ -1,4 +1,3 @@
-<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %>
 
 <h2>New Pantryitem</h2>
 
@@ -7,3 +6,5 @@
                         action: pantryitem_path(@conn, :create, foodcatalog: @foodcatalog) %>>
 
 <%= link "Back", to: pantryitem_path(@conn, :index) %>
+
+<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %>
