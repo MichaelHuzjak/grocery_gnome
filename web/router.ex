@@ -24,10 +24,9 @@ defmodule GroceryGnome.Router do
     get "/registration", RegistrationController, :new
     post "/registration", RegistrationController, :create
 
-	  resources "/fooditems", FooditemController
-		resources "/groceryitems", GroceryitemController
+		resources "/grocery", GroceryitemController
 		resources "/foodcatalog", FoodcatalogController
-		resources "/pantryitems", PantryitemController
+		resources "/pantry", PantryitemController
     resources "/recipes", RecipeController
     resources "/days", DayController
 
@@ -37,9 +36,9 @@ defmodule GroceryGnome.Router do
 
 		get "/kitchen", KitchenController, :index
 
-		get "/pantry", PantryController, :index
+		#get "/pantry", PantryitemController, :index
 
-		get "/grocerylist", GrocerylistController, :index
+		#get "/grocerylist", GroceryitemController, :index
 
 		get "/delete2", FoodcatalogController, :delete2
 		get "/pantrydelete", PantryitemController, :pantrydelete

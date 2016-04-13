@@ -1,4 +1,7 @@
-<h2>Listing groceryitems</h2>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
+
+
+<h2>Grocery</h2>
 
 <table class="table">
   <thead>
