@@ -25,6 +25,7 @@ defmodule GroceryGnome.Router do
     post "/registration", RegistrationController, :create
 
 	  resources "/fooditems", FooditemController
+		resources "/groceryitems", GroceryitemController
 		resources "/foodcatalog", FoodcatalogController
 		resources "/pantryitems", PantryitemController
     resources "/recipes", RecipeController

@@ -1,0 +1,6 @@
+<h2>Edit groceryitem</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: groceryitem_path(@conn, :update, @groceryitem) %>
+
+<%= link "Back", to: groceryitem_path(@conn, :index) %>
