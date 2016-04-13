@@ -13,7 +13,7 @@
 ** TODO Visualize Nutrition
 ** TODO Visualize Price Breakdown
 * Extract
-** TODO Analyze a recipe search query
+** DONE Analyze a recipe search query
 ** TODO Extract Recipe from Website
 ** DONE Parse Ingredients
 * Search

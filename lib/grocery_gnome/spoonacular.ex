@@ -106,8 +106,15 @@ defmodule GroceryGnome.Spoonacular do
 		|> Poison.decode
 	end
 
-	
-
+	def analyze_recipe_query(query) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/queries/analyze"
+		HTTPotion.get(get_params(endpoint, q: query), [
+					headers: ["Accept": "application/json"] ++ dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+		
 	def parse_ingredients(ingredientList, servings) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/parseIngredients"
 		HTTPotion.post(endpoint, [
