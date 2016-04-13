@@ -27,6 +27,9 @@
   </tbody>
 </table>
 
+<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry) %>
+
+
 <h2>Listing foodcatalogs</h2>
 
 <table class="table">
