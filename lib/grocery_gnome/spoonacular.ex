@@ -106,6 +106,15 @@ defmodule GroceryGnome.Spoonacular do
 		|> Poison.decode
 	end
 
+	def autocomplete_ingredient(query) do
+		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete"
+		HTTPotion.get(get_params(endpoint, query: query), [
+					headers: dh
+				])
+		|> Map.get(:body)
+		|> Poison.decode
+	end
+
 	@doc "Search through hundreds of thousands of recipes using advanced filtering and ranking. NOTE: Since this method combines three other functionalities, each request counts as 3 requests.
 
 PARAMETERS:

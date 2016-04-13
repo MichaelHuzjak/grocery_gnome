@@ -17,7 +17,7 @@
 ** TODO Extract Recipe from Website
 ** TODO Parse Ingredients
 * Search
-** TODO Autocomplete Ingredient Search
+** DONE Autocomplete Ingredient Search
 ** DONE Complex Recipe Search
 ** DONE Find By Ingredients
 ** DONE Find By Nutrients
