@@ -60,12 +60,12 @@ defmodule GroceryGnome.Spoonacular do
 	end
 
 	# constructs the full url with params (for get requests mainly)
-	def get_params(url, params) do
+	defp get_params(url, params) do
 		"#{url}?#{parse_params(params)}"
 	end
 
 	# parses just the parameters so they're in the standard format
-	def parse_params(params) do
+	defp parse_params(params) do
 		(for {k, v} <- params, do: to_string(k) <> "=" <>
 			String.replace(to_string(v), " ", "+"))
  		|> Enum.join("&")
@@ -210,7 +210,7 @@ ranking (NUMBER) -- Whether to maximize used ingredients (1) or minimize missing
 		|> Poison.decode
 	end
 
-	def search_recipes(parameters) do
+	def recipe_search(parameters) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search"
 		HTTPotion.get(get_params(endpoint, parameters), [
 					headers: dh
@@ -238,4 +238,3 @@ ranking (NUMBER) -- Whether to maximize used ingredients (1) or minimize missing
 	end
 
 end
-# [%{one: "one"}, %{two: 2}]

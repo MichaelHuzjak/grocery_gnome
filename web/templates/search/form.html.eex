@@ -1,0 +1,4 @@
+<%= form_for @conn, search_path(@conn, :new) [as: :search], fn f -> %>
+    <%= search_input f, :query %>
+    <%= submit "Search" %>
+<% end %>

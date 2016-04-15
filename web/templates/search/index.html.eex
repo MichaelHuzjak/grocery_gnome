@@ -1,0 +1,3 @@
+<h2>Search Gateway</h2>
+
+<%= link "Recipe Search", to: search_path(@conn, :recipe_search), class: "btn btn-default btn-xs" %>
