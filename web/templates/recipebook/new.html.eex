@@ -1,0 +1,6 @@
+<h2>New recipebook</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: recipebook_path(@conn, :create) %>
+
+<%= link "Back", to: recipebook_path(@conn, :index) %>

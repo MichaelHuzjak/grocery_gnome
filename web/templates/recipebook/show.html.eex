@@ -1,0 +1,18 @@
+<h2>Show recipebook</h2>
+
+<ul>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @recipebook.body %>
+  </li>
+
+  <li>
+    <strong>Word count:</strong>
+    <%= @recipebook.word_count %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: recipebook_path(@conn, :edit, @recipebook) %>
+<%= link "Back", to: recipebook_path(@conn, :index) %>
