@@ -23,7 +23,7 @@ defmodule GroceryGnome.PantryitemController do
   end
 
   def new(conn, new_params) do
-		foodcatalog = Repo.get!(Foodcatalog, new_params["foodcatalog"])
+	 foodcatalog = Repo.get!(Foodcatalog, new_params["foodcatalog"])
    changeset = Pantryitem.changeset(%Pantryitem{})
    render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
 	end

@@ -1,12 +1,17 @@
 defmodule GroceryGnome.RecipeController do
   use GroceryGnome.Web, :controller
 
-  alias GroceryGnome.Recipe
+		plug GroceryGnome.Plug.Authenticate
+
+		alias GroceryGnome.Recipe
+		import Ecto.Query
 
   plug :scrub_params, "recipe" when action in [:create, :update]
 
   def index(conn, _params) do
-    recipes = Repo.all(Recipe)
+		userid = conn.assigns.current_user.id
+		query = from p in Recipe, where: p.user_id == ^userid
+    recipes = Repo.all(query)
     render(conn, "index.html", recipes: recipes)
   end
 
@@ -16,7 +21,7 @@ defmodule GroceryGnome.RecipeController do
   end
 
   def create(conn, %{"recipe" => recipe_params}) do
-    changeset = Recipe.changeset(%Recipe{}, recipe_params)
+    changeset = Recipe.changeset(%Recipe{}, %{ instructions: recipe_params["instructions"], prep_time: recipe_params["prep_time"], cook_time: recipe_params["cook_time"], user_id: conn.assigns.current_user.id})
 
     case Repo.insert(changeset) do
       {:ok, _recipe} ->
@@ -64,4 +69,16 @@ defmodule GroceryGnome.RecipeController do
     |> put_flash(:info, "Recipe deleted successfully.")
     |> redirect(to: recipe_path(conn, :index))
   end
+
+	def deleterecipe(conn, params) do
+		id = params["recipe"]
+    recipe = Repo.get!(Recipe, id)
+    Repo.delete!(recipe)
+
+    conn
+    |> put_flash(:info, "Recipe deleted successfully.")
+    |> redirect(to: recipe_path(conn, :index))
+	end
+	
+				
 end

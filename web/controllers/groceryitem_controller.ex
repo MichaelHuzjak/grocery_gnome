@@ -4,6 +4,7 @@ defmodule GroceryGnome.GroceryitemController do
 	plug GroceryGnome.Plug.Authenticate
 	
   alias GroceryGnome.Groceryitem
+	alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
 
 	import Ecto.Query
@@ -76,4 +77,49 @@ defmodule GroceryGnome.GroceryitemController do
     |> put_flash(:info, "Groceryitem deleted successfully.")
     |> redirect(to: groceryitem_path(conn, :index))
   end
+
+	def movetopantry(conn, params) do
+		userid = conn.assigns.current_user.id
+		query = from g in Groceryitem, where: g.user_id == ^userid
+		groceryitems = Repo.all(query)
+
+		for groceryitem <- groceryitems do
+					#changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: "", foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+			catalogid = groceryitem.foodcatalog_id
+			result = Repo.get_by(Pantryitem, user_id: conn.assigns.current_user.id , foodcatalog_id: catalogid)
+
+			case result do
+				nil ->
+					 changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: "", foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+					Repo.insert(changeset)
+				pantryitem ->
+				    changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+					Repo.update(changeset)
+			end
+			
+			Repo.delete!(groceryitem)
+		end
+		
+
+
+    conn
+    |> put_flash(:info, "Groceryitems moved successfully.")
+    |> redirect(to: pantryitem_path(conn, :index))
+	end
+
+	def deletegrocery(conn, params) do
+		id = params["groceryitem"]
+    groceryitem = Repo.get!(Groceryitem, id)
+
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
+    Repo.delete!(groceryitem)
+
+    conn
+    |> put_flash(:info, "Groceryitem deleted successfully.")
+    |> redirect(to: groceryitem_path(conn, :index))
+	end
+	
+	
+	
 end
