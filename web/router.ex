@@ -40,6 +40,8 @@ defmodule GroceryGnome.Router do
 
 		get "/kitchen", KitchenController, :index
 
+		get "/recipebook", RecipeController, :recipebook
+
 		#get "/pantry", PantryitemController, :index
 
 		#get "/grocerylist", GroceryitemController, :index

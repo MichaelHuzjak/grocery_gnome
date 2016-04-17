@@ -15,6 +15,10 @@ defmodule GroceryGnome.RecipeController do
     render(conn, "index.html", recipes: recipes)
   end
 
+  def recipebook(conn, _params) do
+    render(conn, "recipebook.html")
+  end
+
   def new(conn, _params) do
     changeset = Recipe.changeset(%Recipe{})
     render(conn, "new.html", changeset: changeset)
