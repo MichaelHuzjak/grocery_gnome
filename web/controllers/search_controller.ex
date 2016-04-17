@@ -11,6 +11,12 @@ defmodule GroceryGnome.SearchController do
 	end
 
 	def show(conn, params) do
+		# IO.inspect params
+		render(conn, "show.html", params)
+	end
+	
+	def recipe_show(conn, params) do
+		IO.inspect params
 		render(conn, "show.html", params)
 	end
 	

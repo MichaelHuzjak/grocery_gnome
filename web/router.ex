@@ -32,7 +32,7 @@ defmodule GroceryGnome.Router do
 
 		get "/search", SearchController, :index
 		get "/search/recipes", SearchController, :recipe_search
-		get "/search/results", SearchController, :show
+		post "/search/recipe/results", SearchController, :recipe_show
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home
