@@ -8,13 +8,13 @@
 	</tr>
     </thread>
     <tbody>
-	<%# for recipe <- @recipes do %>
+	<%= for recipe <- @recipes do %>
 	    <tr>
-		<td><%# Map.get(recipe, "id") %></td>
-		<td><%# Map.get(recipe, "image") %></td>
-		<td><%# Map.get(recipe, "readyInMinutes") %></td>
-		<td><%# Map.get(recipe, "title") %></td>
+		<td><%= Map.get(recipe, "id") %></td>
+		<td><img src="<%= @uri %><%= Map.get(recipe, "image") %>", alt="<%= Map.get(recipe, "title") %>"</td>
+		<td><%= Map.get(recipe, "readyInMinutes") %></td>
+		<td><%= Map.get(recipe, "title") %></td>
 	    </tr>
-	<%# end %>
+	<%= end %>
     </tbody>
 </table>
