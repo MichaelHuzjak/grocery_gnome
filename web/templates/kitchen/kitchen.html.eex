@@ -9,12 +9,14 @@
 	</div>
     </div>
     <div id="recipes" class="jumbotron">
+      	    <a href="<%= recipe_path @conn, :index %>">
+
       <div class="container">
 	    <span id="recipeButton" class="glyphicon glyphicon-cutlery"></span>
 	    <h2 id="recipeButtonTitle">Recipes</h2>
-	    <a href="<%= pantryitem_path @conn, :index %>">
-	    <button class="btn btn-default full-width"><span class="glyphicon glyphicon-ok"></span></a></button>
-	</div>
+	    <button class="btn btn-default full-width"><span class="glyphicon glyphicon-ok"></span></button>
+      </div>
+      </a>
     </div>
 </div>
 

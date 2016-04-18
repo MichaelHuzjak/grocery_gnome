@@ -1,4 +1,3 @@
-<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
 
 <h2>Recipes</h2>
 
@@ -33,4 +32,7 @@
   </tbody>
 </table>
 
-<%= link "New recipe", to: recipe_path(@conn, :new) %>
+<%= link "New recipe", to: recipe_path(@conn, :new) %></br>
+<%= link "Search for recipe", to: search_path(@conn, :index) %>
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

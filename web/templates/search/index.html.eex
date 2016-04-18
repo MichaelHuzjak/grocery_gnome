@@ -2,3 +2,4 @@
 
 <%= link "Recipe Search", to: search_path(@conn, :recipe_search), class: "btn btn-default btn-xs" %>
 <%= link "Grocery Search", to: search_path(@conn, :grocery_search), class: "btn btn-default btn-xs" %>
+
