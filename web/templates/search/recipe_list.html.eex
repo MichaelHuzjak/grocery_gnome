@@ -9,10 +9,10 @@
     <tbody>
 	<%= for recipe <- @recipes do %>
 	    <tr>
-		<td><img src="<%= @uri %><%= Map.get(recipe, "image") %>", alt="<%= Map.get(recipe, "title") %>" style="width:150px;height:150px;"></td>
-		<td><%= Map.get(recipe, "readyInMinutes") %></td>
-		<td><%= link Map.get(recipe, "title"), 
-		        to: search_path(@conn, :recipe_show, Map.get(recipe, "id")),
+		<td><img src="<%= @uri <> recipe["image"] %>", alt="<%= recipe["title"] %>" style="width:150px;height:150px;"></td>
+		<td><%= recipe["readyInMinutes"] %></td>
+		<td><%= link recipe["title"], 
+		        to: search_path(@conn, :recipe_show, recipe["id"]),
 		        class: "btn" %>
 		</td>
 	    </tr>

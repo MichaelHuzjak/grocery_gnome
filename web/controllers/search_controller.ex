@@ -18,16 +18,20 @@ defmodule GroceryGnome.SearchController do
 	
 	def recipe_list(conn, _params) do
 		{:ok, resp} = Spoonacular.recipe_search conn.params["search"]
-		%{"baseUri" => uri,
-			"results" => results} = resp
-		IO.inspect uri
+		%{"results" => results} = resp
 		IO.inspect results
-		render(conn, "recipe_list.html", recipes: results, uri: uri)
+		render(conn, "recipe_list.html", recipes: results, uri: "https://spoonacular.com/recipeImages/")
+	end
+
+	def recipe_similar(conn, %{"id" => id}) do
+		{:ok, resp} = Spoonacular.find_similar_recipes id
+		IO.inspect resp
+		render(conn, "recipe_list.html", recipes: resp, uri: "https://spoonacular.com/recipeImages/")
 	end
 
 	def recipe_show(conn, %{"id" => id}) do
 		{:ok, resp} = GroceryGnome.Spoonacular.recipe_information id, false
 		IO.inspect resp
-		render(conn, "recipe_show.html", resp: resp)
+		render(conn, "recipe_show.html", resp: resp, id: id)
 	end
 end
