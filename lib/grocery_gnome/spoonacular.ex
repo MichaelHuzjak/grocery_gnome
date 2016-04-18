@@ -208,11 +208,10 @@ ranking (NUMBER) -- Whether to maximize used ingredients (1) or minimize missing
 		|> Poison.decode
 	end
 
-	def search_grocery(num_results, offset, query) do
+	def grocery_search(params) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/search"
 		HTTPotion.get(
-			get_params(endpoint,
-								 number: num_results, offset: offset, query: query), [
+			get_params(endpoint, params), [
 				headers: dh
 			])
 		|> Map.get(:body)

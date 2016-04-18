@@ -1,0 +1,16 @@
+<table class="table">
+    <thread>
+	<tr>
+	    <th>image</th>
+	    <th>title</th>
+	</tr>
+    </thread>
+    <tbody>
+	<%= for product <- @products do %>
+	    <tr>
+		<td><img src="<%= product["image"] %>", title="<%= product["id"] %>"></td>
+		<td><%= product["title"] %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>
