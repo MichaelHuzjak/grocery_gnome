@@ -1,4 +1,9 @@
 <h2>Recipe Search</h2>
 
-<%= render "form.html", conn: @conn,
-                        action: search_path(@conn, :recipe_show)%>
+<%= form_for @conn, search_path(@conn, :recipe_list), [as: :search], fn f -> %>
+    <div class="form-group">
+	<%= label f, :query, "Query", class: "control-label" %>
+	<%= search_input f, :query, class: "form-control" %>
+    </div>
+    <%= submit "Search" %>
+<% end %>
