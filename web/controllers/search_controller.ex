@@ -1,7 +1,8 @@
-defmodule GroceryGnome.SearchController do
-
+defmodule GroceryGnome.SearchController do	
 	use GroceryGnome.Web, :controller
 	alias GroceryGnome.Spoonacular
+
+	plug GroceryGnome.Plug.Authenticate
 
 	def index(conn, _params) do
 		render(conn, "index.html")
@@ -36,7 +37,7 @@ defmodule GroceryGnome.SearchController do
 	end
 
 	def grocery_search(conn, _params) do
-		render(conn, "grocery_search.html")
+		render(conn, "grocery_search.html", conn: conn)
 	end
 
 	def grocery_list(conn, _params) do

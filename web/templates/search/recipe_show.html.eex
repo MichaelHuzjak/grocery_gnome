@@ -27,3 +27,5 @@ Detailed instructions can be found <a href="<%= @resp["sourceUrl"] %>">HERE.</a>
     to: search_path(@conn, :recipe_similar, @id),
     class: "btn"%></h3>
 
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
