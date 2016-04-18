@@ -21,3 +21,5 @@
 	<% end %>
     </tbody>
 </table>
+<h3>Directions:</h3>
+Detailed instructions can be found <a href="<%= @resp["sourceUrl"] %>">HERE.</a>
