@@ -1,0 +1,21 @@
+<table class="table">
+    <thread>
+	<tr>
+	    <th>image</th>
+	    <th>ready in</th>
+	    <th>title</th>
+	</tr>
+    </thread>
+    <tbody>
+	<%= for recipe <- @recipes do %>
+	    <tr>
+		<td><img src="<%= @uri <> recipe["image"] %>", title="<%= recipe["id"] %>" style="width:150px;height:150px;"></td>
+		<td><%= recipe["readyInMinutes"] %></td>
+		<td><%= link recipe["title"], 
+		        to: search_path(@conn, :recipe_show, recipe["id"]),
+		        class: "btn" %>
+		</td>
+	    </tr>
+	<%= end %>
+    </tbody>
+</table>

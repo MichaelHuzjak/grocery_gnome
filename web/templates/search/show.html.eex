@@ -1,20 +1,31 @@
 <table class="table">
     <thread>
 	<tr>
-	    <th>id</th>
 	    <th>image</th>
 	    <th>ready in</th>
 	    <th>title</th>
 	</tr>
     </thread>
     <tbody>
-	<%# for recipe <- @recipes do %>
+	<%= for recipe <- @recipes do %>
 	    <tr>
-		<td><%# Map.get(recipe, "id") %></td>
-		<td><%# Map.get(recipe, "image") %></td>
-		<td><%# Map.get(recipe, "readyInMinutes") %></td>
-		<td><%# Map.get(recipe, "title") %></td>
+		<td><img src="<%= @uri %><%= Map.get(recipe, "image") %>" title="<%= Map.get(recipe, "id") %>" style="width:150px;height:150px"></td>
+		<td><%= Map.get(recipe, "readyInMinutes") %></td>
+		<td><%= Map.get(recipe, "title") %></td>
 	    </tr>
-	<%# end %>
+	<%= end %>
     </tbody>
 </table>
+
+<!-- <div class="container">
+     <div class="row" style="border:1px solid black;">
+     <%# for recipe <- @recipes do %>
+     <div class="col-md-4" style="border:1px solid black;">
+     <p><%# Map.get(recipe, "title") %></p>
+     <img src="<%# @uri <> Map.get(recipe, "image") %>", 
+     title="<%# Map.get(recipe, "id") %>",
+     style="width:150px;height:150px">
+     </div>
+     <%# end %>
+     </div>
+     </div> -->

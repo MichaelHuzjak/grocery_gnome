@@ -1,0 +1,29 @@
+<h2><%= @resp["title"] %></h2>
+<img src="<%= @resp["image"] %>">
+<h3>Ingredients:</h3>
+<table class="table">
+    <thread>
+	<tr>
+	    <th>Aisle</th>
+	    <th>Amount</th>
+	    <th>Unit</th>
+	    <th>Name</th>
+	</tr>
+    </thread>
+    <tbody>
+	<%= for ingredient <- @resp["extendedIngredients"] do %>
+	    <tr>
+		<td><%= ingredient["aisle"] %></td>
+		<td><%= ingredient["amount"] %></td>
+		<td><%= ingredient["unit"] %></td>
+		<td><%= ingredient["name"] %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>
+<h3>Directions:</h3>
+Detailed instructions can be found <a href="<%= @resp["sourceUrl"] %>">HERE.</a>
+<h3><%= link "Similar Recipes",
+    to: search_path(@conn, :recipe_similar, @id),
+    class: "btn"%></h3>
+

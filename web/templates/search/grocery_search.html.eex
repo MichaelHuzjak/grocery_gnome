@@ -1,9 +1,9 @@
-<h2>Recipe Search</h2>
+<h2>Grocery Search</h2>
 
-<%= form_for @conn, search_path(@conn, :recipe_list), [as: :search], fn f -> %>
+<%= form_for @conn, search_path(@conn, :grocery_list), [as: :search], fn f -> %>
     <div class="form-group">
 	<%= label f, :query, "Query", class: "control-label" %>
 	<%= search_input f, :query, class: "form-control" %>
     </div>
-    <%= submit "Search" %>
+    <%= submit "Submit" %>
 <% end %>
