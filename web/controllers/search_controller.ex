@@ -44,4 +44,11 @@ defmodule GroceryGnome.SearchController do
 		IO.inspect resp["products"]
 		render(conn, "grocery_list.html", products: resp["products"])
 	end
+
+	def grocery_show(conn, %{"id" => id}) do
+		{:ok, resp} = GroceryGnome.Spoonacular.product_information id
+		IO.inspect resp
+		render(conn, "grocery_show.html", resp: resp, id: id)
+	end
+
 end

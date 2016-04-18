@@ -1,0 +1,16 @@
+<h2><%= @resp["title"] %></h2>
+<img src="<%= hd @resp["images"] %>">
+<h3>Serving Size</h3>
+<%= @resp["serving_size"] %>
+<h3>Tags</h3>
+<%= for b <- @resp["breadcrumbs"] do %>
+    <div><%= b %></div>
+<% end %>
+<h3>Important Badges</h3>
+<%= for b <- @resp["important_badges"] do %>
+    <div><%= b %></div>
+<% end %>
+<h3>Badges</h3>
+<%= for b <- @resp["badges"] do %>
+    <div><%= b %></div>
+<% end %>
