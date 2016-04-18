@@ -25,10 +25,9 @@ defmodule GroceryGnome.SearchController do
 		render(conn, "recipe_list.html", recipes: results, uri: uri)
 	end
 
-	def recipe_show(conn, params) do
-		IO.inspect params
-		# {:ok, resp} = GroceryGnome.Spoonacular.recipe_information params.id, true
-		# IO.inspect resp
-		render(conn, "index.html")
+	def recipe_show(conn, %{"id" => id}) do
+		{:ok, resp} = GroceryGnome.Spoonacular.recipe_information id, false
+		IO.inspect resp
+		render(conn, "recipe_show.html", resp: resp)
 	end
 end

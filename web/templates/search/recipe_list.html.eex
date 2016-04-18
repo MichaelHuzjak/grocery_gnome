@@ -1,7 +1,6 @@
 <table class="table">
     <thread>
 	<tr>
-	    <th>id</th>
 	    <th>image</th>
 	    <th>ready in</th>
 	    <th>title</th>
@@ -10,10 +9,12 @@
     <tbody>
 	<%= for recipe <- @recipes do %>
 	    <tr>
-		<td><%= Map.get(recipe, "id") %></td>
-		<td><img src="<%= @uri %><%= Map.get(recipe, "image") %>", alt="<%= Map.get(recipe, "title") %>"</td>
+		<td><img src="<%= @uri %><%= Map.get(recipe, "image") %>", alt="<%= Map.get(recipe, "title") %>" style="width:150px;height:150px;"></td>
 		<td><%= Map.get(recipe, "readyInMinutes") %></td>
-		<td><%= link Map.get(recipe, "title"), to: search_path(@conn, :recipe_show, [id: Map.get(recipe, "id")]), class: "btn" %></td>
+		<td><%= link Map.get(recipe, "title"), 
+		        to: search_path(@conn, :recipe_show, Map.get(recipe, "id")),
+		        class: "btn" %>
+		</td>
 	    </tr>
 	<%= end %>
     </tbody>
