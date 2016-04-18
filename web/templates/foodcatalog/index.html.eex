@@ -29,4 +29,5 @@
   </tbody>
 </table>
 
-<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %>
+<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %></br>
+<%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>

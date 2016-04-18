@@ -10,6 +10,35 @@
     </div>
   <% end %>
 
+<table class="table">
+  <thead>
+    <tr>
+	<th>ID</th>
+      <th>Foodname</th>
+      <th>Info</th>
+      <th>Unit</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for foodcatalog <- @foodcatalogs do %>
+    <tr>
+	<td><%= foodcatalog.id %></td>
+      <td><%= foodcatalog.foodname %></td>
+      <td><%= foodcatalog.info %></td>
+      <td><%= foodcatalog.unit %></td>
+
+      <td class="text-right">
+
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+  
   <div class="form-group">
     <%= label f, :ingredients, "Ingredients", class: "control-label" %>
     <%= text_input f, :ingredients, class: "form-control" %>

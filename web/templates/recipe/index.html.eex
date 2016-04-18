@@ -33,6 +33,6 @@
 </table>
 
 <%= link "New recipe", to: recipe_path(@conn, :new) %></br>
-<%= link "Search for recipe", to: search_path(@conn, :index) %>
+<%= link "Search for recipe", to: search_path(@conn, :recipe_search) %>
 
 <%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

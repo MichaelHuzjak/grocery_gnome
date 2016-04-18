@@ -4,6 +4,7 @@ defmodule GroceryGnome.RecipeController do
 		plug GroceryGnome.Plug.Authenticate
 
 		alias GroceryGnome.Recipe
+		alias GroceryGnome.Foodcatalog
 		import Ecto.Query
 
   plug :scrub_params, "recipe" when action in [:create, :update]
@@ -21,7 +22,9 @@ defmodule GroceryGnome.RecipeController do
 
   def new(conn, _params) do
     changeset = Recipe.changeset(%Recipe{})
-    render(conn, "new.html", changeset: changeset)
+		query = from f in Foodcatalog
+		foodcatalogs = Repo.all(query)
+    render(conn, "new.html", changeset: changeset, foodcatalogs: foodcatalogs)
   end
 
   def create(conn, %{"recipe" => recipe_params}) do
