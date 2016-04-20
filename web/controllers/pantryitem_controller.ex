@@ -62,14 +62,16 @@ defmodule GroceryGnome.PantryitemController do
 
   def edit(conn, %{"id" => id}) do
     pantryitem = Repo.get!(Pantryitem, id)
+		foodcatalog = Repo.get!(Foodcatalog, pantryitem.foodcatalog_id)
+
     changeset = Pantryitem.changeset(pantryitem)
-    render(conn, "edit.html", pantryitem: pantryitem, changeset: changeset)
+    render(conn, "edit.html", pantryitem: pantryitem, changeset: changeset,foodcatalog: foodcatalog)
   end
 
   def update(conn, %{"id" => id, "pantryitem" => pantryitem_params}) do
     pantryitem = Repo.get!(Pantryitem, id)
-    changeset = Pantryitem.changeset(pantryitem, pantryitem_params)
-
+    #changeset = Pantryitem.changeset(pantryitem, pantryitem_params)
+		changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: pantryitem_params["expiration"], foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
     case Repo.update(changeset) do
       {:ok, pantryitem} ->
         conn
