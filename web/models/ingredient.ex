@@ -1,18 +1,15 @@
-defmodule GroceryGnome.Recipe do
+defmodule GroceryGnome.Ingredient do
   use GroceryGnome.Web, :model
 
-  schema "recipes" do
-    #field :ingredients, :map
-    field :instructions, :string
-    field :prep_time, :integer
-    field :cook_time, :integer
-    belongs_to :user, GroceryGnome.User
+  schema "ingredients" do
+    field :ingredientquantity, :float
+    belongs_to :recipe, GroceryGnome.Recipe
+    belongs_to :foodcatalog, GroceryGnome.Foodcatalog
 
     timestamps
   end
 
-	#@required_fields ~w(instructions prep_time cook_time user_id)
-  @required_fields ~w(prep_time cook_time user_id)
+  @required_fields ~w(ingredientquantity recipe_id foodcatalog_id)
   @optional_fields ~w()
 
   @doc """

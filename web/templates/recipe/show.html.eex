@@ -1,11 +1,34 @@
 <h2>Show recipe</h2>
 
+<h2>Ingredients</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Recipe ID</th>
+      <th>Foodcatalog ID</th>
+      <th>Quantity</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for ingredient <- @ingredients do %>
+    <tr>
+      <td><%= ingredient.recipe_id %></td>
+      <td><%= ingredient.foodcatalog_id %></td>
+      <td><%= ingredient.ingredientquantity %></td>
+      <td class="text-right">
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+
 <ul>
 
-  <li>
-    <strong>Ingredients:</strong>
-    <%= @recipe.ingredients %>
-  </li>
 
   <li>
     <strong>Instructions:</strong>

@@ -6,7 +6,11 @@ defmodule GroceryGnome.PageController do
 	alias GroceryGnome.Password
 
   def login(conn, _params) do
-    render conn, "welcome.html"
+		if is_nil(conn.assigns.current_user) do
+			render(to: session_path(conn, :new))
+		else
+			 render conn, "homepage.html"
+		end
   end
 
   def home(conn, _params) do
@@ -14,7 +18,15 @@ defmodule GroceryGnome.PageController do
   end
 
   def test(conn, _params) do
-    render conn, "test.html"
+		mymap = %{}
+		#k = 6
+		#s = Integer.to_string(k)
+		#k = String.to_integer(s)
+		#s = Integer.to_string(k)
+		#mapitems = Map.put(mymap, s , 6)
+		mapitems = Map.put(mymap, 0 , 5)
+		
+    render conn, "test.html", mapitems: mapitems
   end
 
 	def change(conn, _params) do
@@ -41,10 +53,5 @@ defmodule GroceryGnome.PageController do
       render conn, "change.html", changeset: changeset
     end
   end
-
-	# def new(conn, _params) do
-	# 	changeset = User.changeset(%User{})
-	# 	render conn, "new.html", changeset: changeset
-	# end
 
 end

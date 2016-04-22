@@ -3,7 +3,7 @@ defmodule GroceryGnome.Repo.Migrations.CreateRecipe do
 
   def change do
     create table(:recipes) do
-      add :ingredients, :map
+      #add :ingredients, :map
       add :instructions, :string
       add :prep_time, :integer
       add :cook_time, :integer

@@ -30,6 +30,7 @@
       <td><%= foodcatalog.unit %></td>
 
       <td class="text-right">
+    <%= hidden_input f, :"#{foodcatalog.id}", value: 5 , class: "form-control" %>
 
       </td>
     </tr>
@@ -37,11 +38,7 @@
   </tbody>
 </table>
 
-
-  
   <div class="form-group">
-    <%= label f, :ingredients, "Ingredients", class: "control-label" %>
-    <%= text_input f, :ingredients, class: "form-control" %>
   </div>
 
   <div class="form-group">

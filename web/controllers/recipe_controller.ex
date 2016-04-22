@@ -4,6 +4,7 @@ defmodule GroceryGnome.RecipeController do
 		plug GroceryGnome.Plug.Authenticate
 
 		alias GroceryGnome.Recipe
+		alias GroceryGnome.Ingredient
 		alias GroceryGnome.Foodcatalog
 		import Ecto.Query
 
@@ -24,16 +25,36 @@ defmodule GroceryGnome.RecipeController do
     changeset = Recipe.changeset(%Recipe{})
 		query = from f in Foodcatalog
 		foodcatalogs = Repo.all(query)
-    render(conn, "new.html", changeset: changeset, foodcatalogs: foodcatalogs)
+		ingmap = %{}
+    render(conn, "new.html", changeset: changeset, foodcatalogs: foodcatalogs, ingmap: ingmap)
   end
 
   def create(conn, %{"recipe" => recipe_params}) do
     changeset = Recipe.changeset(%Recipe{}, %{ instructions: recipe_params["instructions"], prep_time: recipe_params["prep_time"], cook_time: recipe_params["cook_time"], user_id: conn.assigns.current_user.id})
 
+		#	k = Map.get(new2,"0")
+		#new = List.delete(new,recipe_params["instructions"])
+		
     case Repo.insert(changeset) do
       {:ok, _recipe} ->
+				# Since change was inserted into the database ok
+				recipe_id = _recipe.id
+				# Removing keywords from parameter map
+				ingredient_params = recipe_params
+				ingredient_params = Map.delete(ingredient_params,"instructions")
+				ingredient_params = Map.delete(ingredient_params,"prep_time")
+				ingredient_params = Map.delete(ingredient_params,"user_id")
+				ingredient_params = Map.delete(ingredient_params,"cook_time")
+				# Iterate through the rest of the params and create ingredients from them
+				for {key,value} <- ingredient_params do
+					ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: key, ingredientquantity: value, recipe_id: recipe_id})
+																											 Repo.insert(ingredient_changeset)
+
+																											
+				end
+				
         conn
-        |> put_flash(:info, "Recipe created successfully.")
+        |> put_flash(:info, "Recipe created successfully. #{recipe_id}")
         |> redirect(to: recipe_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -42,7 +63,9 @@ defmodule GroceryGnome.RecipeController do
 
   def show(conn, %{"id" => id}) do
     recipe = Repo.get!(Recipe, id)
-    render(conn, "show.html", recipe: recipe)
+		query = from i in Ingredient, where: i.recipe_id == ^id
+    ingredients = Repo.all(query)
+    render(conn, "show.html", recipe: recipe, ingredients: ingredients)
   end
 
   def edit(conn, %{"id" => id}) do

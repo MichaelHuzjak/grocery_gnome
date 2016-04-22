@@ -17,7 +17,7 @@
 
   <div class="form-group">
     <%= label f, :expiration, "Expiration", class: "control-label" %>
-    <%= text_input f, :expiration, class: "form-control" %>
+    <%= date_select f, :expiration, class: "form-control" %>
   </div>
 
   <div class="form-group">

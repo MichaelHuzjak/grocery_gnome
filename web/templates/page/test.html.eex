@@ -9,3 +9,13 @@
 <%= color_input :color, :more %>
 <br>
 <%= time_select :time, :and %>
+
+
+<%= for {key,value} <- @mapitems do %>
+    </br>
+    <%= key %>
+    </br>
+    value =
+    <%= value %>
+    
+<%= end %>

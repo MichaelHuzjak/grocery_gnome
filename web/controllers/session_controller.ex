@@ -1,10 +1,18 @@
 defmodule GroceryGnome.SessionController do
   use GroceryGnome.Web, :controller
-
+	
+	#plug GroceryGnome.Plug.Authenticate
+	plug :action
   plug :scrub_params, "user" when action in [:create]
 
-  def new(conn, _params) do
-    render conn, changeset: User.changeset(%User{})
+  def new(conn,_params) do
+		current_user = get_session(conn, :current_user)
+		if is_nil(current_user) do
+			render conn, changeset: User.changeset(%User{})
+		else
+			 conn
+        |> redirect(to: page_path(conn, :home))
+		end
   end
 
   def create(conn, %{"user" => user_params}) do

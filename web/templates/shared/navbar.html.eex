@@ -25,7 +25,7 @@
 		    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Settings
 			<span class="glyphicon glyphicon-cog"></span></button>
 		    <ul class="dropdown-menu">
-			<li><a href="#" data-toggle="modal" data-target="#changePassword">Change Password</a></li>
+			<li><a href="/changepassword">Change Password</a></li>
 			<li><a href="#" data-toggle="modal" data-target="#managePrivacy">Manage Privacy Settings</a></li>
 			<li><a href="#" data-toggle="modal" data-target="#logout">Logout</a></li>
 		    </ul>
@@ -34,27 +34,7 @@
 	</div>
     </div>
 </nav>
-<div id="changePassword" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Change Password</h4>
-        </div>
-        <div class="modal-body">
-            <form>
-		<input type="password" placeholder="Old Password">
-		<br>
-		<br>
-		<input type="password" placeholder="New Password">
-		<br>
-		<input type="password" placeholder="Confirm New Password">
-	    </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-        </div>
-    </div>
-</div>
+
 
 <div id="managePrivacy" class="modal">
     <div class="modal-content">
