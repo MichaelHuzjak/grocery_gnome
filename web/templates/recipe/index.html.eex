@@ -4,9 +4,11 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Title</th>
       <th>Instructions</th>
       <th>Prep time</th>
       <th>Cook time</th>
+      <th>Serving Size</th>
       <th>User</th>
 
       <th></th>
@@ -15,9 +17,12 @@
   <tbody>
 <%= for recipe <- @recipes do %>
     <tr>
+       <td><%= recipe.recipe_title %></td>
       <td><%= recipe.instructions %></td>
       <td><%= recipe.prep_time %></td>
-      <td><%= recipe.cook_time %></td>
+       <td><%= recipe.cook_time %></td>
+       <td><%= recipe.serving_size %></td>
+
       <td><%= recipe.user_id %></td>
 
       <td class="text-right">

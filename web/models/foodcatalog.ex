@@ -9,8 +9,8 @@ defmodule GroceryGnome.Foodcatalog do
     timestamps
   end
 
-  @required_fields ~w(foodname info unit)
-  @optional_fields ~w()
+  @required_fields ~w(foodname)
+  @optional_fields ~w(info unit)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

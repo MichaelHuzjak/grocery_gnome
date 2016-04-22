@@ -29,6 +29,10 @@
 
 <ul>
 
+    <li>
+    <strong>Title:</strong>
+    <%= @recipe.recipe_title %>
+  </li>
 
   <li>
     <strong>Instructions:</strong>
@@ -45,6 +49,11 @@
     <%= @recipe.cook_time %>
   </li>
 
+    <li>
+    <strong>Serving Size:</strong>
+    <%= @recipe.serving_size %>
+    </li>
+    
   <li>
     <strong>User:</strong>
     <%= @recipe.user_id %>

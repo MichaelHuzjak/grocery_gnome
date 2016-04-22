@@ -3,17 +3,19 @@ defmodule GroceryGnome.Recipe do
 
   schema "recipes" do
     #field :ingredients, :map
+		field :recipe_title, :string
     field :instructions, :string
     field :prep_time, :integer
     field :cook_time, :integer
+		field :serving_size, :integer
     belongs_to :user, GroceryGnome.User
 
     timestamps
   end
 
 	#@required_fields ~w(instructions prep_time cook_time user_id)
-  @required_fields ~w(instructions prep_time cook_time user_id)
-  @optional_fields ~w()
+  @required_fields ~w(recipe_title instructions prep_time cook_time user_id)
+  @optional_fields ~w(serving_size)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
