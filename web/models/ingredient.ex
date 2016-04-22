@@ -21,5 +21,6 @@ defmodule GroceryGnome.Ingredient do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+		|> validate_number(:ingredientquantity, greater_than: 0)
   end
 end

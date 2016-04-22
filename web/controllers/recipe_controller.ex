@@ -44,12 +44,9 @@ defmodule GroceryGnome.RecipeController do
 				ingredient_params = Map.delete(ingredient_params,"cook_time")
 				# Iterate through the rest of the params and create ingredients from them
 				for {key,value} <- ingredient_params do
-					ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: key, ingredientquantity: value, recipe_id: recipe_id})
-					Repo.insert(ingredient_changeset)
-
-																											
+							ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: key, ingredientquantity: value, recipe_id: recipe_id})
+							Repo.insert(ingredient_changeset)
 				end
-				
         conn
         |> put_flash(:info, "Recipe created successfully. #{recipe_id}")
         |> redirect(to: recipe_path(conn, :index))
