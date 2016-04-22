@@ -12,7 +12,7 @@ defmodule GroceryGnome.Recipe do
   end
 
 	#@required_fields ~w(instructions prep_time cook_time user_id)
-  @required_fields ~w(prep_time cook_time user_id)
+  @required_fields ~w(instructions prep_time cook_time user_id)
   @optional_fields ~w()
 
   @doc """

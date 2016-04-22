@@ -31,9 +31,6 @@ defmodule GroceryGnome.RecipeController do
 
   def create(conn, %{"recipe" => recipe_params}) do
     changeset = Recipe.changeset(%Recipe{}, %{ instructions: recipe_params["instructions"], prep_time: recipe_params["prep_time"], cook_time: recipe_params["cook_time"], user_id: conn.assigns.current_user.id})
-
-		#	k = Map.get(new2,"0")
-		#new = List.delete(new,recipe_params["instructions"])
 		
     case Repo.insert(changeset) do
       {:ok, _recipe} ->
@@ -48,7 +45,7 @@ defmodule GroceryGnome.RecipeController do
 				# Iterate through the rest of the params and create ingredients from them
 				for {key,value} <- ingredient_params do
 					ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: key, ingredientquantity: value, recipe_id: recipe_id})
-																											 Repo.insert(ingredient_changeset)
+					Repo.insert(ingredient_changeset)
 
 																											
 				end
@@ -100,15 +97,28 @@ defmodule GroceryGnome.RecipeController do
     |> redirect(to: recipe_path(conn, :index))
   end
 
-	def deleterecipe(conn, params) do
-		id = params["recipe"]
+
+	def deleterecipe(conn, delete_param) do
+		id = delete_param["recipe"]
     recipe = Repo.get!(Recipe, id)
+
+		# query all known tables that have this foodcatalog's id and delete them
+		query = from i in Ingredient, where: i.recipe_id == ^id
+		ingredients = Repo.all(query)
+
+		for ingredient <- ingredients do
+			Repo.delete!(ingredient)
+		end
+		
+    # Here we use delete! (with a bang) because we expect
+    # it to always work (and if it does not, it will raise).
     Repo.delete!(recipe)
 
     conn
     |> put_flash(:info, "Recipe deleted successfully.")
     |> redirect(to: recipe_path(conn, :index))
 	end
+	
 	
 				
 end
