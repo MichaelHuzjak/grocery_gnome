@@ -55,7 +55,7 @@ defmodule GroceryGnome.SearchController do
 				recipe_id = _recipe.id
 				# Removing keywords from parameter map
 				for ingredient <- recipe["extendedIngredients"] do
-					result = Repo.get_by!(Foodcatalog, foodname: ingredient["name"])
+					result = Repo.get_by(Foodcatalog, foodname: ingredient["name"])
 					case result do
 						nil ->
 							foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: ingredient["name"], unit: ingredient["unit"], info: ingredient["aisle"]})
