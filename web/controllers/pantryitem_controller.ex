@@ -68,9 +68,21 @@ import Ecto.Date
   def edit(conn, %{"id" => id}) do
     pantryitem = Repo.get!(Pantryitem, id)
 		foodcatalog = Repo.get!(Foodcatalog, pantryitem.foodcatalog_id)
+		date = pantryitem.expiration
+		expiration = %{}
+		datesplit = String.split(date, "-")
+		year = List.first(datesplit)
+		leftover = List.delete(datesplit, year)
+		month = List.first(leftover)
+		leftover = List.delete(leftover,month)
+		day = List.first(leftover)
+		expiration = Map.put(expiration, :year, year)
+		expiration = Map.put(expiration, :month, month)
+		expiration = Map.put(expiration, :day, day)
 
-    changeset = Pantryitem.changeset(pantryitem)
-    render(conn, "edit.html", pantryitem: pantryitem, changeset: changeset,foodcatalog: foodcatalog)
+		
+    changeset = Pantryitem.changeset(pantryitem,%{pantryquantity: pantryitem.pantryquantity, expiration: expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+    render(conn, "edit.html", pantryitem: pantryitem, changeset: changeset, foodcatalog: foodcatalog)
   end
 
   def update(conn, %{"id" => id, "pantryitem" => pantryitem_params}) do
