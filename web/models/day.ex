@@ -2,9 +2,9 @@ defmodule GroceryGnome.Day do
   use GroceryGnome.Web, :model
 
   schema "days" do
-    field :breakfast, {:array, :string}
-    field :lunch, {:array, :string}
-    field :dinner, {:array, :string}
+    field :breakfast, {:array, :id}
+    field :lunch, {:array, :id}
+    field :dinner, {:array, :id}
     field :date, :string
     belongs_to :user, GroceryGnome.User
 

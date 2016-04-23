@@ -13,14 +13,12 @@ defmodule GroceryGnome.ScheduleController do
 		userid = conn.assigns.current_user.id
 		{:ok, meals} = GroceryGnome.Spoonacular.caloried_meal_plan 2000, "day"
 		[breakfast, lunch, dinner] = meals["meals"]
-		changeset = Day.changeset(
-			%Day{
-				breakfast: [breakfast["id"]],
-				lunch: [lunch["id"]],
-				dinner: [dinner["id"]],
-				date: Ecto.Date.utc,
-				user_id: userid
-			})
+		changeset = %Day{
+			breakfast: [breakfast["id"]],
+			lunch: [lunch["id"]],
+			dinner: [dinner["id"]],
+			date: to_string(Ecto.Date.utc),
+		}
 		# render(conn, "index.html", changeset: changeset)
 		case Repo.insert(changeset) do
 			{:ok, _day} ->

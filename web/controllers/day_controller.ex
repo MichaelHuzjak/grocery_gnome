@@ -13,7 +13,7 @@ defmodule GroceryGnome.DayController do
   def new(conn, _params) do
     changeset = Day.changeset(%Day{})
     render(conn, "new.html", changeset: changeset)
-  end
+v  end
 
   def create(conn, %{"day" => day_params}) do
     changeset = Day.changeset(%Day{}, day_params)

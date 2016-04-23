@@ -15,9 +15,9 @@
     <tbody>
 	<%= for day <- @days do %>
 	    <tr>
-		<td><%= day.breakfast %></td>
-		<td><%= day.lunch %></td>
-		<td><%= day.dinner %></td>
+		<td><%= for b <- day.breakfast do %><%= b %> <% end %></td>
+		<td><%= for l <- day.lunch do %><%= l %> <% end %></td>
+		<td><%= for d <- day.dinner do %><%= d %><% end %></td>
 		<td><%= day.date %></td>
 		<td><%= day.user_id %></td>
 
