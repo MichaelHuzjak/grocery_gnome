@@ -27,34 +27,9 @@
   </tbody>
 </table>
 
-<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry) %>
-
-
-<h2>Listing foodcatalogs</h2>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Foodname</th>
-      <th>Info</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for foodcatalog <- @foodcatalogs do %>
-    <tr>
-      <td><%= foodcatalog.foodname %></td>
-      <td><%= foodcatalog.info %></td>
-
-      <td class="text-right">
-        <%= link "Add", to: groceryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %></br>
+<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry) %></br>
+<%= link "Add to Grocery", to: groceryitem_path(@conn, :search) %></br>
+<%= link "Foodcatalog index", to: foodcatalog_path(@conn, :index) %></br>
 <%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>
 
  <div class="dropdown" style="display: inline; margin-left: 20px;">

@@ -37,13 +37,17 @@ defmodule GroceryGnome.Router do
 		get "/search/recipe/recipe_add/:id", SearchController, :recipe_add
 		get "/search/recipe/similar/:id", SearchController, :recipe_similar
 
-		get "/search/grocery", SearchController, :grocery_search
-		post "/search/grocery/results", SearchController, :grocery_list
-		get "/search/grocery/show/:id", SearchController, :grocery_show
+		get "/search/grocerylist", SearchController, :grocery_search
+		post "/search/grocerylist/results", SearchController, :grocery_list
+		get "/search/grocerylist/show/:id", SearchController, :grocery_show
 
-		post "/query", PantryitemController, :pantryitem_search
-		post "/newpantryfood", PantryitemController, :newpantryfood
-		get "/pantrysearch", PantryitemController, :search
+		post "/search/pantry/query", PantryitemController, :pantryitem_search
+		post "/search/pantry/new", PantryitemController, :newpantryfood
+		get "/search/pantry", PantryitemController, :search
+
+		post "/search/grocery/query", GroceryitemController, :groceryitem_search
+		post "/search/grocery/new", GroceryitemController, :newgroceryfood
+		get "/search/grocery", GroceryitemController, :search
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home

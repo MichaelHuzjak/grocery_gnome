@@ -136,7 +136,7 @@ import Ecto.Date
 	def newpantryfood(conn, _params) do
 		pantryitem = conn.params["pantryitem"]
 					result = Repo.get_by(Foodcatalog, foodname: pantryitem["foodname"])
-					foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: pantryitem["foodname"], unit: pantryitem["unit"], info: pantryitem["info"]})
+					foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: String.downcase( pantryitem["foodname"]), unit: pantryitem["unit"], info: pantryitem["info"]})
 								case Repo.insert(foodcatalogchangeset) do
 								  {:ok, _foodcatalog} ->
 										date = pantryitem["expiration"]
