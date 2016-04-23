@@ -50,6 +50,7 @@ defmodule GroceryGnome.Router do
 		get "/search/grocery", GroceryitemController, :search
 
 		get "/schedule", ScheduleController, :index
+		get "/schedule/gen", ScheduleController, :generate
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home
