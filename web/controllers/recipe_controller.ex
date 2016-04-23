@@ -59,7 +59,7 @@ defmodule GroceryGnome.RecipeController do
 
   def show(conn, %{"id" => id}) do
     recipe = Repo.get!(Recipe, id)
-		query = from i in Ingredient, where: i.recipe_id == ^id
+		query = from i in Ingredient, where: i.recipe_id == ^id, preload: [:foodcatalog]
     ingredients = Repo.all(query)
     render(conn, "show.html", recipe: recipe, ingredients: ingredients)
   end

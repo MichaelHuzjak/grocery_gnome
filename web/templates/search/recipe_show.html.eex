@@ -27,7 +27,7 @@ Detailed instructions can be found <a href="<%= @resp["sourceUrl"] %>">HERE.</a>
     to: search_path(@conn, :recipe_similar, @id),
     class: "btn"%></h3>
 
-<%= link @resp["title"], 
+<%= link "Add Recipe", 
 		        to: search_path(@conn, :recipe_add, @resp["id"]),
 		        class: "btn" %>
 

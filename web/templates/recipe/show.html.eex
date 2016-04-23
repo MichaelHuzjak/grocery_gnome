@@ -5,8 +5,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Recipe ID</th>
-      <th>Foodcatalog ID</th>
+      <th>Ingredient Name</th>
+      <th>Ingredient Info</th>
       <th>Quantity</th>
 
       <th></th>
@@ -15,9 +15,9 @@
   <tbody>
 <%= for ingredient <- @ingredients do %>
     <tr>
-      <td><%= ingredient.recipe_id %></td>
-      <td><%= ingredient.foodcatalog_id %></td>
-      <td><%= ingredient.ingredientquantity %></td>
+      <td><%= ingredient.foodcatalog.foodname %></td>
+      <td><%= ingredient.foodcatalog.info %></td>
+      <td><%= ingredient.ingredientquantity %> <%= ingredient.foodcatalog.unit %></td>
       <td class="text-right">
       </td>
     </tr>
@@ -53,11 +53,6 @@
     <strong>Serving Size:</strong>
     <%= @recipe.serving_size %>
     </li>
-    
-  <li>
-    <strong>User:</strong>
-    <%= @recipe.user_id %>
-  </li>
 
 </ul>
 
