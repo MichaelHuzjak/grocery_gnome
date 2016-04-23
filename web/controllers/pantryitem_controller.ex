@@ -14,7 +14,7 @@ import Ecto.Date
 
   def index(conn, _params) do
 		userid = conn.assigns.current_user.id
-		query = from p in Pantryitem, where: p.user_id == ^userid
+		query = from p in Pantryitem, where: p.user_id == ^userid, preload: [:foodcatalog]
     pantryitems = Repo.all(query)
 		query2 = from f in Foodcatalog
 		foodcatalogs = Repo.all(query2)

@@ -5,10 +5,9 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Pantryquantity</th>
       <th>Expiration</th>
-      <th>User</th>
-      <th>Foodcatalog</th>
 
       <th></th>
     </tr>
@@ -16,10 +15,9 @@
   <tbody>
 <%= for pantryitem <- @pantryitems do %>
     <tr>
-      <td><%= pantryitem.pantryquantity %></td>
+      <td><%= pantryitem.foodcatalog.foodname %></td>
+      <td><%= pantryitem.pantryquantity %> <%= pantryitem.foodcatalog.unit %> </td>
       <td><%= pantryitem.expiration %></td>
-      <td><%= pantryitem.user_id %></td>
-      <td><%= pantryitem.foodcatalog_id %></td>
 
       <td class="text-right">
         <%= link "Show", to: pantryitem_path(@conn, :show, pantryitem), class: "btn btn-default btn-xs" %>
