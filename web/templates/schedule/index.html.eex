@@ -29,7 +29,7 @@
 	    </tr>
 	<% end %>
     </tbody>
-ip</table>
+</table>
 
 <%= link "New day", to: schedule_path(@conn, :generate) %>
 
