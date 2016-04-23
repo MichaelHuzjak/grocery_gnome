@@ -1,0 +1,8 @@
+<%= form_for @conn, pantryitem_path(@conn, :pantryitem_search), [as: :search], fn f -> %>
+    <div class="form-group">
+	<%= label f, :query, "Query", class: "control-label" %>
+	<%= search_input f, :query, class: "form-control" %>
+    </div>
+    <%= submit "Search" %>
+<% end %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

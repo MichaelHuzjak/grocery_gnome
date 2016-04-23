@@ -111,6 +111,49 @@ import Ecto.Date
     |> put_flash(:info, "Pantryitem deleted successfully.")
     |> redirect(to: pantryitem_path(conn, :index))
 	end
-	
 
+	def search(conn,_params) do
+
+    render(conn, "pantryitemsearch.html")
+	end
+
+	def pantryitem_search(conn, _params) do
+		search = conn.params["search"]
+		query = search["query"]
+		query = String.downcase(query)
+		result = Repo.get_by(Foodcatalog, foodname: query)
+
+		case result do
+			nil ->
+				query = String.capitalize(query)
+				render(conn, "foodform.html", name: query)
+			foodcatalog ->
+				changeset = Pantryitem.changeset(%Pantryitem{})
+				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+			end
+	end
+
+	def newpantryfood(conn, _params) do
+		pantryitem = conn.params["pantryitem"]
+					result = Repo.get_by(Foodcatalog, foodname: pantryitem["foodname"])
+					foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: pantryitem["foodname"], unit: pantryitem["unit"], info: pantryitem["info"]})
+								case Repo.insert(foodcatalogchangeset) do
+								  {:ok, _foodcatalog} ->
+										date = pantryitem["expiration"]
+										year = date["year"]
+										month = date["month"]
+										day = date["day"]
+										date = year <> "-" <> month <> "-" <> day
+										changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem["pantryquantity"], expiration: date, foodcatalog_id: _foodcatalog.id, user_id: conn.assigns.current_user.id})
+										case Repo.insert(changeset) do
+											{:ok, _pantryitem} ->
+												conn
+												|> put_flash(:info, "Pantryitem created successfully.")
+												|> redirect(to: pantryitem_path(conn, :index))
+											{:error, changeset} ->
+												render(conn, "new.html", changeset: changeset, foodcatalog: _foodcatalog, conn: @conn)
+										end
+								end
+	end
+	
 end

@@ -1,7 +1,8 @@
-<h2>Show recipe</h2>
-
-<h2>Ingredients</h2>
-
+<h2><%= @recipe.recipe_title %></h2>
+<ul>
+    <li>
+    <strong>Ingredients:</strong>
+    </li>
 <table class="table">
   <thead>
     <tr>
@@ -27,12 +28,6 @@
 
 
 
-<ul>
-
-    <li>
-    <strong>Title:</strong>
-    <%= @recipe.recipe_title %>
-  </li>
 
   <li>
     <strong>Instructions:</strong>
@@ -58,3 +53,4 @@
 
 <%= link "Edit", to: recipe_path(@conn, :edit, @recipe) %>
 <%= link "Back", to: recipe_path(@conn, :index) %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

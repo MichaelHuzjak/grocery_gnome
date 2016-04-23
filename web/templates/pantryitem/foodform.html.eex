@@ -1,0 +1,29 @@
+<%= form_for @conn, pantryitem_path(@conn, :newpantryfood), [as: :pantryitem], fn f -> %>
+
+  <div class="form-group">
+    <%= label f, :foodname, "Foodname", class: "control-label" %>
+    <%= @name %>
+    <%= hidden_input f, :foodname, value: @name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :info, "Info", class: "control-label" %>
+    <%= text_input f, :info, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :unit, "Unit", class: "control-label" %>
+    <%= text_input f, :unit, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= label f, :pantryquantity, "Pantryquantity", class: "control-label" %>
+    <%= number_input f, :pantryquantity, step: "any", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :expiration, "Expiration", class: "control-label" %>
+    <%= date_select f, :expiration, class: "form-control" %>
+  </div>
+    <%= submit "Submit" %>
+<% end %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

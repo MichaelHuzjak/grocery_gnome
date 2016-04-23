@@ -29,40 +29,8 @@
   </tbody>
 </table>
 
-<h2>Listing foodcatalogs</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Foodname</th>
-      <th>Info</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for foodcatalog <- @foodcatalogs do %>
-    <tr>
-      <td><%= foodcatalog.foodname %></td>
-      <td><%= foodcatalog.info %></td>
-
-      <td class="text-right">
-        <%= link "Add", to: pantryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New foodcatalog", to: foodcatalog_path(@conn, :new) %></br>
+<%= link "Add to Pantry", to: pantryitem_path(@conn, :search) %></br>
+<%= link "Foodcatalog List", to: foodcatalog_path(@conn, :index) %></br>
 <%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>
 
- <div class="dropdown" style="display: inline; margin-left: 20px;">
-  <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 250px !important;">Add foodcatalog to Pantry
-<span class="caret"></span></button>
-  <ul class="dropdown-menu scrollable-menu" role="menu" style="width: 250px !important; height: auto; !important">
-    <%= for foodcatalog <- @foodcatalogs do %>    
-	<%= link foodcatalog.foodname, to: pantryitem_path(@conn, :new, foodcatalog: foodcatalog)%><br>
-    <% end %>
-  </ul>
-</div>
