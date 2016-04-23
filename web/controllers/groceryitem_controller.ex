@@ -13,7 +13,7 @@ defmodule GroceryGnome.GroceryitemController do
 
   def index(conn, _params) do
 		userid = conn.assigns.current_user.id
-		query = from p in Groceryitem, where: p.user_id == ^userid
+		query = from p in Groceryitem, where: p.user_id == ^userid, preload: [:foodcatalog]
     groceryitems = Repo.all(query)
 
 		query2 = from f in Foodcatalog

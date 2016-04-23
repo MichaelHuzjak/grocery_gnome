@@ -6,19 +6,16 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Groceryquantity</th>
-      <th>User</th>
-      <th>Foodcatalog</th>
-
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for groceryitem <- @groceryitems do %>
     <tr>
-      <td><%= groceryitem.groceryquantity %></td>
-      <td><%= groceryitem.user_id %></td>
-      <td><%= groceryitem.foodcatalog_id %></td>
+      <td><%= groceryitem.foodcatalog.foodname %></td>
+      <td><%= groceryitem.groceryquantity %> <%= groceryitem.foodcatalog.unit %></td>
 
       <td class="text-right">
         <%= link "Show", to: groceryitem_path(@conn, :show, groceryitem), class: "btn btn-default btn-xs" %>
@@ -38,26 +35,19 @@
 <table class="table">
   <thead>
     <tr>
-	<th>ID</th>
       <th>Foodname</th>
       <th>Info</th>
-      <th>Unit</th>
-
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for foodcatalog <- @foodcatalogs do %>
     <tr>
-	<td><%= foodcatalog.id %></td>
       <td><%= foodcatalog.foodname %></td>
       <td><%= foodcatalog.info %></td>
-      <td><%= foodcatalog.unit %></td>
 
       <td class="text-right">
         <%= link "Add", to: groceryitem_path(@conn, :new, foodcatalog: foodcatalog), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: foodcatalog_path(@conn, :edit, foodcatalog), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: foodcatalog_path(@conn, :delete2, foodcatalog: foodcatalog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
