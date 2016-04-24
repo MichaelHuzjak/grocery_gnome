@@ -30,6 +30,8 @@ defmodule GroceryGnome.Router do
     resources "/recipes", RecipeController
     resources "/days", DayController
 
+    	        get "/planner", DayController, :planner
+
 		get "/search", SearchController, :index
 		get "/search/recipes", SearchController, :recipe_search
 		post "/search/recipe/results", SearchController, :recipe_list

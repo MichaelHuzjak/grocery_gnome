@@ -10,6 +10,11 @@ defmodule GroceryGnome.DayController do
     render(conn, "index.html", days: days)
   end
 
+  def planner(conn, _params) do
+    #days = Repo.all(Day)
+    render(conn, "planner.html")
+  end
+
   def new(conn, _params) do
     changeset = Day.changeset(%Day{})
     render(conn, "new.html", changeset: changeset)
