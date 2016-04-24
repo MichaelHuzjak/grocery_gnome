@@ -77,8 +77,8 @@ defmodule GroceryGnome.Spoonacular do
 		HTTPotion.get(endpoint, [
 					headers: dh
 				])
-		# |> Map.get(:body)
-		# |> Poison.decode
+		|> Map.get(:body)
+		|> Poison.decode
 	end
 
 	def visualize_ingredients(params) do
