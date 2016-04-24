@@ -4,7 +4,7 @@ defmodule GroceryGnome.ScheduleView do
 	# terrible
 	def fetch(id) do
 		try do
-			{:ok, resp} = GroceryGnome.Spoonacular.summarize_recipe(id)
+			{:ok, resp} = GroceryGnome.Spoonacular.recipe_information(id,false)
 			resp["title"]
 		rescue
 			HTTPotion.HTTPError -> ""

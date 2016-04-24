@@ -2,6 +2,7 @@
 
 <div id="kitchenNav">
     <div id="planner" class="jumbotron">
+      	<a href="<%= schedule_path @conn, :index %>">
 	<div class="container">
 	    <span id="plannerButton"class="kitchenButtons glyphicon glyphicon-list-alt"></span>
 	    <h2>Meal Planner</h2>
