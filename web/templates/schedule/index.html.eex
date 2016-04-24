@@ -2,10 +2,11 @@
 
 <%= for day <- @days do %>
     <h3><%= day.date %></h3>
-    <%= for slot <- [day.breakfast, day.lunch, day.dinner] do %>
+    <%= for {title, slot} <- [{"Breakfast", day.breakfast}, {"Lunch", day.lunch}, {"Dinner", day.dinner}] do %>
 	<div class="panel-group">
 	    <div class="panel panel-default">
 		<div class="panel-body">
+		    <%= title %>
 		    <%= for item <- slot do %>
 			<div class="panel-group">
 			    <div class="panel panel-default">
