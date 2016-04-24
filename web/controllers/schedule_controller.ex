@@ -6,6 +6,9 @@ defmodule GroceryGnome.ScheduleController do
 
 	def index(conn, _params) do
 		days = Repo.all(Day)
+		for d <- days do
+			IO.inspect d
+		end
 		render(conn, "index.html", days: days)
 	end
 
@@ -14,8 +17,8 @@ defmodule GroceryGnome.ScheduleController do
 		{:ok, meals} = GroceryGnome.Spoonacular.caloried_meal_plan 2000, "day"
 		[breakfast, lunch, dinner] = meals["meals"]
 		changeset = %Day{
-			breakfast: [breakfast["id"]],
-			lunch: [lunch["id"]],
+			breakfast: [breakfast["id"], 1433],
+			lunch: [lunch["id"], 1234, 51515],
 			dinner: [dinner["id"]],
 			date: to_string(Ecto.Date.utc),
 			user_id: userid,

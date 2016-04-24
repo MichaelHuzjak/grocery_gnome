@@ -1,35 +1,24 @@
 <h2>Listing days</h2>
 
-<table class="table">
-    <thead>
-	<tr>
-	    <th>Breakfast</th>
-	    <th>Lunch</th>
-	    <th>Dinner</th>
-	    <th>Date</th>
-	    <th>User</th>
-
-	    <th></th>
-	</tr>
-    </thead>
-    <tbody>
-	<%= for day <- @days do %>
-	    <tr>
-		<td><%= for b <- day.breakfast do %><%= b %> <% end %></td>
-		<td><%= for l <- day.lunch do %><%= l %> <% end %></td>
-		<td><%= for d <- day.dinner do %><%= d %><% end %></td>
-		<td><%= day.date %></td>
-		<td><%= day.user_id %></td>
-
-		<td class="text-right">
-		    <%# link "Show", to: day_path(@conn, :show, day), class: "btn btn-default btn-xs" %>
-		    <%# link "Edit", to: day_path(@conn, :edit, day), class: "btn btn-default btn-xs" %>
-		    <%# link "Delete", to: day_path(@conn, :delete, day), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-		</td>
-	    </tr>
-	<% end %>
-    </tbody>
-</table>
+<%= for day <- @days do %>
+    <h3><%= day.date %></h3>
+    <%= for slot <- [day.breakfast, day.lunch, day.dinner] do %>
+	<div class="panel-group">
+	    <div class="panel panel-default">
+		<div class="panel-body">
+		    <%= for item <- slot do %>
+			<div class="panel-group">
+			    <div class="panel panel-default">
+				<div class="panel-body">
+				    <%= item %>
+				</div>
+			    </div>
+			</div>
+		    <% end %>
+		</div>
+	    </div>
+	</div>
+    <% end %>
+<% end %>
 
 <%= link "New day", to: schedule_path(@conn, :generate) %>
-

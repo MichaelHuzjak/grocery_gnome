@@ -71,7 +71,7 @@ defmodule GroceryGnome.Spoonacular do
  		|> Enum.join("&")
 	end
 
-	# request times out, unsure why
+	# not all numbers have recipes. times out on ones that don't...
 	def summarize_recipe(id) do
 		endpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/#{id}/summary"
 		HTTPotion.get(endpoint, [
