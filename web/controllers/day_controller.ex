@@ -11,8 +11,9 @@ defmodule GroceryGnome.DayController do
   end
 
   def planner(conn, _params) do
-    #days = Repo.all(Day)
-    render(conn, "planner.html")
+    days = Repo.all(Day)
+    #changeset = Day.changeset(%Day{})
+    render(conn, "planner.html", days: days)
   end
 
   def new(conn, _params) do

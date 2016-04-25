@@ -1,6 +1,51 @@
 <!--%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %-->
+<head>
+  <link rel="stylesheet" type="text/css" href="planner.css">
+</head>
+<body>
 
+  <script>
 
+    <!--highlight current day-->
+
+    function currentDay() {
+    alert("Hi");
+      <!--var d = new Date();
+    var date = d.getDate();
+    alert(date);
+      dayCells = document.getElementsbyTagName("td");
+      dayCells[d+2].innerHTML = "n"
+    }
+  
+  <!--set Modal header with selected day-->
+  
+  function populateModal(btn) {
+    var mTitle = document.getElementById("title");
+    mTitle.innerHTML = "April "  + btn.parentNode.textContent + " meal plan";
+    var dateHeader = document.getElementById("dHeader");
+  }
+
+  <!--populate calendar with existing days-->
+
+  
+  function update() {
+    var dayCells = document.getElementsByTagName("td");
+    var calDays = [];
+   
+    <%= for day <- @days do %>
+      calDays.push("<%= hd(tl(String.split(day.date, "/"))) %>");
+    <% end %>
+    window.alert(calDays);
+
+    for (i = 0; i < calDays.length; ++i) {
+		    cellIndex = parseInt(calDays[i]);
+		    cellIndex = cellIndex+2;
+        dayCells[cellIndex].innerHTML = '<button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#dayModal" onclick="populateModal(this)">3</button>';
+        dayCells[cellIndex].childNodes[0].innerHTML = calDays[i];
+    }
+  }
+
+</script>
 
 <div class="container">
 	<div class="row">
@@ -11,7 +56,7 @@
                       <th colspan="7">
                         <span class="btn-group">
                             <a class="btn"><i class="icon-chevron-left"></i></a>
-                        	<a class="btn active">April 2016</a>
+                        	<a class="btn active" id="cHeader">April 2016</a>
                         	<a class="btn"><i class="icon-chevron-right"></i></a>
                         </span>
                       </th>
@@ -28,11 +73,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="muted">29</td>
-                        <td class="muted">30</td>
-                        <td class="muted">31</td>
-                        <td><button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#dayModal">1</button></td>
-                        <td>2</td>
+                        <td class="muted" style="color: lightgrey;">29</td>
+                        <td class="muted" style="color: lightgrey;">30</td>
+                        <td class="muted" style="color: lightgrey;">31</td>
+                        <td align="center">1</td>
+                        <td><a data-toggle="modal" data-target="newDayModal">2</a></td>
                         <td>3</td>
                         <td>4</td>
                     </tr>
@@ -56,7 +101,7 @@
                     </tr>
                     <tr>
                         <td>19</td>
-                        <td class="btn-primary"><strong>20</strong></td>
+                        <td <!--class="btn-primary"><strong-->20<!--/strong--></td>
                         <td>21</td>
                         <td>22</td>
                         <td>23</td>
@@ -68,15 +113,16 @@
                         <td>27</td>
                         <td>28</td>
                         <td>29</td>
-                        <td class="muted">1</td>
-                        <td class="muted">2</td>
-                        <td class="muted">3</td>
+                        <td class="muted" style="color: lightgrey;">1</td>
+                        <td class="muted" style="color: lightgrey;">2</td>
+                        <td class="muted" style="color: lightgrey;">3</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 	</div>
 </div>
+<button class="btn btn-success" onclick="update()">Update meal plan</button>
 
 <div id="dayModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -85,10 +131,33 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">April 1 Meals</h4>
+        <h4 class="modal-title" id="title">April 1 Meals</h4>
+	
       </div>
       <div class="modal-body">
-        
+	<h5 id="dHeader"></h5>
+        <div class="form-group">
+          <%#= label f, :date, "Date", class: "control-label" %>
+          <%#= text_input f, :date, class: "form-control" %>
+	  <%#= for day <- @days do %>
+	      <%#= if (String.split(day.date, "/") == %> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+<div id="newDayModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">    
+     <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="title">New meal plan</h4>	
+      </div>
+      <div class="modal-body">
+	<h5 id="dHeader"></h5>
+       
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -98,7 +167,7 @@
   </div>
 </div>
 
-
+</body>
 
 
 
