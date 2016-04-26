@@ -11,15 +11,4 @@ defmodule GroceryGnome.ScheduleView do
 		end
 	end
 
-	def meal_schedule_date_select(form, field, opts \\ []) do
-		builder = fn b ->
-			~s"""
-			Date: <%= b.(:day, []) %> / <%= b.(:month, []) / <%= b.(:hour, []) %>
-			Time: <%= b.(:hour, []) %> : <%= b.(:min, []) %>
-			"""
-		end
-		builder = nil
-		datetime_select(form, field, [builder: builder] ++ opts)
-	end
-	
 end
