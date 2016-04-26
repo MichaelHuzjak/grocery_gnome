@@ -68,7 +68,7 @@
 	    <p1>Are you sure you want to logout of Grocery Gnome?
         </div>
         <div class="modal-footer">
-<%= link "Yes", to: session_path(@conn, :delete) , class: "btn btn-success" %>
+	    <%= link "Yes", to: session_path(@conn, :delete) , class: "btn btn-success" %>
 
 	    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
         </div>

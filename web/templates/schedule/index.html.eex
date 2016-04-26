@@ -16,29 +16,8 @@
 <% end %>
 <%# link "Generate day", to: schedule_path(@conn, :generate) %>
 
-<div class="container">
-    <h2>Modal Example</h2>
-    <!-- trigger modal with button -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open modal</button>
-    <!-- modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-	    <!-- modal content -->
-	    <div class="modal-content">
-		<div class="model-header">
-		    <button type="button" class="close" data-dismiss="modal">&times;</button>
-		    <h4 class="modal-title">Modal Header</h4>
-		</div>
-	    </div>
-	    <div class="modal-body">
-		<p>Some tect in the modal.</p>
-	    </div>
-	    <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	    </div>
-	</div>
-    </div>
-</div>
+<%= render "new.html", conn: @conn %>
+
 
 <%= for day <- @days do %>
     <h3><%= day.date %></h3><%= link "Delete", to: schedule_path(@conn, :delete, day), class: "btn btn-danger btn-xs" %>
