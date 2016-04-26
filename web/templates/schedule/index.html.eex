@@ -1,7 +1,9 @@
 <h2>Listing days</h2>
 
+<%= link "New Day", to: schedule_path(@conn, :new) %>
+
 <%= for day <- @days do %>
-    <h3><%= day.date %></h3>
+    <h3><%= day.date %></h3><%= link "Delete", to: schedule_path(@conn, :delete, id: day.id) %>
     <%= for {title, slot} <- [{"Breakfast", day.breakfast}, {"Lunch", day.lunch}, {"Dinner", day.dinner}] do %>
 	<div class="panel-group">
 	    <div class="panel panel-default">
@@ -22,4 +24,8 @@
     <% end %>
 <% end %>
 
-<%= link "New day", to: schedule_path(@conn, :generate) %>
+<%= form_for @conn, schedule_path(@conn, :generate), [as: :form_data], fn f -> %>
+    <%= meal_schedule_date_select f, :date %>
+    <%= submit "Submit" %>
+<% end %>
+<%# link "Generate day", to: schedule_path(@conn, :generate) %>
