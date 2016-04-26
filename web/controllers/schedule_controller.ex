@@ -50,6 +50,7 @@ defmodule GroceryGnome.ScheduleController do
 	end
 
 	def new(conn, _params) do
+		IO.inspect conn
 		changeset = Day.changeset(%Day{})
 		render(conn, "new.html", changeset: changeset)
 	end
