@@ -1,2 +1,25 @@
 <h2>Plan for <%= @date %></h2>
 
+<%= form_for @conn, schedule_path(@conn, :create), [as: :form_data], fn f -> %>
+    <%= for {title, sym} <- [{"Breakfast", :breakfast}, {"Lunch", :lunch}, {"Dinner", :dinner}] do %>
+	<div class="panel-group">
+	    <div class="panel panel-default">
+		<div class="panel-body">
+		    <%= title %>
+
+		    <%= search_input f, sym, class: "form-control" %>
+
+		    <!-- <div class="panel-group">
+			 <div class="panel panel-default">
+			 <div class="panel-body">
+			 
+			 </div>
+			 </div>
+			 </div> -->
+
+		</div>
+	    </div>
+	</div>
+    <% end %>
+    <%= submit "Submit" %>
+<% end %>
