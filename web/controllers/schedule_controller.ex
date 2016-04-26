@@ -40,7 +40,7 @@ defmodule GroceryGnome.ScheduleController do
 		end
 	end
 
-	def delete(conn, %{id: id}) do
+	def delete(conn, %{"id" => id}) do
 		day = Repo.get!(Day, id)
 
 		Repo.delete!(day)
