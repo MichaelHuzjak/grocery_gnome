@@ -19,13 +19,12 @@ defmodule GroceryGnome.ScheduleController do
 		[breakfast, lunch, dinner] = meals["meals"]
 		IO.inspect date
 		d = ~s/#{date["year"]}-#{date["month"]}-#{date["day"]}/
-		changeset = %Day{
-			breakfast: [breakfast["id"], 1433],
-			lunch: [lunch["id"], 1234, 51515],
-			dinner: [dinner["id"]],
-			date: d,
-			user_id: userid,
-		}
+		changeset = Day.changeset(%Day{}, %{
+					breakfast: [breakfast["id"], 1433],
+					lunch: [lunch["id"], 1234, 51515],
+					dinner: [dinner["id"]],
+					date: d,
+					user_id: userid})
 		# render(conn, "index.html", changeset: changeset)
 		case Repo.insert(changeset) do
 			{:ok, _day} ->
