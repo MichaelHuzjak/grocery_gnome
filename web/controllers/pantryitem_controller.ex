@@ -47,8 +47,8 @@ import Ecto.Date
 		year = date["year"]
 		month = date["month"]
 		day = date["day"]
-		date = year <> "-" <> month <> "-" <> day
-		changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: date, foodcatalog_id: id, user_id: conn.assigns.current_user.id})
+		edate = %Ecto.Date{year: String.to_integer(year), month: String.to_integer(month), day: String.to_integer(day)}
+		changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: edate, foodcatalog_id: id, user_id: conn.assigns.current_user.id})
 
     case Repo.insert(changeset) do
       {:ok, _pantryitem} ->
@@ -56,7 +56,7 @@ import Ecto.Date
         |> put_flash(:info, "Pantryitem created successfully.")
         |> redirect(to: pantryitem_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, conn: @conn)
+        render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
     end
   end
 
@@ -68,20 +68,8 @@ import Ecto.Date
   def edit(conn, %{"id" => id}) do
     pantryitem = Repo.get!(Pantryitem, id)
 		foodcatalog = Repo.get!(Foodcatalog, pantryitem.foodcatalog_id)
-		date = pantryitem.expiration
-		expiration = %{}
-		datesplit = String.split(date, "-")
-		year = List.first(datesplit)
-		leftover = List.delete(datesplit, year)
-		month = List.first(leftover)
-		leftover = List.delete(leftover,month)
-		day = List.first(leftover)
-		expiration = Map.put(expiration, :year, year)
-		expiration = Map.put(expiration, :month, month)
-		expiration = Map.put(expiration, :day, day)
 
-		
-    changeset = Pantryitem.changeset(pantryitem,%{pantryquantity: pantryitem.pantryquantity, expiration: expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+    changeset = Pantryitem.changeset(pantryitem,%{pantryquantity: pantryitem.pantryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
     render(conn, "edit.html", pantryitem: pantryitem, changeset: changeset, foodcatalog: foodcatalog)
   end
 
@@ -93,7 +81,7 @@ import Ecto.Date
 		year = date["year"]
 		month = date["month"]
 		day = date["day"]
-		date = year <> "-" <> month <> "-" <> day
+		edate = %Ecto.Date{year: String.to_integer(year), month: String.to_integer(month), day: String.to_integer(day)}
 		changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: date, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
     case Repo.update(changeset) do
       {:ok, pantryitem} ->
@@ -161,7 +149,7 @@ import Ecto.Date
 										year = date["year"]
 										month = date["month"]
 										day = date["day"]
-										date = year <> "-" <> month <> "-" <> day
+										edate = %Ecto.Date{year: String.to_integer(year), month: String.to_integer(month), day: String.to_integer(day)}
 										changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem["pantryquantity"], expiration: date, foodcatalog_id: _foodcatalog.id, user_id: conn.assigns.current_user.id})
 										case Repo.insert(changeset) do
 											{:ok, _pantryitem} ->
