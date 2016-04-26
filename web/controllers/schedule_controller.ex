@@ -55,4 +55,11 @@ defmodule GroceryGnome.ScheduleController do
 		render(conn, "new.html", changeset: changeset)
 	end
 
+	def new_day(conn, _params) do
+		date = conn.params["form_data"]["date"]
+		# IO.inspect Ecto.Date. date
+		date_string = "#{date["year"]}-#{date["month"]}-#{date["day"]}"
+		render(conn, "new_day_form.html", date: date_string)
+	end
+
 end

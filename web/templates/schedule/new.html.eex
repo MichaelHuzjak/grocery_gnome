@@ -40,7 +40,7 @@
 		    <h4 class="modal-title">Create Plan for Selected Date</h4>
 		</div>
 		<div class="modal-body">
-		    <%= form_for @conn, schedule_path(@conn, :new), [as: :form_data], fn f -> %>
+		    <%= form_for @conn, schedule_path(@conn, :new_day), [as: :form_data], fn f -> %>
 			<%= label f, :date, "New Day", class: "control-label" %>
 			<%= meal_schedule_date_select f, :date %>
 			<%= submit "Submit" %>
@@ -50,10 +50,6 @@
 		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		</div>
 	    </div>
-	    
 	</div>
     </div>
-
-
-    
 </div>
