@@ -15,7 +15,7 @@
 		    <h4 class="modal-title">Generate Plan for Selected Date</h4>
 		</div>
 		<div class="modal-body">
-		    <%= form_for @conn, schedule_path(@conn, :generate), [as: :form_data], fn f -> %>
+		    <%= form_for @conn, schedule_path(@conn, :generatetodatabase), [as: :form_data], fn f -> %>
 			<%= label f, :date, "Generate Day", class: "control-label" %>
 			<%= meal_schedule_date_select f, :date %>
 			<%= submit "Submit" %>
