@@ -3,7 +3,7 @@ defmodule GroceryGnome.Pantryitem do
 
   schema "pantryitems" do
     field :pantryquantity, :float
-    field :expiration, :string
+    field :expiration, Ecto.Date
     belongs_to :user, GroceryGnome.User
     belongs_to :foodcatalog, GroceryGnome.Foodcatalog
 
