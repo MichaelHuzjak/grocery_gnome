@@ -3,7 +3,7 @@
 <%= link "New Day", to: schedule_path(@conn, :new) %>
 
 <%= for day <- @days do %>
-    <h3><%= day.date %></h3><%= link "Delete", to: schedule_path(@conn, :delete, id: day.id) %>
+    <h3><%= day.date %></h3><%= link "Delete", to: schedule_path(@conn, :delete, day), class: "btn btn-danger btn-xs" %>
     <%= for {title, slot} <- [{"Breakfast", day.breakfast}, {"Lunch", day.lunch}, {"Dinner", day.dinner}] do %>
 	<div class="panel-group">
 	    <div class="panel panel-default">
