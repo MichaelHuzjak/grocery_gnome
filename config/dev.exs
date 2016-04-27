@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :grocery_gnome, GroceryGnome.Endpoint,
-  http: [port: 4000],
+  http: [port: {:system, "PORT"}],
   debug_errors: true,
   code_reloader: true,
   cache_static_lookup: false,
