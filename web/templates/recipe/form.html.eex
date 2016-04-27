@@ -1,71 +1,71 @@
 <%= form_for @changeset, @action, fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below:</p>
-      <ul>
-        <%= for {attr, message} <- f.errors do %>
-          <li><%= humanize(attr) %> <%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= if @changeset.action do %>
+	<div class="alert alert-danger">
+	    <p>Oops, something went wrong! Please check the errors below:</p>
+	    <ul>
+		<%= for {attr, message} <- f.errors do %>
+		    <li><%= humanize(attr) %> <%= message %></li>
+		<% end %>
+	    </ul>
+	</div>
+    <% end %>
 
-<table class="table">
-  <thead>
-    <tr>
-	<th>ID</th>
-      <th>Foodname</th>
-      <th>Info</th>
-      <th>Unit</th>
+    <table class="table">
+	<thead>
+	    <tr>
+		<th>ID</th>
+		<th>Foodname</th>
+		<th>Info</th>
+		<th>Unit</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for foodcatalog <- @foodcatalogs do %>
-    <tr>
-	<td><%= foodcatalog.id %></td>
-      <td><%= foodcatalog.foodname %></td>
-      <td><%= foodcatalog.info %></td>
-      <td><%= foodcatalog.unit %></td>
+		<th></th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <%= for foodcatalog <- @foodcatalogs do %>
+		<tr>
+		    <td><%= foodcatalog.id %></td>
+		    <td><%= foodcatalog.foodname %></td>
+		    <td><%= foodcatalog.info %></td>
+		    <td><%= foodcatalog.unit %></td>
 
-      <td class="text-right">
-    <%= number_input f, :"#{foodcatalog.id}" , step: "any", placeholder: 0, class: "form-control" %>
+		    <td class="text-right">
+			<%= number_input f, :"#{foodcatalog.id}" , step: "any", placeholder: 0, class: "form-control" %>
 
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-  <div class="form-group">
-  </div>
-  <div class="form-group">
-    <%= label f, :recipe_title, "Recipe Title", class: "control-label" %>
-    <%= text_input f, :recipe_title, class: "form-control" %>
-  </div>
-  
-  <div class="form-group">
-    <%= label f, :instructions, "Instructions", class: "control-label" %>
-    <%= text_input f, :instructions, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :prep_time, "Prep time", class: "control-label" %>
-    <%= number_input f, :prep_time, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :cook_time, "Cook time", class: "control-label" %>
-    <%= number_input f, :cook_time, class: "form-control" %>
-  </div>
+		    </td>
+		</tr>
+	    <% end %>
+	</tbody>
+    </table>
 
     <div class="form-group">
-    <%= label f, :serving_size, "Serving Size", class: "control-label" %>
-    <%= number_input f, :serving_size, class: "form-control" %>
-  </div>
+    </div>
+    <div class="form-group">
+	<%= label f, :recipe_title, "Recipe Title", class: "control-label" %>
+	<%= text_input f, :recipe_title, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+	<%= label f, :instructions, "Instructions", class: "control-label" %>
+	<%= text_input f, :instructions, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
+    <div class="form-group">
+	<%= label f, :prep_time, "Prep time", class: "control-label" %>
+	<%= number_input f, :prep_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+	<%= label f, :cook_time, "Cook time", class: "control-label" %>
+	<%= number_input f, :cook_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+	<%= label f, :serving_size, "Serving Size", class: "control-label" %>
+	<%= number_input f, :serving_size, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+	<%= submit "Submit", class: "btn btn-primary" %>
+    </div>
 <% end %>

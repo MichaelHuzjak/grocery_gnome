@@ -1,0 +1,66 @@
+<h2>Listing days</h2>
+
+<%= render "new.html", conn: @conn %>
+
+<%= for day <- @days do %>
+    <h3><%= day.date %></h3><%= link "Delete", to: schedule_path(@conn, :delete, day), class: "btn btn-danger btn-xs" %>
+    <!-- Breakfast table --->
+	<div class="panel-group">
+	    <div class="panel panel-default">
+		<div class="panel-body">
+		  Breakfast
+		  <%= for meal <- day.meals do %>
+		      <%= if meal.meal_type == 0 do %>
+			<div class="panel-group">
+			    <div class="panel panel-default">
+				<div class="panel-body">
+				  <%= meal.recipe.recipe_title %>
+				</div>
+			    </div>
+			</div>
+			<% end %>
+		   <% end %>
+		</div>
+	    </div>
+	</div>
+	<!-- Lunch table -->
+		<div class="panel-group">
+	    <div class="panel panel-default">
+		<div class="panel-body">
+		  Lunch
+		  <%= for meal <- day.meals do %>
+		      <%= if meal.meal_type == 1 do %>
+			<div class="panel-group">
+			    <div class="panel panel-default">
+				<div class="panel-body">
+				  <%= meal.recipe.recipe_title %>
+				</div>
+			    </div>
+			</div>
+			<% end %>
+		   <% end %>
+		</div>
+	    </div>
+		</div>
+		
+	<!-- Dinner table -->
+		<div class="panel-group">
+	    <div class="panel panel-default">
+		<div class="panel-body">
+		  Dinner
+		  <%= for meal <- day.meals do %>
+		      <%= if meal.meal_type == 2 do %>
+			<div class="panel-group">
+			    <div class="panel panel-default">
+				<div class="panel-body">
+				  <%= meal.recipe.recipe_title %>
+				</div>
+			    </div>
+			</div>
+			<% end %>
+		   <% end %>
+		</div>
+	    </div>
+	</div>
+<% end %>
+

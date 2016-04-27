@@ -1,20 +1,15 @@
-defmodule GroceryGnome.Day do
+defmodule GroceryGnome.Meal do
   use GroceryGnome.Web, :model
 
-  schema "days" do
-    #field :breakfast, {:array, :id}
-    #field :lunch, {:array, :id}
-    #field :dinner, {:array, :id}
-    field :date, :string
-    belongs_to :user, GroceryGnome.User
+  schema "meals" do
+    field :meal_type, :integer
+    belongs_to :recipe, GroceryGnome.Recipe
+    belongs_to :day, GroceryGnome.Day
 
-		has_many :meals, GroceryGnome.Meal
     timestamps
   end
 
-  @required_fields ~w(date user_id)
-	#@required_fields ~w(breakfast lunch dinner date user_id)
-
+  @required_fields ~w(meal_type recipe_id day_id)
   @optional_fields ~w()
 
   @doc """
