@@ -9,7 +9,8 @@ defmodule GroceryGnome.ScheduleController do
 	alias GroceryGnome.Meal
 
 	def index(conn, _params) do
-		days = Repo.all from d in Day,
+		userid = conn.assigns.current_user.id
+		days = Repo.all from d in Day, where: d.user_id == ^userid,
            join: m in assoc(d, :meals),
            join: r in assoc(m, :recipe),
            preload: [meals: {m, recipe: r}]

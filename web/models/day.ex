@@ -12,8 +12,8 @@ defmodule GroceryGnome.Day do
     timestamps
   end
 
-  @required_fields ~w(date)
-	#@required_fields ~w(breakfast lunch dinner date)
+  @required_fields ~w(date user_id)
+	#@required_fields ~w(breakfast lunch dinner date user_id)
 
   @optional_fields ~w()
 
