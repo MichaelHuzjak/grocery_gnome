@@ -4,27 +4,27 @@
 <h2>Grocery</h2>
 
 <table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Groceryquantity</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for groceryitem <- @groceryitems do %>
-    <tr>
-      <td><%= groceryitem.foodcatalog.foodname %></td>
-      <td><%= groceryitem.groceryquantity %> <%= groceryitem.foodcatalog.unit %></td>
+    <thead>
+	<tr>
+	    <th>Name</th>
+	    <th>Groceryquantity</th>
+	    <th></th>
+	</tr>
+    </thead>
+    <tbody>
+	<%= for groceryitem <- @groceryitems do %>
+	    <tr>
+		<td><%= groceryitem.foodcatalog.foodname %></td>
+		<td><%= groceryitem.groceryquantity %> <%= groceryitem.foodcatalog.unit %></td>
 
-      <td class="text-right">
-        <%= link "Show", to: groceryitem_path(@conn, :show, groceryitem), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: groceryitem_path(@conn, :edit, groceryitem), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: groceryitem_path(@conn, :deletegrocery, groceryitem: groceryitem),  class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
+		<td class="text-right">
+		    <%= link "Show", to: groceryitem_path(@conn, :show, groceryitem), class: "btn btn-default btn-xs" %>
+		    <%= link "Edit", to: groceryitem_path(@conn, :edit, groceryitem), class: "btn btn-default btn-xs" %>
+		    <%= link "Delete", to: groceryitem_path(@conn, :deletegrocery, groceryitem: groceryitem),  class: "btn btn-danger btn-xs" %>
+		</td>
+	    </tr>
+	<% end %>
+    </tbody>
 </table>
 
 <%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry) %></br>
@@ -32,12 +32,12 @@
 <%= link "Foodcatalog index", to: foodcatalog_path(@conn, :index) %></br>
 <%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>
 
- <div class="dropdown" style="display: inline; margin-left: 20px;">
-  <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 250px !important;">Add foodcatalog to Grocery
-<span class="caret"></span></button>
-  <ul class="dropdown-menu scrollable-menu" role="menu" style="width: 250px !important; height: auto !important;">
-    <%= for foodcatalog <- @foodcatalogs do %>    
-	<%= link foodcatalog.foodname, to: groceryitem_path(@conn, :new, foodcatalog: foodcatalog)%><br>
-    <% end %>
-  </ul>
+<div class="dropdown" style="display: inline; margin-left: 20px;">
+    <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 250px !important;">Add foodcatalog to Grocery
+	<span class="caret"></span></button>
+    <ul class="dropdown-menu scrollable-menu" role="menu" style="width: 250px !important; height: auto !important;">
+	<%= for foodcatalog <- @foodcatalogs do %>    
+	    <%= link foodcatalog.foodname, to: groceryitem_path(@conn, :new, foodcatalog: foodcatalog)%><br>
+	<% end %>
+    </ul>
 </div>
