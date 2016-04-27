@@ -32,4 +32,3 @@
 </table>
 
 <%= link "New day", to: day_path(@conn, :new) %>
-<!--  -->
