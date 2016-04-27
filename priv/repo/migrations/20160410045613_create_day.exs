@@ -3,9 +3,9 @@ defmodule GroceryGnome.Repo.Migrations.CreateDay do
 
   def change do
     create table(:days) do
-      add :breakfast, {:array, :id}
-      add :lunch, {:array, :id}
-      add :dinner, {:array, :id}
+      #add :breakfast, {:array, :id}
+      #add :lunch, {:array, :id}
+      #add :dinner, {:array, :id}
       add :date, :string
       add :user_id, references(:users)
 

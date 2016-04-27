@@ -6,9 +6,14 @@ defmodule GroceryGnome.ScheduleController do
 	alias GroceryGnome.Recipe
 	alias GroceryGnome.Foodcatalog
 	alias GroceryGnome.Ingredient
+	alias GroceryGnome.Meal
 
 	def index(conn, _params) do
-		days = Repo.all(Day)
+		days = Repo.all from d in Day,
+           join: m in assoc(d, :meals),
+           join: r in assoc(m, :recipe),
+           preload: [meals: {m, recipe: r}]
+		#days = Repo.all(Day)
 		for d <- days do
 			IO.inspect d
 		end
@@ -49,31 +54,49 @@ defmodule GroceryGnome.ScheduleController do
 		[breakfast, lunch, dinner] = meals["meals"]
 		IO.inspect date
 		date = ~s/#{date["year"]}-#{date["month"]}-#{date["day"]}/
-		#breakfast
-		{:ok, b} = GroceryGnome.Spoonacular.recipe_information breakfast["id"], false
-		IO.inspect b
-		recipe_add(userid,b)
-		b = Repo.get_by(Recipe, recipe_title: b["title"])
-		#lunch
-		{:ok, l} = GroceryGnome.Spoonacular.recipe_information lunch["id"], false
-		IO.inspect l
-		recipe_add(userid,l)
-		l = Repo.get_by(Recipe, recipe_title: l["title"])
-		#dinner
-		{:ok, d} = GroceryGnome.Spoonacular.recipe_information dinner["id"], false
-		IO.inspect d
-		recipe_add(userid,d)
-		d = Repo.get_by(Recipe, recipe_title: d["title"])
 
 		changeset = Day.changeset(%Day{}, %{
-					breakfast: [b.id],
-					lunch: [l.id],
-					dinner: [d.id],
 					date: date,
 					user_id: userid})
 		
 		case Repo.insert(changeset) do
 			{:ok, _day} ->
+				#Generate the Meals
+						#breakfast
+			{:ok, b} = GroceryGnome.Spoonacular.recipe_information breakfast["id"], false
+				IO.inspect b
+				recipe_add(userid,b)
+				b = Repo.get_by(Recipe, recipe_title: b["title"])
+				meal = Meal.changeset(%Meal{}, %{
+							meal_type: 0,
+							recipe_id: b.id,
+							day_id: _day.id,
+																	 })
+				Repo.insert(meal)
+				#lunch
+				{:ok, l} = GroceryGnome.Spoonacular.recipe_information lunch["id"], false
+				IO.inspect l
+				recipe_add(userid,l)
+				l = Repo.get_by(Recipe, recipe_title: l["title"])
+				meal = Meal.changeset(%Meal{}, %{
+							meal_type: 1,
+							recipe_id: l.id,
+							day_id: _day.id,
+																	 })
+				Repo.insert(meal)
+
+				#dinner
+				{:ok, d} = GroceryGnome.Spoonacular.recipe_information dinner["id"], false
+				IO.inspect d
+				recipe_add(userid,d)
+				d = Repo.get_by(Recipe, recipe_title: d["title"])
+				meal = Meal.changeset(%Meal{}, %{
+							meal_type: 2,
+							recipe_id: d.id,
+							day_id: _day.id,
+																	 })
+								Repo.insert(meal)
+
 				conn
 				|> put_flash(:info, "Generated plan #{b.id}")
 				|> redirect(to: schedule_path(conn, :index))
@@ -120,6 +143,13 @@ defmodule GroceryGnome.ScheduleController do
 	def delete(conn, %{"id" => id}) do
 		day = Repo.get!(Day, id)
 
+		query = from m in Meal, where: m.day_id == ^id
+		meals = Repo.all(query)
+		for meal <- meals do
+			Repo.delete(meal)
+		end
+
+		
 		Repo.delete!(day)
 
 		conn

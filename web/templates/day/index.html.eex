@@ -3,9 +3,6 @@
 <table class="table">
     <thead>
 	<tr>
-	    <th>Breakfast</th>
-	    <th>Lunch</th>
-	    <th>Dinner</th>
 	    <th>Date</th>
 	    <th>User</th>
 
@@ -15,9 +12,7 @@
     <tbody>
 	<%= for day <- @days do %>
 	    <tr>
-		<td><%= day.breakfast %></td>
-		<td><%= day.lunch %></td>
-		<td><%= day.dinner %></td>
+
 		<td><%= day.date %></td>
 		<td><%= day.user_id %></td>
 
