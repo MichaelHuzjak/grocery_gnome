@@ -51,8 +51,11 @@ defmodule GroceryGnome.Router do
 
 		get "/schedule", ScheduleController, :index
 		post "/schedule/gen", ScheduleController, :generate
-		get "/schedule/:id", ScheduleController, :delete
+		post "/schedule/gen2dat",ScheduleController, :generatetodatabase
+		get "/schedule/delete/:id", ScheduleController, :delete
 		get "/schedule/new", ScheduleController, :new
+		post "/schedule/new_day", ScheduleController, :new_day
+		post "/schedule/create", ScheduleController, :create
 
 		get "/home", PageController, :home
 		post "/home", PageController, :home

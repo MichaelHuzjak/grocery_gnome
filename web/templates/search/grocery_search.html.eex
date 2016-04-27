@@ -1,5 +1,3 @@
-
-
 <h2>Grocery Search</h2>
 
 <%= form_for @conn, search_path(@conn, :grocery_list), [as: :search], fn f -> %>

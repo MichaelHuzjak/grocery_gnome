@@ -1,6 +1,6 @@
 <h2>Listing days</h2>
 
-<%= link "New Day", to: schedule_path(@conn, :new) %>
+<%= render "new.html", conn: @conn %>
 
 <%= for day <- @days do %>
     <h3><%= day.date %></h3><%= link "Delete", to: schedule_path(@conn, :delete, day), class: "btn btn-danger btn-xs" %>
@@ -13,7 +13,7 @@
 			<div class="panel-group">
 			    <div class="panel panel-default">
 				<div class="panel-body">
-				    <%= fetch item %>
+				    <%= item %>
 				</div>
 			    </div>
 			</div>
@@ -24,8 +24,3 @@
     <% end %>
 <% end %>
 
-<%= form_for @conn, schedule_path(@conn, :generate), [as: :form_data], fn f -> %>
-    <%= meal_schedule_date_select f, :date %>
-    <%= submit "Submit" %>
-<% end %>
-<%# link "Generate day", to: schedule_path(@conn, :generate) %>
