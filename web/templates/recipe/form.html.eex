@@ -10,7 +10,31 @@
     </div>
   <% end %>
 
-<table class="table">
+
+<script>
+function addIngredient() {
+    var table = document.getElementById("rTable");
+    var row = table.insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = '<div class="form-group">
+    <%= label f, :instructions, "Foodname", class: "control-label" %>
+    <%= text_input f, :"0-", class: "form-control" %>
+  </div>';
+    cell2.innerHTML = '<div class="form-group">
+    <%= label f, :instructions, "Info", class: "control-label" %>
+    <%= text_input f, :instructions, class: "form-control" %>
+  </div>';
+    cell3.innerHTML = '<div class="form-group">
+    <%= label f, :instructions, "Units", class: "control-label" %>
+    <%= text_input f, :instructions, class: "form-control" %>
+  </div>
+}
+
+</script>
+  
+<table class="table" id="rTable">
   <thead>
     <tr>
 	<th>ID</th>
@@ -18,7 +42,7 @@
       <th>Info</th>
       <th>Unit</th>
 
-      <th></th>
+      <th><button class="btn btn-sm btn-success" onclick="addIngredient()">Add Ingredient</button></th>
     </tr>
   </thead>
   <tbody>
