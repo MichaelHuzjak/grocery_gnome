@@ -18,7 +18,7 @@ defmodule GroceryGnome.ScheduleView do
 			"""
 		end
 		builder = nil
-		date_select(form, field, [builder: builder] ++ opts)
+		date_select(form, field, [builder: builder, default: Ecto.Date.utc] ++ opts)
 	end
 	
 end
