@@ -11,14 +11,39 @@ defmodule GroceryGnome.ScheduleController do
 	def index(conn, _params) do
 		userid = conn.assigns.current_user.id
 		days = Repo.all from d in Day, where: d.user_id == ^userid,
-           join: m in assoc(d, :meals),
-           join: r in assoc(m, :recipe),
-           preload: [meals: {m, recipe: r}]
+    join: m in assoc(d, :meals),
+    join: r in assoc(m, :recipe),
+    preload: [meals: {m, recipe: r}]
 		#days = Repo.all(Day)
 		for d <- days do
 			IO.inspect d
 		end
 		render(conn, "index.html", days: days)
+	end
+
+	def create(conn, %{"date" => d}) do
+		IO.puts "---------------------"
+		selection = conn.params["form_data"]
+		userid = conn.assigns.current_user.id
+		IO.inspect selection
+		changeset = %Day{
+					breakfast: [selection["breakfast"]],
+					lunch: [selection["lunch"]],
+					dinner: [selection["dinner"]],
+					date: d,
+					user_id: userid}
+		IO.inspect changeset
+		case Repo.insert(changeset) do
+			{:ok, _day} ->
+				conn
+				|> put_flash(:info, "Created plan")
+				|> redirect(to: schedule_path(conn, :index))
+			{:error, changeset} ->
+				IO.inspect changeset
+				conn
+				|> put_flash(:error, "Error occured")
+				|> redirect(to: schedule_path(conn, :index))
+		end
 	end
 
 	def generate(conn, _params) do
@@ -29,12 +54,11 @@ defmodule GroceryGnome.ScheduleController do
 		IO.inspect date
 		d = ~s/#{date["year"]}-#{date["month"]}-#{date["day"]}/
 		changeset = Day.changeset(%Day{}, %{
-					breakfast: [breakfast["id"], 1433],
-					lunch: [lunch["id"], 1234, 51515],
+					breakfast: [breakfast["id"]],
+					lunch: [lunch["id"]],
 					dinner: [dinner["id"]],
 					date: d,
 					user_id: userid})
-		# render(conn, "index.html", changeset: changeset)
 		case Repo.insert(changeset) do
 			{:ok, _day} ->
 				conn
@@ -62,8 +86,8 @@ defmodule GroceryGnome.ScheduleController do
 		
 		case Repo.insert(changeset) do
 			{:ok, _day} ->
-				#Generate the Meals
-						#breakfast
+			#Generate the Meals
+			#breakfast
 			{:ok, b} = GroceryGnome.Spoonacular.recipe_information breakfast["id"], false
 				IO.inspect b
 				recipe_add(userid,b)
@@ -96,7 +120,7 @@ defmodule GroceryGnome.ScheduleController do
 							recipe_id: d.id,
 							day_id: _day.id,
 																	 })
-								Repo.insert(meal)
+				Repo.insert(meal)
 
 				conn
 				|> put_flash(:info, "Generated plan #{b.id}")
@@ -111,8 +135,8 @@ defmodule GroceryGnome.ScheduleController do
 
 
 	def recipe_add(userid, recipe) do
-	#	{:ok, recipe} = GroceryGnome.Spoonacular.recipe_information id, false
-	#	IO.inspect recipe
+		#	{:ok, recipe} = GroceryGnome.Spoonacular.recipe_information id, false
+		#	IO.inspect recipe
 
 		# create the recipe
     changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe["title"], instructions: "Filler", prep_time: recipe["readyInMinutes"], cook_time: recipe["readyInMinutes"], user_id: userid})
@@ -128,13 +152,13 @@ defmodule GroceryGnome.ScheduleController do
 						nil ->
 							foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: ingredient["name"], unit: ingredient["unit"], info: ingredient["aisle"]})
 							case Repo.insert(foodcatalogchangeset) do
-								      {:ok, _foodcatalog} ->
+								{:ok, _foodcatalog} ->
 									ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: _foodcatalog.id, ingredientquantity: ingredient["amount"], recipe_id: recipe_id})
 									Repo.insert(ingredient_changeset)
-								end
+							end
 						foodcatalog ->
-									ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: foodcatalog.id, ingredientquantity: ingredient["amount"], recipe_id: recipe_id})
-									Repo.insert(ingredient_changeset)
+							ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: foodcatalog.id, ingredientquantity: ingredient["amount"], recipe_id: recipe_id})
+							Repo.insert(ingredient_changeset)
 					end
 				end
 		end
@@ -168,7 +192,15 @@ defmodule GroceryGnome.ScheduleController do
 		date = conn.params["form_data"]["date"]
 		# IO.inspect Ecto.Date. date
 		date_string = "#{date["year"]}-#{date["month"]}-#{date["day"]}"
-		render(conn, "new_day_form.html", date: date_string)
+		userid = conn.assigns.current_user.id
+		query = from p in Recipe, where: p.user_id == ^userid
+		recipes = Repo.all(query)
+
+		items = for item <- recipes, into: [] do
+			{item.recipe_title, item.id}
+		end
+				
+		render(conn, "new_day_form.html", date: date_string, recipes: items)
 	end
 
 end
