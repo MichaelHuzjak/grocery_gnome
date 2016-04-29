@@ -21,30 +21,30 @@ defmodule GroceryGnome.ScheduleController do
 		render(conn, "index.html", days: days)
 	end
 
-	def create(conn, %{"date" => d}) do
-		IO.puts "---------------------"
-		selection = conn.params["form_data"]
-		userid = conn.assigns.current_user.id
-		IO.inspect selection
-		changeset = %Day{
-					breakfast: [selection["breakfast"]],
-					lunch: [selection["lunch"]],
-					dinner: [selection["dinner"]],
-					date: d,
-					user_id: userid}
-		IO.inspect changeset
-		case Repo.insert(changeset) do
-			{:ok, _day} ->
-				conn
-				|> put_flash(:info, "Created plan")
-				|> redirect(to: schedule_path(conn, :index))
-			{:error, changeset} ->
-				IO.inspect changeset
-				conn
-				|> put_flash(:error, "Error occured")
-				|> redirect(to: schedule_path(conn, :index))
-		end
-	end
+	# def create(conn, %{"date" => d}) do
+	# 	IO.puts "---------------------"
+	# 	selection = conn.params["form_data"]
+	# 	userid = conn.assigns.current_user.id
+	# 	IO.inspect selection
+	# 	changeset = %Day{
+	# 		breakfast: [selection["breakfast"]],
+	# 		lunch: [selection["lunch"]],
+	# 		dinner: [selection["dinner"]],
+	# 		date: d,
+	# 		user_id: userid}
+	# 	IO.inspect changeset
+	# 	case Repo.insert(changeset) do
+	# 		{:ok, _day} ->
+	# 			conn
+	# 			|> put_flash(:info, "Created plan")
+	# 			|> redirect(to: schedule_path(conn, :index))
+	# 		{:error, changeset} ->
+	# 			IO.inspect changeset
+	# 			conn
+	# 			|> put_flash(:error, "Error occured")
+	# 			|> redirect(to: schedule_path(conn, :index))
+	# 	end
+	# end
 
 	def generate(conn, _params) do
 		date = conn.params["form_data"]["date"]
@@ -86,44 +86,20 @@ defmodule GroceryGnome.ScheduleController do
 		
 		case Repo.insert(changeset) do
 			{:ok, _day} ->
-			#Generate the Meals
-			#breakfast
-			{:ok, b} = GroceryGnome.Spoonacular.recipe_information breakfast["id"], false
-				IO.inspect b
-				recipe_add(userid,b)
-				b = Repo.get_by(Recipe, recipe_title: b["title"])
-				meal = Meal.changeset(%Meal{}, %{
-							meal_type: 0,
-							recipe_id: b.id,
-							day_id: _day.id,
-																	 })
-				Repo.insert(meal)
-				#lunch
-				{:ok, l} = GroceryGnome.Spoonacular.recipe_information lunch["id"], false
-				IO.inspect l
-				recipe_add(userid,l)
-				l = Repo.get_by(Recipe, recipe_title: l["title"])
-				meal = Meal.changeset(%Meal{}, %{
-							meal_type: 1,
-							recipe_id: l.id,
-							day_id: _day.id,
-																	 })
-				Repo.insert(meal)
-
-				#dinner
-				{:ok, d} = GroceryGnome.Spoonacular.recipe_information dinner["id"], false
-				IO.inspect d
-				recipe_add(userid,d)
-				d = Repo.get_by(Recipe, recipe_title: d["title"])
-				meal = Meal.changeset(%Meal{}, %{
-							meal_type: 2,
-							recipe_id: d.id,
-							day_id: _day.id,
-																	 })
-				Repo.insert(meal)
-
+				for {type, mls} <- [{0, breakfast}, {1, lunch}, {2, dinner}] do
+					{:ok, m} = GroceryGnome.Spoonacular.recipe_information mls["id"], false
+					recipe_add(userid,m)
+					n = Repo.get_by(Recipe, recipe_title: m["title"])
+					meal = Meal.changeset(%Meal{}, %{
+								meal_type: type,
+								recipe_id: n.id,
+								day_id: _day.id,
+																		 })
+					Repo.insert(meal)
+				end
+					
 				conn
-				|> put_flash(:info, "Generated plan #{b.id}")
+				|> put_flash(:info, "Generated plan")
 				|> redirect(to: schedule_path(conn, :index))
 			{:error, changeset} ->
 				IO.inspect changeset
@@ -199,7 +175,7 @@ defmodule GroceryGnome.ScheduleController do
 		items = for item <- recipes, into: [] do
 			{item.recipe_title, item.id}
 		end
-				
+		
 		render(conn, "new_day_form.html", date: date_string, recipes: items)
 	end
 
