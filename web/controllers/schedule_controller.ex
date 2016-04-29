@@ -85,7 +85,7 @@ defmodule GroceryGnome.ScheduleController do
 					user_id: userid})
 		
 		case Repo.insert(changeset) do
-			{:ok, _day} ->
+			{:ok, day} ->
 				for {type, mls} <- [{0, breakfast}, {1, lunch}, {2, dinner}] do
 					{:ok, m} = GroceryGnome.Spoonacular.recipe_information mls["id"], false
 					recipe_add(userid,m)
@@ -93,7 +93,7 @@ defmodule GroceryGnome.ScheduleController do
 					meal = Meal.changeset(%Meal{}, %{
 								meal_type: type,
 								recipe_id: n.id,
-								day_id: _day.id,
+								day_id: day.id,
 																		 })
 					Repo.insert(meal)
 				end
