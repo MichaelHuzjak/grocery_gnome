@@ -27,16 +27,16 @@
   </a>
   
   <ul class="dropdown-menu notifications" role="menu" aria-labelledby="notificationButton">
-    
-    <div class="notification-heading"><h4 class="menu-title">Notifications</h4>
-    </div>
     <li class="divider"></li>
    <div class="notifications-wrapper">
      <a class="content" href="#">
+       <%= for pantryitem <- notifyExpiration @conn do %>
        <div class="notification-item">
         <h4 class="item-title">Low Stock Notification!</h4>
-        <p class="item-info">Milk</p>
-      </div>
+        <p class="item-info"><%= pantryitem.foodcatalog.foodname %></p>
+	<p class="item-info">Milk</p>
+       </div>
+       <%= end %>
     </a>
 </div>
 	      </div>

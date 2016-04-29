@@ -173,5 +173,11 @@ import Ecto.Date
 										end
 								end
 	end
+
+	def notifyExpiration(conn, _params) do
+		userid = conn.assigns.current_user.id
+		query = from p in Pantryitem, where: p.user_id == ^userid and p.expiration < date_add(^Ecto.Date.utc, 7, "day"), preload: [:foodcatalog]
+    pantryitems = Repo.all(query)
+	end
 	
 end
