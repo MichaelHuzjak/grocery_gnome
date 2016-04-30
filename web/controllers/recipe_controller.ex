@@ -45,18 +45,44 @@ defmodule GroceryGnome.RecipeController do
 				ingredient_params = Map.delete(ingredient_params,"user_id")
 				ingredient_params = Map.delete(ingredient_params,"cook_time")
 				# Iterate through the rest of the params and create ingredients from them
-				for {key,value} <- ingredient_params do
-							ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: key, ingredientquantity: value, recipe_id: recipe_id})
-							Repo.insert(ingredient_changeset)
+				#for {key,value} <- ingredient_params do
+				#			ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: key, ingredientquantity: value, recipe_id: recipe_id})
+				#			Repo.insert(ingredient_changeset)
+				#end
+				#createloop(String.to_integer(ingredient_params["rowcount"]),ingredient_params)
+				count = Map.get(ingredient_params, "rowcount")
+				case count do
+					string ->
+						createloop(String.to_integer(string),recipe_id,ingredient_params)
 				end
+				#createloop(String.to_integer(count),recipe_id,ingredient_params)
         conn
-        |> put_flash(:info, "Recipe created successfully. #{recipe_id}")
+        |> put_flash(:info, "Recipe created successfully. #{count}")
         |> redirect(to: recipe_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
+	def createloop(i, recipe_id, map) do
+		if i > 0 do
+			namestring = "name" <> Integer.to_string(i)
+			name = Map.get(map,namestring)
+			result = Repo.get_by(Foodcatalog, foodname: name)
+			case result do
+				nil ->
+				s2 = "bah"
+				foodcatalog ->
+					quantitystring = "quantity" <> Integer.to_string(i)
+					quantity = String.to_integer(Map.get(map,quantitystring))
+					ingredient_changeset = Ingredient.changeset(%Ingredient{}, %{ foodcatalog_id: foodcatalog.id, ingredientquantity: quantity, recipe_id: recipe_id})
+					Repo.insert(ingredient_changeset)
+			end
+			createloop((i-1),recipe_id,map)
+		end
+	end
+
+	
   def show(conn, %{"id" => id}) do
     recipe = Repo.get!(Recipe, id)
 		query = from i in Ingredient, where: i.recipe_id == ^id, preload: [:foodcatalog]

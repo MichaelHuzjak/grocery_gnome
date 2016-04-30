@@ -4,6 +4,8 @@ defmodule GroceryGnome.ScheduleController do
 	plug GroceryGnome.Plug.Authenticate
 	alias GroceryGnome.Day
 	alias GroceryGnome.Recipe
+	alias GroceryGnome.Groceryitem
+	alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
 	alias GroceryGnome.Ingredient
 	alias GroceryGnome.Meal
@@ -111,6 +113,7 @@ defmodule GroceryGnome.ScheduleController do
 					user_id: userid})
 		
 		case Repo.insert(changeset) do
+<<<<<<< HEAD
 			{:ok, day} ->
 				for {type, mls} <- [{0, breakfast}, {1, lunch}, {2, dinner}] do
 					{:ok, m} = GroceryGnome.Spoonacular.recipe_information mls["id"], false
@@ -124,6 +127,47 @@ defmodule GroceryGnome.ScheduleController do
 					Repo.insert(meal)
 				end
 					
+=======
+			{:ok, _day} ->
+				#Generate the Meals
+						#breakfast
+			{:ok, b} = GroceryGnome.Spoonacular.recipe_information breakfast["id"], false
+				IO.inspect b
+				recipe_add(userid,b)
+				b = Repo.get_by(Recipe, recipe_title: b["title"])
+				meal = Meal.changeset(%Meal{}, %{
+							meal_type: 0,
+							recipe_id: b.id,
+							day_id: _day.id,
+																	 })
+				Repo.insert(meal)
+				#lunch
+				{:ok, l} = GroceryGnome.Spoonacular.recipe_information lunch["id"], false
+				IO.inspect l
+				recipe_add(userid,l)
+				l = Repo.get_by(Recipe, recipe_title: l["title"])
+				meal = Meal.changeset(%Meal{}, %{
+							meal_type: 1,
+							recipe_id: l.id,
+							day_id: _day.id,
+																	 })
+				Repo.insert(meal)
+
+				#dinner
+				{:ok, d} = GroceryGnome.Spoonacular.recipe_information dinner["id"], false
+				IO.inspect d
+				recipe_add(userid,d)
+				d = Repo.get_by(Recipe, recipe_title: d["title"])
+				meal = Meal.changeset(%Meal{}, %{
+							meal_type: 2,
+							recipe_id: d.id,
+							day_id: _day.id,
+																	 })
+								Repo.insert(meal)
+
+								# ensure
+								ensure_schedule(userid)
+>>>>>>> ensure
 				conn
 				|> put_flash(:info, "Generated plan")
 				|> redirect(to: schedule_path(conn, :index))
@@ -204,5 +248,104 @@ defmodule GroceryGnome.ScheduleController do
 		
 		render(conn, "new_day_form.html", date: date_string, recipes: items)
 	end
+
+
+
+	def ensure_schedule(userid) do
+		days = Repo.all from d in Day, where: d.user_id == ^userid,
+           join: m in assoc(d, :meals),
+           join: r in assoc(m, :recipe),
+           preload: [meals: {m, recipe: r}]
+		imap = %{}
+		ingredientmap = map_ingredients(days,imap)
+		for {key,value} <- ingredientmap do
+			foodcatalog = Repo.get_by(Foodcatalog, foodname: key)
+			currentstock = get_pantryquantity(foodcatalog.id,userid) + get_groceryquantity(foodcatalog.id,userid)
+			additiontostock = currentstock - value
+			if additiontostock < 0 do
+				truevalue = (-1 * additiontostock)
+				result = Repo.get_by(Groceryitem, foodcatalog_id: foodcatalog.id, user_id: userid)
+				case result do
+					nil ->
+						changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: truevalue, foodcatalog_id: foodcatalog.id , user_id: userid})
+						Repo.insert(changeset)
+					groceryitem ->
+						changeset = Groceryitem.changeset(groceryitem,  %{id: groceryitem.id, groceryquantity: groceryitem.groceryquantity + truevalue, foodcatalog_id: foodcatalog.id , user_id: userid})
+						Repo.update(changeset)
+				end
+			end
+		end
+	end
+
+	def get_pantryquantity(foodcatalogid,userid) do
+			result = Repo.get_by(Pantryitem, foodcatalog_id: foodcatalogid, user_id: userid)
+			case result do
+				nil ->
+					0
+				pantryitem ->
+					pantryitem.pantryquantity
+			end
+	end
+
+	def get_groceryquantity(foodcatalogid,userid) do
+			result = Repo.get_by(Groceryitem, foodcatalog_id: foodcatalogid, user_id: userid)
+			case result do
+				nil ->
+					0
+				groceryitem ->
+					groceryitem.groceryquantity
+			end
+	end
+	
+	def map_ingredients(daylist, imap) do
+	result = List.first(daylist)
+	case result do
+		nil ->
+			imap
+		day ->
+			meallist = day.meals
+			newimap = grab_from_day(meallist,imap)
+			newlist = List.delete(daylist,day)
+			map_ingredients(newlist,newimap)	
+	end
+	end
+
+	def grab_from_day(meallist, imap) do
+		result = List.first(meallist)
+		case result do
+			nil ->
+				imap
+			meal ->
+				newlist = List.delete(meallist,meal)
+				recipeid = meal.recipe_id
+				recipe = Repo.get!(Recipe, recipeid)
+				query = from i in Ingredient, where: i.recipe_id == ^recipeid, preload: [:foodcatalog]
+				ingredients = Repo.all(query)
+				newmap = ingredient_helper(ingredients,imap)
+				grab_from_day(newlist,newmap)
+		end
+	end
+
+	def ingredient_helper(ilist, imap) do
+		result = List.first(ilist)
+		case result do
+			nil ->
+				imap
+			ingredient ->
+				newlist = List.delete(ilist,ingredient)
+				name = ingredient.foodcatalog.foodname
+				mappedname = Map.get(imap,name)
+				case mappedname do
+					nil ->
+						newmap = Map.put(imap,name,ingredient.ingredientquantity)
+						ingredient_helper(newlist,newmap)
+					namevalue ->
+						newmap = Map.put(imap,name, namevalue + ingredient.ingredientquantity)
+						ingredient_helper(newlist,newmap)
+				end
+		end
+	end
+
+
 
 end

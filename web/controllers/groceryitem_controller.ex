@@ -6,7 +6,6 @@ defmodule GroceryGnome.GroceryitemController do
   alias GroceryGnome.Groceryitem
 	alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
-
 	import Ecto.Query
 
   plug :scrub_params, "groceryitem" when action in [:create, :update]
@@ -90,7 +89,7 @@ defmodule GroceryGnome.GroceryitemController do
 
 			case result do
 				nil ->
-					 changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: "", foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+					 changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: Ecto.Date.utc, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
 					Repo.insert(changeset)
 				pantryitem ->
 				    changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
