@@ -21,29 +21,55 @@ defmodule GroceryGnome.ScheduleController do
 		render(conn, "index.html", days: days)
 	end
 
-	# def create(conn, %{"date" => d}) do
-	# 	IO.puts "---------------------"
-	# 	selection = conn.params["form_data"]
-	# 	userid = conn.assigns.current_user.id
-	# 	IO.inspect selection
-	# 	changeset = %Day{
-	# 		breakfast: [selection["breakfast"]],
-	# 		lunch: [selection["lunch"]],
-	# 		dinner: [selection["dinner"]],
-	# 		date: d,
-	# 		user_id: userid}
-	# 	IO.inspect changeset
-	# 	case Repo.insert(changeset) do
-	# 		{:ok, _day} ->
-	# 			conn
-	# 			|> put_flash(:info, "Created plan")
-	# 			|> redirect(to: schedule_path(conn, :index))
-	# 		{:error, changeset} ->
-	# 			IO.inspect changeset
-	# 			conn
-	# 			|> put_flash(:error, "Error occured")
-	# 			|> redirect(to: schedule_path(conn, :index))
-	# 	end
+	def create(conn, %{"date" => d}) do
+		IO.puts "---------------------"
+		selection = conn.params["form_data"]
+		userid = conn.assigns.current_user.id
+		IO.inspect selection
+		changeset = %Day{
+			date: d,
+			user_id: userid
+		}
+		case Repo.insert(changeset) do
+			{:ok, day} ->
+				for {type, mls} <- [{0, selection["breakfast"]}, {1, selection["lunch"]}, {2, selection["dinner"]}] do
+					m = Repo.get_by(Recipe, id: mls)
+					meal = Meal.changeset(%Meal{}, %{
+								meal_type: type,
+								recipe_id: m.id,
+								day_id: day.id,
+																		 })
+					Repo.insert(meal)
+				end
+				conn
+				|> put_flash(:info, "Created plan")
+				|> redirect(to: schedule_path(conn, :index))
+			{:error, changeset} ->
+				conn
+				|> put_flash(:error, "Error occured")
+				|> redirect(to: schedule_path(conn, :index))
+		end
+	end
+				
+		# changeset = %Day{
+		# 	breakfast: [selection["breakfast"]],
+		# 	lunch: [selection["lunch"]],
+		# 	dinner: [selection["dinner"]],
+		# 	date: d,
+		# 	user_id: userid}
+		# IO.inspect changeset
+		# case Repo.insert(changeset) do
+		# 	{:ok, _day} ->
+		# 		conn
+		# 		|> put_flash(:info, "Created plan")
+		# 		|> redirect(to: schedule_path(conn, :index))
+		# 	{:error, changeset} ->
+		# 		IO.inspect changeset
+		# 		conn
+		# 		|> put_flash(:error, "Error occured")
+		# 		|> redirect(to: schedule_path(conn, :index))
+		# end
+	# 	redirect(conn, to: schedule_path(conn, :index))
 	# end
 
 	def generate(conn, _params) do
