@@ -1,7 +1,9 @@
-<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
 
 
 <h2>Grocery</h2>
+
+<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry), class: "btn btn-info btn-lg" %>
+<%= link "Add to Grocery", to: groceryitem_path(@conn, :search), class: "btn btn-info btn-lg" %>
 
 <table class="table">
     <thead>
@@ -27,11 +29,6 @@
     </tbody>
 </table>
 
-<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry) %></br>
-<%= link "Add to Grocery", to: groceryitem_path(@conn, :search) %></br>
-<%= link "Foodcatalog index", to: foodcatalog_path(@conn, :index) %></br>
-<%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>
-
 <div class="dropdown" style="display: inline; margin-left: 20px;">
     <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 250px !important;">Add foodcatalog to Grocery
 	<span class="caret"></span></button>
@@ -41,3 +38,5 @@
 	<% end %>
     </ul>
 </div>
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
