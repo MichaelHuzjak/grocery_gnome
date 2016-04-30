@@ -125,18 +125,12 @@ defmodule GroceryGnome.GroceryitemController do
 
 	def groceryitem_search(conn, _params) do
 		query = String.downcase(conn.params["search"]["query"])
-
 		result = Repo.all(from p in Foodcatalog)
-
 		rated = for x <- result, into: [] do
 			{String.jaro_distance(x.foodname, query), x.foodname}
 		end
 		|> Enum.sort_by(&elem(&1,0), &>=/2)
-
-		IO.inspect rated
-
 		userid = conn.assigns.current_user.id
-
 		cond do
 			elem(hd(rated),0) == 1 ->
 				changeset = Groceryitem.changeset(%Groceryitem{})
@@ -144,25 +138,6 @@ defmodule GroceryGnome.GroceryitemController do
 			true ->
 				redirect(conn, to: groceryitem_path(conn, :index))
 		end
-
-		# case result do
-		# 	nil ->
-		# 		query = String.capitalize(query)
-		# 		render(conn, "foodform.html", name: query)
-		# 	foodcatalog ->
-		# 		userid = conn.assigns.current_user.id
-		# 		query = Repo.get_by(Pantryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
-		# 		case result do
-		# 			nil ->
-		# 				changeset = Groceryitem.changeset(%Groceryitem{})
-		# 				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
-		# 			groceryitem ->
-		# 				#changeset = Groceryitem.changeset(	groceryitem)
-		# 				#render(conn, "edit.html", groceryitem: 	groceryitem, changeset: changeset)
-		# 				changeset = Groceryitem.changeset(%Groceryitem{})
-		# 				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
-		# 		end
-		# end
 	end
 
 	def newgroceryfood(conn, _params) do
