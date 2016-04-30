@@ -89,6 +89,8 @@ defmodule GroceryGnome.ScheduleController do
 					user_id: userid})
 		case Repo.insert(changeset) do
 			{:ok, _day} ->
+				#ensure
+				ensure_schedule(userid)
 				conn
 				|> put_flash(:info, "Generated plan")
 				|> redirect(to: schedule_path(conn, :index))
@@ -125,7 +127,8 @@ defmodule GroceryGnome.ScheduleController do
 																		 })
 					Repo.insert(meal)
 				end
-					
+				#ensure
+				ensure_schedule(userid)
 				conn
 				|> put_flash(:info, "Generated plan")
 				|> redirect(to: schedule_path(conn, :index))
