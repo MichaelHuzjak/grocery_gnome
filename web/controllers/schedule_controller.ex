@@ -4,6 +4,8 @@ defmodule GroceryGnome.ScheduleController do
 	plug GroceryGnome.Plug.Authenticate
 	alias GroceryGnome.Day
 	alias GroceryGnome.Recipe
+	alias GroceryGnome.Groceryitem
+	alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
 	alias GroceryGnome.Ingredient
 	alias GroceryGnome.Meal
@@ -98,6 +100,8 @@ defmodule GroceryGnome.ScheduleController do
 																	 })
 								Repo.insert(meal)
 
+								# ensure
+								ensure_schedule(userid)
 				conn
 				|> put_flash(:info, "Generated plan #{b.id}")
 				|> redirect(to: schedule_path(conn, :index))
@@ -170,5 +174,104 @@ defmodule GroceryGnome.ScheduleController do
 		date_string = "#{date["year"]}-#{date["month"]}-#{date["day"]}"
 		render(conn, "new_day_form.html", date: date_string)
 	end
+
+
+
+	def ensure_schedule(userid) do
+		days = Repo.all from d in Day, where: d.user_id == ^userid,
+           join: m in assoc(d, :meals),
+           join: r in assoc(m, :recipe),
+           preload: [meals: {m, recipe: r}]
+		imap = %{}
+		ingredientmap = map_ingredients(days,imap)
+		for {key,value} <- ingredientmap do
+			foodcatalog = Repo.get_by(Foodcatalog, foodname: key)
+			currentstock = get_pantryquantity(foodcatalog.id,userid) + get_groceryquantity(foodcatalog.id,userid)
+			additiontostock = currentstock - value
+			if additiontostock < 0 do
+				truevalue = (-1 * additiontostock)
+				result = Repo.get_by(Groceryitem, foodcatalog_id: foodcatalog.id, user_id: userid)
+				case result do
+					nil ->
+						changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: truevalue, foodcatalog_id: foodcatalog.id , user_id: userid})
+						Repo.insert(changeset)
+					groceryitem ->
+						changeset = Groceryitem.changeset(groceryitem,  %{id: groceryitem.id, groceryquantity: groceryitem.groceryquantity + truevalue, foodcatalog_id: foodcatalog.id , user_id: userid})
+						Repo.update(changeset)
+				end
+			end
+		end
+	end
+
+	def get_pantryquantity(foodcatalogid,userid) do
+			result = Repo.get_by(Pantryitem, foodcatalog_id: foodcatalogid, user_id: userid)
+			case result do
+				nil ->
+					0
+				pantryitem ->
+					pantryitem.pantryquantity
+			end
+	end
+
+	def get_groceryquantity(foodcatalogid,userid) do
+			result = Repo.get_by(Groceryitem, foodcatalog_id: foodcatalogid, user_id: userid)
+			case result do
+				nil ->
+					0
+				groceryitem ->
+					groceryitem.groceryquantity
+			end
+	end
+	
+	def map_ingredients(daylist, imap) do
+	result = List.first(daylist)
+	case result do
+		nil ->
+			imap
+		day ->
+			meallist = day.meals
+			newimap = grab_from_day(meallist,imap)
+			newlist = List.delete(daylist,day)
+			map_ingredients(newlist,newimap)	
+	end
+	end
+
+	def grab_from_day(meallist, imap) do
+		result = List.first(meallist)
+		case result do
+			nil ->
+				imap
+			meal ->
+				newlist = List.delete(meallist,meal)
+				recipeid = meal.recipe_id
+				recipe = Repo.get!(Recipe, recipeid)
+				query = from i in Ingredient, where: i.recipe_id == ^recipeid, preload: [:foodcatalog]
+				ingredients = Repo.all(query)
+				newmap = ingredient_helper(ingredients,imap)
+				grab_from_day(newlist,newmap)
+		end
+	end
+
+	def ingredient_helper(ilist, imap) do
+		result = List.first(ilist)
+		case result do
+			nil ->
+				imap
+			ingredient ->
+				newlist = List.delete(ilist,ingredient)
+				name = ingredient.foodcatalog.foodname
+				mappedname = Map.get(imap,name)
+				case mappedname do
+					nil ->
+						newmap = Map.put(imap,name,ingredient.ingredientquantity)
+						ingredient_helper(newlist,newmap)
+					namevalue ->
+						newmap = Map.put(imap,name, namevalue + ingredient.ingredientquantity)
+						ingredient_helper(newlist,newmap)
+				end
+		end
+	end
+
+
 
 end

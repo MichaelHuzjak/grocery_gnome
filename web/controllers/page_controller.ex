@@ -19,11 +19,6 @@ defmodule GroceryGnome.PageController do
 
   def test(conn, _params) do
 		mymap = %{}
-		#k = 6
-		#s = Integer.to_string(k)
-		#k = String.to_integer(s)
-		#s = Integer.to_string(k)
-		#mapitems = Map.put(mymap, s , 6)
 		mapitems = Map.put(mymap, 0 , 5)
 		
     render conn, "test.html", mapitems: mapitems

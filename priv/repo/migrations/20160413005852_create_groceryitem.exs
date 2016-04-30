@@ -9,8 +9,7 @@ defmodule GroceryGnome.Repo.Migrations.CreateGroceryitem do
 
       timestamps
     end
-    create index(:groceryitems, [:user_id])
-    create index(:groceryitems, [:foodcatalog_id])
+		create unique_index(:pantryitems, [:user_id, :foodcatalog_id], name: :grocery_item_index)
 
   end
 end
