@@ -64,3 +64,4 @@
     </div>
 <% end %>
 
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

@@ -1,4 +1,3 @@
-<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
 
 <h2>Pantry</h2>
 
@@ -34,3 +33,4 @@
 <%= link "Foodcatalog List", to: foodcatalog_path(@conn, :index) %></br>
 <%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>
 
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
