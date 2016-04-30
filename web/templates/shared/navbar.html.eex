@@ -30,10 +30,16 @@
     <li class="divider"></li>
    <div class="notifications-wrapper">
      <a class="content" href="#">
-       <%= for pantryitem <- notifyExpiration @conn do %>
+       <%= for exp <- notifyExpiration @conn do %>
        <div class="notification-item">
         <h4 class="item-title">Expiration Notification!</h4>
-        <p class="item-info"><%= pantryitem.foodcatalog.foodname %> - <%= pantryitem.expiration %></p>
+        <p class="item-info"><%= exp.foodcatalog.foodname %> - <%= exp.expiration %></p>
+       </div>
+       <%= end %>
+        <%= for lowstock <- notifyLowStock @conn do %>
+       <div class="notification-item">
+        <h4 class="item-title">Low Stock Notification!</h4>
+        <p class="item-info"><%= lowstock.foodcatalog.foodname %> - <%= lowstock.pantryquantity %> <%= lowstock.foodcatalog.unit %> </p>
        </div>
        <%= end %>
     </a>

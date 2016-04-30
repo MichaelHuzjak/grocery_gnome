@@ -58,4 +58,10 @@ defmodule GroceryGnome.PageController do
 		query = from p in Pantryitem, where: p.user_id == ^userid and p.expiration < date_add(^Ecto.Date.utc, 1, "week"), preload: [:foodcatalog]
     pantryitems = Repo.all(query)
 	end
+	
+	def low_stock_notifications(conn) do
+		userid = conn.assigns.current_user.id
+		query = from p in Pantryitem, where: p.user_id == ^userid and p.pantryquantity < 1, preload: [:foodcatalog]
+    pantryitems = Repo.all(query)
+	end
 end

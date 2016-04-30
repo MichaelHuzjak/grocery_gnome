@@ -9,4 +9,8 @@ defmodule GroceryGnome.SharedView do
 	def notifyExpiration(conn) do
 		pantryitems = GroceryGnome.PageController.expiration_notifications conn
 	end
+
+	def notifyLowStock(conn) do
+		pantryitems = GroceryGnome.PageController.low_stock_notifications conn
+	end
 end
