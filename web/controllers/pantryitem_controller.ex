@@ -48,7 +48,9 @@ import Ecto.Date
 		month = date["month"]
 		day = date["day"]
 		edate = %Ecto.Date{year: String.to_integer(year), month: String.to_integer(month), day: String.to_integer(day)}
-		changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: edate, foodcatalog_id: id, user_id: conn.assigns.current_user.id})
+		monitor = pantryitem_params["monitor"]
+		baselevel = pantryitem_params["baselevel"]
+		changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: pantryitem_params["pantryquantity"], expiration: edate, monitor: monitor, baselevel: baselevel, foodcatalog_id: id, user_id: conn.assigns.current_user.id})
 
     case Repo.insert(changeset) do
       {:ok, _pantryitem} ->

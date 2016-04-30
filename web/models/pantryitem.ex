@@ -4,13 +4,15 @@ defmodule GroceryGnome.Pantryitem do
   schema "pantryitems" do
     field :pantryquantity, :float
     field :expiration, Ecto.Date
+		field :monitor, :boolean
+		field :baselevel, :float
     belongs_to :user, GroceryGnome.User
     belongs_to :foodcatalog, GroceryGnome.Foodcatalog
 
     timestamps
   end
 
-  @required_fields ~w(pantryquantity expiration foodcatalog_id user_id)
+  @required_fields ~w(pantryquantity expiration monitor baselevel foodcatalog_id user_id)
   @optional_fields ~w()
 
   @doc """

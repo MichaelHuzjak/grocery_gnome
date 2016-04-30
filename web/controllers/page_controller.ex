@@ -61,7 +61,7 @@ defmodule GroceryGnome.PageController do
 	
 	def low_stock_notifications(conn) do
 		userid = conn.assigns.current_user.id
-		query = from p in Pantryitem, where: p.user_id == ^userid and p.pantryquantity < 1, preload: [:foodcatalog]
+		query = from p in Pantryitem, where: p.user_id == ^userid and p.monitor and  p.pantryquantity < p.baselevel, preload: [:foodcatalog]
     pantryitems = Repo.all(query)
 	end
 end
