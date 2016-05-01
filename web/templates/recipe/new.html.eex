@@ -5,3 +5,4 @@
 
 <%= link "Back", to: recipe_path(@conn, :index) %>
 
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

@@ -24,10 +24,8 @@ defmodule GroceryGnome.ScheduleController do
 	end
 
 	def create(conn, %{"date" => d}) do
-		IO.puts "---------------------"
 		selection = conn.params["form_data"]
 		userid = conn.assigns.current_user.id
-		IO.inspect selection
 		changeset = %Day{
 			date: d,
 			user_id: userid
@@ -125,7 +123,6 @@ defmodule GroceryGnome.ScheduleController do
 																		 })
 					Repo.insert(meal)
 				end
-					
 				conn
 				|> put_flash(:info, "Generated plan")
 				|> redirect(to: schedule_path(conn, :index))
@@ -143,7 +140,7 @@ defmodule GroceryGnome.ScheduleController do
 		#	IO.inspect recipe
 
 		# create the recipe
-    changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe["title"], instructions: "Filler", prep_time: recipe["readyInMinutes"], cook_time: recipe["readyInMinutes"], user_id: userid})
+    changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe["title"], instructions: "Filler", prep_time: recipe["readyInMinutes"], cook_time: recipe["readyInMinutes"],serving_size: recipe["servings"], user_id: userid})
 
     case Repo.insert(changeset) do
       {:ok, _recipe} ->
@@ -207,21 +204,52 @@ defmodule GroceryGnome.ScheduleController do
 		render(conn, "new_day_form.html", date: date_string, recipes: items)
 	end
 
-
-
-	def ensure_schedule(userid) do
+	def isensured(conn) do
+		userid  = conn.assigns.current_user.id
 		days = Repo.all from d in Day, where: d.user_id == ^userid,
            join: m in assoc(d, :meals),
            join: r in assoc(m, :recipe),
            preload: [meals: {m, recipe: r}]
 		imap = %{}
-		ingredientmap = map_ingredients(days,imap)
+		ingredientmap = map_days(days,imap)
+		is_list_ensured(Map.to_list(ingredientmap),true,userid)
+	end
+
+	def is_list_ensured(ingredientlist,bool,userid) do
+		case bool do
+			false ->
+				false
+			true ->
+				result = List.first(ingredientlist)
+				case result do
+					nil ->
+						true
+					{key,value} ->
+						foodcatalog = Repo.get_by(Foodcatalog, foodname: key)
+						additiontostock = get_pantryquantity(foodcatalog.id,userid) + get_groceryquantity(foodcatalog.id,userid) - value
+						if additiontostock < 0 do
+							is_list_ensured(List.delete(ingredientlist,result),false,userid)
+						else
+							is_list_ensured(List.delete(ingredientlist,result),true,userid)
+						end
+				end
+		end
+	end
+		
+
+	def ensure_schedule(conn, _params) do
+		userid = conn.assigns.current_user.id
+		days = Repo.all from d in Day, where: d.user_id == ^userid,
+           join: m in assoc(d, :meals),
+           join: r in assoc(m, :recipe),
+           preload: [meals: {m, recipe: r}]
+		imap = %{}
+		ingredientmap = map_days(days,imap)
 		for {key,value} <- ingredientmap do
 			foodcatalog = Repo.get_by(Foodcatalog, foodname: key)
-			currentstock = get_pantryquantity(foodcatalog.id,userid) + get_groceryquantity(foodcatalog.id,userid)
-			additiontostock = currentstock - value
-			if additiontostock < 0 do
-				truevalue = (-1 * additiontostock)
+			stock = get_pantryquantity(foodcatalog.id,userid) + get_groceryquantity(foodcatalog.id,userid) - value
+			if stock < 0 do
+				truevalue = (-1 * stock)
 				result = Repo.get_by(Groceryitem, foodcatalog_id: foodcatalog.id, user_id: userid)
 				case result do
 					nil ->
@@ -233,6 +261,7 @@ defmodule GroceryGnome.ScheduleController do
 				end
 			end
 		end
+		index(conn,_params)
 	end
 
 	def get_pantryquantity(foodcatalogid,userid) do
@@ -255,20 +284,19 @@ defmodule GroceryGnome.ScheduleController do
 			end
 	end
 	
-	def map_ingredients(daylist, imap) do
+	def map_days(daylist, imap) do
 	result = List.first(daylist)
 	case result do
 		nil ->
 			imap
 		day ->
-			meallist = day.meals
-			newimap = grab_from_day(meallist,imap)
+			newimap = map_meals(day.meals,imap)
 			newlist = List.delete(daylist,day)
-			map_ingredients(newlist,newimap)	
+			map_days(newlist,newimap)	
 	end
 	end
 
-	def grab_from_day(meallist, imap) do
+	def map_meals(meallist, imap) do
 		result = List.first(meallist)
 		case result do
 			nil ->
@@ -279,12 +307,12 @@ defmodule GroceryGnome.ScheduleController do
 				recipe = Repo.get!(Recipe, recipeid)
 				query = from i in Ingredient, where: i.recipe_id == ^recipeid, preload: [:foodcatalog]
 				ingredients = Repo.all(query)
-				newmap = ingredient_helper(ingredients,imap)
-				grab_from_day(newlist,newmap)
+				newmap = map_ingredients(ingredients,imap)
+				map_meals(newlist,newmap)
 		end
 	end
 
-	def ingredient_helper(ilist, imap) do
+	def map_ingredients(ilist, imap) do
 		result = List.first(ilist)
 		case result do
 			nil ->
@@ -296,10 +324,10 @@ defmodule GroceryGnome.ScheduleController do
 				case mappedname do
 					nil ->
 						newmap = Map.put(imap,name,ingredient.ingredientquantity)
-						ingredient_helper(newlist,newmap)
+						map_ingredients(newlist,newmap)
 					namevalue ->
 						newmap = Map.put(imap,name, namevalue + ingredient.ingredientquantity)
-						ingredient_helper(newlist,newmap)
+						map_ingredients(newlist,newmap)
 				end
 		end
 	end

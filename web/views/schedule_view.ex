@@ -21,4 +21,8 @@ defmodule GroceryGnome.ScheduleView do
 		date_select(form, field, [builder: builder, default: Ecto.Date.utc] ++ opts)
 	end
 	
+	def isensured(conn) do
+		GroceryGnome.ScheduleController.isensured conn
+	end
+	
 end

@@ -72,12 +72,18 @@ defmodule GroceryGnome.Router do
 		get "/delete2", FoodcatalogController, :delete2
 		get "/pantrydelete", PantryitemController, :pantrydelete
 		get "/deleterecipe", RecipeController, :deleterecipe
-		
+
+		post "/move", GroceryitemController, :move
 		get "/deletegrocery", GroceryitemController, :deletegrocery
 		get "/movetopantry", GroceryitemController, :movetopantry
 		get "/changepassword", PageController, :change
 		post "/changepassword", PageController, :changepassword
 		put "/changepassword", PageController, :changepassword
+		get "/ensureschedule", ScheduleController, :ensure_schedule
+		get "/shoppinglist", GroceryitemController, :shop_by_recipe
+		get "/shoppinglist/show/:id", GroceryitemController, :show_recipe
+		get "/shoppinglist/togrocery/:id", GroceryitemController, :recipe_to_grocery
+
   end
 
   # Other scopes may use custom stacks.
