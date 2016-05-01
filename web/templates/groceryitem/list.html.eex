@@ -1,0 +1,16 @@
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
+
+<h2>Results</h2>
+
+<table class="table">
+    <thead>
+	<tr><th>Name</th></tr>
+    </thead>
+    <tbody>
+	<%= for {score, name} <- @rated do %>
+	    <tr>
+		<td><%= name %></td>
+	    </tr>
+	<% end %>
+    </tbody>
+</table>	

@@ -46,6 +46,7 @@ defmodule GroceryGnome.Router do
 		get "/search/pantry", PantryitemController, :search
 
 		post "/search/grocery/query", GroceryitemController, :groceryitem_search
+		post "/search/grocery/list", GroceryitemController, :show_search
 		post "/search/grocery/new", GroceryitemController, :newgroceryfood
 		get "/search/grocery", GroceryitemController, :search
 

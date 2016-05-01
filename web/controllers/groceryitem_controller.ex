@@ -136,7 +136,7 @@ defmodule GroceryGnome.GroceryitemController do
 				changeset = Groceryitem.changeset(%Groceryitem{})
 				render(conn, "new.html", changeset: changeset, foodcatalog: result)
 			true ->
-				redirect(conn, to: groceryitem_path(conn, :index))
+				render(conn, "list.html", rated: rated)
 		end
 	end
 
