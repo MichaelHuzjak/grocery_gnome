@@ -136,8 +136,17 @@ import Ecto.Date
 				query = String.capitalize(query)
 				render(conn, "foodform.html", name: query)
 			foodcatalog ->
-				changeset = Pantryitem.changeset(%Pantryitem{})
-				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+				userid = conn.assigns.current_user.id
+				pantryresult = Repo.get_by(Pantryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
+				case pantryresult do
+					nil ->
+						changeset = Pantryitem.changeset(%Pantryitem{})
+						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+					pantryitem ->
+						foodcatalog = Repo.get!(Foodcatalog, pantryitem.foodcatalog_id)
+						changeset = Pantryitem.changeset(pantryitem,%{pantryquantity: pantryitem.pantryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+						render(conn, "edit.html", pantryitem: pantryitem, changeset: changeset, foodcatalog: foodcatalog)
+				end
 			end
 	end
 
