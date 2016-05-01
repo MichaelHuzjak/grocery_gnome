@@ -142,7 +142,7 @@ defmodule GroceryGnome.ScheduleController do
 		#	IO.inspect recipe
 
 		# create the recipe
-    changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe["title"], instructions: "Filler", prep_time: recipe["readyInMinutes"], cook_time: recipe["readyInMinutes"], user_id: userid})
+    changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe["title"], instructions: "Filler", prep_time: recipe["readyInMinutes"], cook_time: recipe["readyInMinutes"],serving_size: recipe["servings"], user_id: userid})
 
     case Repo.insert(changeset) do
       {:ok, _recipe} ->
