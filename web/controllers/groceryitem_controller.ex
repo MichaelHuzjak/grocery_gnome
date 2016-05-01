@@ -77,35 +77,6 @@ defmodule GroceryGnome.GroceryitemController do
     |> redirect(to: groceryitem_path(conn, :index))
   end
 
-	def movetopantry(conn, params) do
-		userid = conn.assigns.current_user.id
-		query = from g in Groceryitem, where: g.user_id == ^userid
-		groceryitems = Repo.all(query)
-
-		for groceryitem <- groceryitems do
-					#changeset = Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: "", foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
-			catalogid = groceryitem.foodcatalog_id
-			result = Repo.get_by(Pantryitem, user_id: conn.assigns.current_user.id , foodcatalog_id: catalogid)
-
-			case result do
-				nil ->
-					 changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: Ecto.Date.utc, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
-					Repo.insert(changeset)
-				pantryitem ->
-				    changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
-					Repo.update(changeset)
-			end
-			
-			Repo.delete!(groceryitem)
-		end
-		
-
-
-    conn
-    |> put_flash(:info, "Groceryitems moved successfully.")
-    |> redirect(to: pantryitem_path(conn, :index))
-	end
-
 	def move(conn, params) do
 		groceryitems = conn.params["movelist"]
 		case groceryitems do
@@ -124,7 +95,10 @@ defmodule GroceryGnome.GroceryitemController do
 							changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity,  monitor: "false", baselevel: 0, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
 							Repo.insert(changeset)
 						pantryitem ->
-							changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity,  monitor: groceryitem.monitor, baselevel: groceryitem.baselevel, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+							changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity,
+																														 monitor: if groceryitem.monitor == nil do false else groceryitem.monitor end,
+																														 baselevel: if groceryitem.monitor == nil do 0 else groceryitem.baselevel end,
+																														 expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
 							Repo.update(changeset)
 					end
 					Repo.delete!(groceryitem)

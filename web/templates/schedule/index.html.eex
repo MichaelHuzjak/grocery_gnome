@@ -1,5 +1,4 @@
 <h2>Listing days</h2>
-
 <%= render "new.html", conn: @conn %>
 
 <%= for day <- @days do %>

@@ -79,6 +79,7 @@ defmodule GroceryGnome.Router do
 		get "/changepassword", PageController, :change
 		post "/changepassword", PageController, :changepassword
 		put "/changepassword", PageController, :changepassword
+		get "/ensureschedule", ScheduleController, :ensure_schedule
   end
 
   # Other scopes may use custom stacks.
