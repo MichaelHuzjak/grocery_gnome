@@ -154,16 +154,14 @@ defmodule GroceryGnome.GroceryitemController do
 				render(conn, "foodform.html", name: query)
 			foodcatalog ->
 				userid = conn.assigns.current_user.id
-				query = Repo.get_by(Pantryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
-				case result do
+				groceryresult = Repo.get_by(Groceryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
+				case groceryresult do
 					nil ->
 						changeset = Groceryitem.changeset(%Groceryitem{})
 						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
 					groceryitem ->
-						#changeset = Groceryitem.changeset(	groceryitem)
-						#render(conn, "edit.html", groceryitem: 	groceryitem, changeset: changeset)
-						changeset = Groceryitem.changeset(%Groceryitem{})
-						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+						changeset = Groceryitem.changeset(groceryitem)
+						render(conn, "edit.html", groceryitem: groceryitem, changeset: changeset)
 				end
 			end
 	end
@@ -173,15 +171,15 @@ defmodule GroceryGnome.GroceryitemController do
 					result = Repo.get_by(Foodcatalog, foodname: groceryitem["foodname"])
 					foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: String.downcase(groceryitem["foodname"]), unit: groceryitem["unit"], info: groceryitem["info"]})
 								case Repo.insert(foodcatalogchangeset) do
-								  {:ok, _foodcatalog} ->
-										changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: groceryitem["groceryquantity"], foodcatalog_id: _foodcatalog.id, user_id: conn.assigns.current_user.id})
+								  {:ok, foodcatalog} ->
+										changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: groceryitem["groceryquantity"], foodcatalog_id: foodcatalog.id, user_id: conn.assigns.current_user.id})
 										case Repo.insert(changeset) do
 											{:ok, _groceryitem} ->
 												conn
 												|> put_flash(:info, "Grocery Item created successfully.")
 												|> redirect(to: groceryitem_path(conn, :index))
 											{:error, changeset} ->
-												render(conn, "new.html", changeset: changeset, foodcatalog: _foodcatalog, conn: @conn)
+												render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, conn: @conn)
 										end
 								end
 	end
