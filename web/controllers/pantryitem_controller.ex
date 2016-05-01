@@ -131,13 +131,19 @@ import Ecto.Date
 		query = String.downcase(query)
 		result = Repo.get_by(Foodcatalog, foodname: query)
 
+		IO.inspect result
+
+		name = String.split(result.foodname, " ")
+		|> Enum.map(&String.capitalize(&1))
+		|> (fn(f) -> (for x <- f, into: "", do: x <> " ") end).()
+
 		case result do
 			nil ->
 				query = String.capitalize(query)
 				render(conn, "foodform.html", name: query)
 			foodcatalog ->
 				changeset = Pantryitem.changeset(%Pantryitem{})
-				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, name: name)
 			end
 	end
 
