@@ -24,10 +24,8 @@ defmodule GroceryGnome.ScheduleController do
 	end
 
 	def create(conn, %{"date" => d}) do
-		IO.puts "---------------------"
 		selection = conn.params["form_data"]
 		userid = conn.assigns.current_user.id
-		IO.inspect selection
 		changeset = %Day{
 			date: d,
 			user_id: userid
