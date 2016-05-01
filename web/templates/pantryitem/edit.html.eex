@@ -3,4 +3,6 @@
 <%= render "form.html", changeset: @changeset,
                         action: pantryitem_path(@conn, :update, @pantryitem,  foodcatalog: @foodcatalog) %>
 
-<%= link "Back", to: pantryitem_path(@conn, :index) %>
+<%= link "Back", to: pantryitem_path(@conn, :index), class: "btn btn-info btn-lg" %>
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
