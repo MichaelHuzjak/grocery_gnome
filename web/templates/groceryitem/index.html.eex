@@ -2,6 +2,11 @@
 
 <h2>Grocery</h2>
 
+<%= form_for @conn, groceryitem_path(@conn, :move), [as: :movelist], fn f -> %>
+<%= link "Add to Grocery", to: groceryitem_path(@conn, :search), class: "btn btn-info btn-lg", type: "button" %>
+<%= submit "Move to Pantry", class: "btn btn-info btn-lg" %>
+<%= link "Shop by Recipe", to: groceryitem_path(@conn, :shop_by_recipe), class: "btn btn-info btn-lg", type: "button" %>
+
 <table class="table">
     <thead>
 	<tr>
@@ -17,6 +22,7 @@
 		<td><%= groceryitem.groceryquantity %> <%= groceryitem.foodcatalog.unit %></td>
 
 		<td class="text-right">
+		  <input checked="checked" id="movelist_<%= groceryitem.id %>" name="movelist[<%= groceryitem.id %>]" type="checkbox" value="true">
 		    <%= link "Show", to: groceryitem_path(@conn, :show, groceryitem), class: "btn btn-default btn-xs" %>
 		    <%= link "Edit", to: groceryitem_path(@conn, :edit, groceryitem), class: "btn btn-default btn-xs" %>
 		    <%= link "Delete", to: groceryitem_path(@conn, :deletegrocery, groceryitem: groceryitem),  class: "btn btn-danger btn-xs" %>
@@ -25,11 +31,6 @@
 	<% end %>
     </tbody>
 </table>
-
-<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry) %></br>
-<%= link "Add to Grocery", to: groceryitem_path(@conn, :search) %></br>
-<%= link "Foodcatalog index", to: foodcatalog_path(@conn, :index) %></br>
-<%= link "Search for foodcatalog", to: search_path(@conn, :grocery_search) %>
 
 <div class="dropdown" style="display: inline; margin-left: 20px;">
     <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 250px !important;">Add foodcatalog to Grocery
@@ -40,3 +41,6 @@
 	<% end %>
     </ul>
 </div>
+<%= end %>
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

@@ -1,6 +1,7 @@
 
 <h2>Recipes</h2>
-
+<%= link "New recipe", to: recipe_path(@conn, :new), class: "btn btn-info btn-lg" %>
+<%= link "Search for recipe", to: search_path(@conn, :recipe_search), class: "btn btn-info btn-lg" %>
 <table class="table">
   <thead>
     <tr>
@@ -34,8 +35,5 @@
 <% end %>
   </tbody>
 </table>
-
-<%= link "New recipe", to: recipe_path(@conn, :new) %></br>
-<%= link "Search for recipe", to: search_path(@conn, :recipe_search) %>
 
 <%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

@@ -1,0 +1,26 @@
+
+<h2>Recipe Shopping List</h2>
+
+<%= link "Search for recipe", to: search_path(@conn, :recipe_search), class: "btn btn-info btn-lg" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for recipe <- @recipes do %>
+    <tr>
+       <td><%= recipe.recipe_title %></td>
+       <td class="text-right">
+	<%= link "Add", to: groceryitem_path(@conn, :recipe_to_grocery, recipe), class: "btn btn-default btn-xs" %>
+        <%= link "Show", to: groceryitem_path(@conn, :show_recipe, recipe), class: "btn btn-default btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

@@ -5,6 +5,11 @@ defmodule GroceryGnome.PageController do
 	alias GroceryGnome.User
 	alias GroceryGnome.Password
 
+	alias GroceryGnome.Pantryitem
+	alias GroceryGnome.Foodcatalog.Foodcatalog
+  import Ecto.Query
+	import Ecto.Date
+
   def login(conn, _params) do
 		if is_nil(conn.assigns.current_user) do
 			render(to: session_path(conn, :new))
@@ -48,5 +53,15 @@ defmodule GroceryGnome.PageController do
       render conn, "change.html", changeset: changeset
     end
   end
-
+	def expiration_notifications(conn) do
+		userid = conn.assigns.current_user.id
+		query = from p in Pantryitem, where: p.user_id == ^userid and p.expiration < date_add(^Ecto.Date.utc, 1, "week"), preload: [:foodcatalog]
+    pantryitems = Repo.all(query)
+	end
+	
+	def low_stock_notifications(conn) do
+		userid = conn.assigns.current_user.id
+		query = from p in Pantryitem, where: p.user_id == ^userid and p.monitor and  p.pantryquantity < p.baselevel, preload: [:foodcatalog]
+    pantryitems = Repo.all(query)
+	end
 end

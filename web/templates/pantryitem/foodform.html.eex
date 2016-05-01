@@ -24,6 +24,15 @@
     <%= label f, :expiration, "Expiration", class: "control-label" %>
     <%= date_select f, :expiration, class: "form-control" %>
   </div>
+
+  <div class="form-group">
+    <%= label f, :monitor, "Monitor Quantity", class: "control-label" %>
+    <%= checkbox f, :monitor, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :baselevel, "Minimum Quantity", class: "control-label" %>
+    <%= number_input f, :baselevel, class: "form-control" %>
     <%= submit "Submit" %>
 <% end %>
 <%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>

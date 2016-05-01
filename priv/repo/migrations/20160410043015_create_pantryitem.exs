@@ -5,6 +5,8 @@ defmodule GroceryGnome.Repo.Migrations.CreatePantryitem do
     create table(:pantryitems) do
       add :pantryquantity, :float
       add :expiration, :date
+			add :monitor, :boolean
+			add :baselevel, :float
       add :user_id, references(:users)
       add :foodcatalog_id, references(:foodcatalogs)
 

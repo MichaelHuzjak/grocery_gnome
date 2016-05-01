@@ -1,0 +1,58 @@
+<%= link "Add", to: groceryitem_path(@conn, :recipe_to_grocery, @recipe), class: "btn btn-success" %>
+<%= link "Back", to: groceryitem_path(@conn, :shop_by_recipe), class: "btn btn-success" %>
+
+
+<h2><%= @recipe.recipe_title %></h2>
+<ul>
+    <li>
+    <strong>Ingredients:</strong>
+    </li>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ingredient Name</th>
+      <th>Ingredient Info</th>
+      <th>Quantity</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for ingredient <- @ingredients do %>
+    <tr>
+      <td><%= ingredient.foodcatalog.foodname %></td>
+      <td><%= ingredient.foodcatalog.info %></td>
+      <td><%= ingredient.ingredientquantity %> <%= ingredient.foodcatalog.unit %></td>
+      <td class="text-right">
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+
+
+  <li>
+    <strong>Instructions:</strong>
+    <%= @recipe.instructions %>
+  </li>
+
+  <li>
+    <strong>Prep time:</strong>
+    <%= @recipe.prep_time %>
+  </li>
+
+  <li>
+    <strong>Cook time:</strong>
+    <%= @recipe.cook_time %>
+  </li>
+
+    <li>
+    <strong>Serving Size:</strong>
+    <%= @recipe.serving_size %>
+    </li>
+
+</ul>
+
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
