@@ -4,6 +4,8 @@ defmodule GroceryGnome.GroceryitemController do
 	plug GroceryGnome.Plug.Authenticate
 	
   alias GroceryGnome.Groceryitem
+	alias GroceryGnome.Recipe
+	alias GroceryGnome.Ingredient
 	alias GroceryGnome.Pantryitem
 	alias GroceryGnome.Foodcatalog
 	import Ecto.Query
@@ -96,8 +98,8 @@ defmodule GroceryGnome.GroceryitemController do
 							Repo.insert(changeset)
 						pantryitem ->
 							changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity,
-																														 monitor: if groceryitem.monitor == nil do false else groceryitem.monitor end,
-																														 baselevel: if groceryitem.monitor == nil do 0 else groceryitem.baselevel end,
+																														 monitor: pantryitem.monitor == nil,
+																														 baselevel: pantryitem.baselevel == nil,
 																														 expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
 							Repo.update(changeset)
 					end
@@ -183,6 +185,37 @@ defmodule GroceryGnome.GroceryitemController do
 										end
 								end
 	end
-	
+
+	def shop_by_recipe(conn, _params) do
+		userid = conn.assigns.current_user.id
+		query = from p in Recipe, where: p.user_id == ^userid
+    recipes = Repo.all(query)
+    render(conn, "shoppinglist.html", recipes: recipes)
+	end
+
+	def show_recipe(conn, %{"id" => id}) do
+    recipe = Repo.get!(Recipe, id)
+		query = from i in Ingredient, where: i.recipe_id == ^id, preload: [:foodcatalog]
+    ingredients = Repo.all(query)
+    render(conn, "showrecipe.html", recipe: recipe, ingredients: ingredients)
+  end
+
+	def recipe_to_grocery(conn, %{"id" => id}) do
+    recipe = Repo.get!(Recipe, id)
+		query = from i in Ingredient, where: i.recipe_id == ^id, preload: [:foodcatalog]
+    ingredients = Repo.all(query)
+		for ingredient <- ingredients do
+				result = Repo.get_by(Groceryitem, foodcatalog_id: ingredient.foodcatalog_id, user_id: recipe.user_id)
+				case result do
+					nil ->
+						changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: ingredient.ingredientquantity, foodcatalog_id: ingredient.foodcatalog_id , user_id: recipe.user_id})
+						Repo.insert(changeset)
+					groceryitem ->
+						changeset = Groceryitem.changeset(groceryitem,  %{id: groceryitem.id, groceryquantity: groceryitem.groceryquantity + ingredient.ingredientquantity, foodcatalog_id: ingredient.foodcatalog.id , user_id: recipe.user_id})
+						Repo.update(changeset)
+				end
+		end
+    index(conn, %{})
+  end
 	
 end
