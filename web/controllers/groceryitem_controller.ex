@@ -35,8 +35,8 @@ defmodule GroceryGnome.GroceryitemController do
     case Repo.insert(changeset) do
       {:ok, _groceryitem} ->
         conn
-        |> put_flash(:info, "Groceryitem created successfully.")
-        |> redirect(to: groceryitem_path(conn, :index))
+								|> put_flash(:info, "Groceryitem created successfully.")
+																|> redirect(to: groceryitem_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -60,8 +60,8 @@ defmodule GroceryGnome.GroceryitemController do
     case Repo.update(changeset) do
       {:ok, groceryitem} ->
         conn
-        |> put_flash(:info, "Groceryitem updated successfully.")
-        |> redirect(to: groceryitem_path(conn, :show, groceryitem))
+								|> put_flash(:info, "Groceryitem updated successfully.")
+																|> redirect(to: groceryitem_path(conn, :show, groceryitem))
       {:error, changeset} ->
         render(conn, "edit.html", groceryitem: groceryitem, changeset: changeset)
     end
@@ -75,8 +75,8 @@ defmodule GroceryGnome.GroceryitemController do
     Repo.delete!(groceryitem)
 
     conn
-    |> put_flash(:info, "Groceryitem deleted successfully.")
-    |> redirect(to: groceryitem_path(conn, :index))
+				|> put_flash(:info, "Groceryitem deleted successfully.")
+								|> redirect(to: groceryitem_path(conn, :index))
   end
 
 	def move(conn, params) do
@@ -87,25 +87,25 @@ defmodule GroceryGnome.GroceryitemController do
 				|> put_flash(:info, "Groceryitems moved successfully.")
 				|> redirect(to: pantryitem_path(conn, :index))
 			groceryitems ->
-			for {key,value} <- groceryitems do
-				if value == "true" do
-					groceryitem = Repo.get(Groceryitem, key)
-					catalogid = groceryitem.foodcatalog_id
-					result = Repo.get_by(Pantryitem, user_id: conn.assigns.current_user.id , foodcatalog_id: catalogid)
-					case result do
-						nil ->
-							changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity,  monitor: "false", baselevel: 0, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
-							Repo.insert(changeset)
-						pantryitem ->
-							changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity,
-																														 monitor: pantryitem.monitor == nil,
-																														 baselevel: pantryitem.baselevel == nil,
-																														 expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
-							Repo.update(changeset)
+				for {key,value} <- groceryitems do
+					if value == "true" do
+						groceryitem = Repo.get(Groceryitem, key)
+						catalogid = groceryitem.foodcatalog_id
+						result = Repo.get_by(Pantryitem, user_id: conn.assigns.current_user.id , foodcatalog_id: catalogid)
+						case result do
+							nil ->
+								changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity,  monitor: "false", baselevel: 0, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+								Repo.insert(changeset)
+							pantryitem ->
+								changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity,
+																															 monitor: pantryitem.monitor == nil,
+																															 baselevel: pantryitem.baselevel == nil,
+																															 expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+								Repo.update(changeset)
+						end
+						Repo.delete!(groceryitem)
 					end
-					Repo.delete!(groceryitem)
 				end
-			end
 				conn
 				|> put_flash(:info, "Groceryitems moved successfully.")
 				|> redirect(to: pantryitem_path(conn, :index))
@@ -121,8 +121,8 @@ defmodule GroceryGnome.GroceryitemController do
     Repo.delete!(groceryitem)
 
     conn
-    |> put_flash(:info, "Groceryitem deleted successfully.")
-    |> redirect(to: groceryitem_path(conn, :index))
+				|> put_flash(:info, "Groceryitem deleted successfully.")
+								|> redirect(to: groceryitem_path(conn, :index))
 	end
 
 	def deletegrocery(conn, params) do
@@ -134,11 +134,11 @@ defmodule GroceryGnome.GroceryitemController do
     Repo.delete!(groceryitem)
 
     conn
-    |> put_flash(:info, "Groceryitem deleted successfully.")
-    |> redirect(to: groceryitem_path(conn, :index))
+				|> put_flash(:info, "Groceryitem deleted successfully.")
+								|> redirect(to: groceryitem_path(conn, :index))
 	end
 
-		def search(conn,_params) do
+	def search(conn,_params) do
     render(conn, "groceryitemsearch.html")
 	end
 
@@ -165,25 +165,25 @@ defmodule GroceryGnome.GroceryitemController do
 						changeset = Groceryitem.changeset(%Groceryitem{})
 						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
 				end
-			end
+		end
 	end
 
 	def newgroceryfood(conn, _params) do
 		groceryitem = conn.params["groceryitem"]
-					result = Repo.get_by(Foodcatalog, foodname: groceryitem["foodname"])
-					foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: String.downcase(groceryitem["foodname"]), unit: groceryitem["unit"], info: groceryitem["info"]})
-								case Repo.insert(foodcatalogchangeset) do
-								  {:ok, _foodcatalog} ->
-										changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: groceryitem["groceryquantity"], foodcatalog_id: _foodcatalog.id, user_id: conn.assigns.current_user.id})
-										case Repo.insert(changeset) do
-											{:ok, _groceryitem} ->
-												conn
-												|> put_flash(:info, "Grocery Item created successfully.")
-												|> redirect(to: groceryitem_path(conn, :index))
-											{:error, changeset} ->
-												render(conn, "new.html", changeset: changeset, foodcatalog: _foodcatalog, conn: @conn)
-										end
-								end
+		result = Repo.get_by(Foodcatalog, foodname: groceryitem["foodname"])
+		foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: String.downcase(groceryitem["foodname"]), unit: groceryitem["unit"], info: groceryitem["info"]})
+		case Repo.insert(foodcatalogchangeset) do
+			{:ok, _foodcatalog} ->
+				changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: groceryitem["groceryquantity"], foodcatalog_id: _foodcatalog.id, user_id: conn.assigns.current_user.id})
+				case Repo.insert(changeset) do
+					{:ok, _groceryitem} ->
+						conn
+						|> put_flash(:info, "Grocery Item created successfully.")
+						|> redirect(to: groceryitem_path(conn, :index))
+					{:error, changeset} ->
+						render(conn, "new.html", changeset: changeset, foodcatalog: _foodcatalog, conn: @conn)
+				end
+		end
 	end
 
 	def shop_by_recipe(conn, _params) do
@@ -205,15 +205,15 @@ defmodule GroceryGnome.GroceryitemController do
 		query = from i in Ingredient, where: i.recipe_id == ^id, preload: [:foodcatalog]
     ingredients = Repo.all(query)
 		for ingredient <- ingredients do
-				result = Repo.get_by(Groceryitem, foodcatalog_id: ingredient.foodcatalog_id, user_id: recipe.user_id)
-				case result do
-					nil ->
-						changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: ingredient.ingredientquantity, foodcatalog_id: ingredient.foodcatalog_id , user_id: recipe.user_id})
-						Repo.insert(changeset)
-					groceryitem ->
-						changeset = Groceryitem.changeset(groceryitem,  %{id: groceryitem.id, groceryquantity: groceryitem.groceryquantity + ingredient.ingredientquantity, foodcatalog_id: ingredient.foodcatalog.id , user_id: recipe.user_id})
-						Repo.update(changeset)
-				end
+			result = Repo.get_by(Groceryitem, foodcatalog_id: ingredient.foodcatalog_id, user_id: recipe.user_id)
+			case result do
+				nil ->
+					changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: ingredient.ingredientquantity, foodcatalog_id: ingredient.foodcatalog_id , user_id: recipe.user_id})
+					Repo.insert(changeset)
+				groceryitem ->
+					changeset = Groceryitem.changeset(groceryitem,  %{id: groceryitem.id, groceryquantity: groceryitem.groceryquantity + ingredient.ingredientquantity, foodcatalog_id: ingredient.foodcatalog.id , user_id: recipe.user_id})
+					Repo.update(changeset)
+			end
 		end
     index(conn, %{})
   end
