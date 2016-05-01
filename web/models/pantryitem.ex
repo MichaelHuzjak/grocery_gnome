@@ -12,8 +12,8 @@ defmodule GroceryGnome.Pantryitem do
     timestamps
   end
 
-  @required_fields ~w(pantryquantity expiration monitor baselevel foodcatalog_id user_id)
-  @optional_fields ~w()
+  @required_fields ~w(pantryquantity monitor baselevel foodcatalog_id user_id)
+  @optional_fields ~w(expiration )
 
   @doc """
   Creates a changeset based on the `model` and `params`.

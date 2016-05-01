@@ -2,9 +2,8 @@
 <h2>Grocery</h2>
 
 <%= form_for @conn, groceryitem_path(@conn, :move), [as: :movelist], fn f -> %>
-<%= link "Move to Pantry", to: groceryitem_path(@conn, :movetopantry), class: "btn btn-info btn-lg", type: "button" %>
 <%= link "Add to Grocery", to: groceryitem_path(@conn, :search), class: "btn btn-info btn-lg", type: "button" %>
-<%= submit "Movelist" %>
+<%= submit "Move to Pantry", class: "btn btn-info btn-lg" %>
 
 <table class="table">
     <thead>

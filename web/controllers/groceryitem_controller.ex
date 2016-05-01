@@ -121,10 +121,10 @@ defmodule GroceryGnome.GroceryitemController do
 					result = Repo.get_by(Pantryitem, user_id: conn.assigns.current_user.id , foodcatalog_id: catalogid)
 					case result do
 						nil ->
-							changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity, expiration: Ecto.Date.utc, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+							changeset =  Pantryitem.changeset(%Pantryitem{}, %{pantryquantity: groceryitem.groceryquantity,  monitor: "false", baselevel: 0, foodcatalog_id: groceryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
 							Repo.insert(changeset)
 						pantryitem ->
-							changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
+							changeset = Pantryitem.changeset(pantryitem, %{pantryquantity: pantryitem.pantryquantity + groceryitem.groceryquantity,  monitor: groceryitem.monitor, baselevel: groceryitem.baselevel, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
 							Repo.update(changeset)
 					end
 					Repo.delete!(groceryitem)
