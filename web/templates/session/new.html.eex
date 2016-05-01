@@ -97,6 +97,12 @@
 			    </div>
 			</div>
 			<div class="form-group">
+			    <label for="icode" class="col-md-3 control-label">Household Size</label>
+			    <div class="col-md-9">
+				<%= number_input f, :household, class: "form-control" , placeholder: "0", value: "0" %>
+			    </div>
+			</div>
+			<div class="form-group">
 			    <div class="col-md-offset-3 col-md-9">
 				<%= submit "Register", class: "btn btn-primary" %>
 				<%#= link("Login", to: session_path(@conn, :new), class: "btn btn-success pull-right") %>
