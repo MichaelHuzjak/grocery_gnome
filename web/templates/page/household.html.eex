@@ -1,0 +1,8 @@
+<%= form_for @conn, page_path(@conn, :change_household), [as: :household], fn f -> %>
+    <div class="form-group">
+	<%= label f, :size, "Size", class: "control-label" %>
+	<%= number_input f, :size, class: "form-control", value: @conn.assigns.current_user.household %>
+    </div>
+    <%= submit "Submit" %>
+<% end %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
