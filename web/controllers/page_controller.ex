@@ -79,7 +79,7 @@ defmodule GroceryGnome.PageController do
       #  |> put_flash(:info, "User Household updated successfully.")
       #  |> redirect(to: page_path(conn, :home))
 			#	 {:error, changeset} ->
-		redirect(to: groceryitem_path(conn, :index))
+        render(conn, "home.html")
     #end				
 
 	end
