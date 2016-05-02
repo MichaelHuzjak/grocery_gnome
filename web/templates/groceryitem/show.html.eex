@@ -21,3 +21,4 @@
 
 <%= link "Edit", to: groceryitem_path(@conn, :edit, @groceryitem) %>
 <%= link "Back", to: groceryitem_path(@conn, :index) %>
+<%= render GroceryGnome.SharedView, "navbar.html", conn: @conn %>
