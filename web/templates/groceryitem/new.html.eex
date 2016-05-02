@@ -1,5 +1,5 @@
 
-<h2>New groceryitem</h2>
+<h2>New Grocery Entry</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: groceryitem_path(@conn, :create,  foodcatalog: @foodcatalog) %>

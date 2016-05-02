@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :groceryquantity, "Groceryquantity", class: "control-label" %>
+    <%= label f, :groceryquantity, "Quantity", class: "control-label" %>
     <%= number_input f, :groceryquantity, step: "any", class: "form-control" %>
   </div>
 

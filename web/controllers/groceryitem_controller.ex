@@ -155,16 +155,8 @@ defmodule GroceryGnome.GroceryitemController do
 			foodcatalog ->
 				userid = conn.assigns.current_user.id
 				query = Repo.get_by(Pantryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
-				case result do
-					nil ->
-						changeset = Groceryitem.changeset(%Groceryitem{})
-						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
-					groceryitem ->
-						#changeset = Groceryitem.changeset(	groceryitem)
-						#render(conn, "edit.html", groceryitem: 	groceryitem, changeset: changeset)
-						changeset = Groceryitem.changeset(%Groceryitem{})
-						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
-				end
+				changeset = Groceryitem.changeset(%Groceryitem{})
+				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
 		end
 	end
 
