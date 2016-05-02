@@ -8,7 +8,7 @@
 
     <div class="form-group">
 	<%= label f, :cuisine, "Cuisine", class: "control-label" %>
-	<%= select f, :cuisine, ["african", "chinese", "japanese", "korean", "vietnamese", "thai", "indian",
+	<%= select f, :cuisine, ["", "african", "chinese", "japanese", "korean", "vietnamese", "thai", "indian",
 	"british", "irish", "french", "italian", "mexican", "spanish", "middle",
 	"eastern", "jewish", "american", "cajun", "southern", "greek", "german",
 	"nordic", "eastern", "european", "caribbean", "latin american"],
@@ -17,7 +17,7 @@
 
     <div class="form-group">
 	<%= label f, :diet, "Diet", class: "control-label" %>
-	<%= select f, :diet, ["pescetarian", "lacto vegetarian", "ovo vegetarian", "vegan",
+	<%= select f, :diet, ["", "pescetarian", "lacto vegetarian", "ovo vegetarian", "vegan",
 	    "vegetarian"],
 	class: "form-control" %>
     </div>
