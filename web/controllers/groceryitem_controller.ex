@@ -32,6 +32,7 @@ defmodule GroceryGnome.GroceryitemController do
   def create(conn, %{"groceryitem" => groceryitem_params, "foodcatalog" => id}) do
 		foodcatalog = Repo.get!(Foodcatalog, id)
 		changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: groceryitem_params["groceryquantity"], foodcatalog_id: id, user_id: conn.assigns.current_user.id})
+		IO.inspect groceryitem_params["groceryquantity"]
     case Repo.insert(changeset) do
       {:ok, _groceryitem} ->
         conn
