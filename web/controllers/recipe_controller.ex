@@ -30,7 +30,7 @@ defmodule GroceryGnome.RecipeController do
   end
 
   def create(conn, %{"recipe" => recipe_params}) do
-    changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe_params["recipe_title"], instructions: recipe_params["instructions"], prep_time: recipe_params["prep_time"], cook_time: recipe_params["cook_time"], serving_size: recipe_params["serving_size"], user_id: conn.assigns.current_user.id})
+    changeset = Recipe.changeset(%Recipe{}, %{recipe_title: recipe_params["recipe_title"], instructions: recipe_params["instructions"], prep_time: recipe_params["prep_time"], cook_time: 0, serving_size: recipe_params["serving_size"], user_id: conn.assigns.current_user.id})
 		
     case Repo.insert(changeset) do
       {:ok, _recipe} ->

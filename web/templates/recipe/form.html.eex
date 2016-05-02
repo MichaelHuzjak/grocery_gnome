@@ -73,11 +73,6 @@
     </div>
 
     <div class="form-group">
-	<%= label f, :cook_time, "Cook time", class: "control-label" %>
-	<%= number_input f, :cook_time, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
 	<%= label f, :serving_size, "Serving Size", class: "control-label" %>
 	<%= number_input f, :serving_size, class: "form-control" %>
     </div>

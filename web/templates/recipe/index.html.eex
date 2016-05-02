@@ -6,9 +6,7 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Instructions</th>
       <th>Prep time</th>
-      <th>Cook time</th>
       <th>Serving Size</th>
       <th></th>
     </tr>
@@ -17,9 +15,7 @@
 <%= for recipe <- @recipes do %>
     <tr>
        <td><%= recipe.recipe_title %></td>
-      <td><%= recipe.instructions %></td>
       <td><%= recipe.prep_time %></td>
-       <td><%= recipe.cook_time %></td>
        <td><%= recipe.serving_size %></td>
       <td class="text-right">
         <%= link "Show", to: recipe_path(@conn, :show, recipe), class: "btn btn-default btn-xs" %>

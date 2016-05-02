@@ -50,7 +50,8 @@
 		    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @conn.assigns.current_user.username %>
 			<span class="glyphicon glyphicon-cog"></span></button>
 		    <ul class="dropdown-menu">
-			<li><a href="/changepassword">Change Password</a></li>
+		      <li><a href="/changepassword">Change Password</a></li>
+		      <li><a href="#" data-toggle="modal" data-target="#household">Manage Household Size</a></li>
 			<li><a href="#" data-toggle="modal" data-target="#managePrivacy">Manage Privacy Settings</a></li>
 			<li><a href="#" data-toggle="modal" data-target="#logout">Logout</a></li>
 		    </ul>
@@ -80,6 +81,32 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
         </div>
+    </div>
+</div>
+
+<div id="household" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Change Household Size</h4>
+        </div>
+        <div class="modal-body">
+	    <p1>Please enter a new household size.
+        </div>
+	<%= form_for @conn, page_path(@conn, :change_household), [as: :household], fn f -> %>
+
+        <div class="modal-footer">
+	  <%= label f, :size, "Size", class: "control-label" %>
+	  <%= number_input f, :size, class: "form-control", value: @conn.assigns.current_user.household %>
+        </div>
+
+
+        <div class="modal-footer">
+	  <%= submit "Submit", class: "btn btn-success" %>
+        </div>
+
+	
+	<%= end %>
     </div>
 </div>
 
