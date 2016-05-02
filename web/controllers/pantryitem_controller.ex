@@ -133,10 +133,12 @@ import Ecto.Date
 
 		IO.inspect result
 
-		name = String.split(result.foodname, " ")
-		|> Enum.map(&String.capitalize(&1))
-		|> (fn(f) -> (for x <- f, into: "", do: x <> " ") end).()
-
+		if result != nil do
+			name = String.split(result.foodname, " ")
+			|> Enum.map(&String.capitalize(&1))
+			|> (fn(f) -> (for x <- f, into: "", do: x <> " ") end).()
+		end
+		
 		case result do
 			nil ->
 				query = String.capitalize(query)
