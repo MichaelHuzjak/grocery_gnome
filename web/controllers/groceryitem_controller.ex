@@ -154,14 +154,21 @@ defmodule GroceryGnome.GroceryitemController do
 				render(conn, "foodform.html", name: query)
 			foodcatalog ->
 				userid = conn.assigns.current_user.id
-				query = Repo.get_by(Pantryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
-				changeset = Groceryitem.changeset(%Groceryitem{})
-				render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
-		end
+				groceryresult = Repo.get_by(Groceryitem, user_id: userid, foodcatalog_id: foodcatalog.id)
+				case groceryresult do
+					nil ->
+						changeset = Groceryitem.changeset(%Groceryitem{})
+						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+					groceryitem ->
+						changeset = Groceryitem.changeset(groceryitem)
+						render(conn, "edit.html", groceryitem: groceryitem, changeset: changeset)
+				end
+			end
 	end
 
 	def newgroceryfood(conn, _params) do
 		groceryitem = conn.params["groceryitem"]
+<<<<<<< HEAD
 		result = Repo.get_by(Foodcatalog, foodname: groceryitem["foodname"])
 		foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: String.downcase(groceryitem["foodname"]), unit: groceryitem["unit"], info: groceryitem["info"]})
 		case Repo.insert(foodcatalogchangeset) do
@@ -176,6 +183,22 @@ defmodule GroceryGnome.GroceryitemController do
 						render(conn, "new.html", changeset: changeset, foodcatalog: _foodcatalog, conn: @conn)
 				end
 		end
+=======
+					result = Repo.get_by(Foodcatalog, foodname: groceryitem["foodname"])
+					foodcatalogchangeset = Foodcatalog.changeset(%Foodcatalog{}, %{foodname: String.downcase(groceryitem["foodname"]), unit: groceryitem["unit"], info: groceryitem["info"]})
+								case Repo.insert(foodcatalogchangeset) do
+								  {:ok, foodcatalog} ->
+										changeset = Groceryitem.changeset(%Groceryitem{}, %{groceryquantity: groceryitem["groceryquantity"], foodcatalog_id: foodcatalog.id, user_id: conn.assigns.current_user.id})
+										case Repo.insert(changeset) do
+											{:ok, _groceryitem} ->
+												conn
+												|> put_flash(:info, "Grocery Item created successfully.")
+												|> redirect(to: groceryitem_path(conn, :index))
+											{:error, changeset} ->
+												render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, conn: @conn)
+										end
+								end
+>>>>>>> 5218097820007745b583278eaf0c2d142637408b
 	end
 
 	def shop_by_recipe(conn, _params) do

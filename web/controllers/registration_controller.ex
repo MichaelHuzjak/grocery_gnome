@@ -20,7 +20,10 @@ defmodule GroceryGnome.RegistrationController do
         |> put_flash(:info, "Successfully registered")
         |> redirect(to: session_path(conn, :new))
     else
-      render conn, "new.html", changeset: changeset
+			conn
+			|> put_flash(:error, "Failed to register")
+			  |> redirect(to: session_path(conn, :new))
+
     end
   end
     

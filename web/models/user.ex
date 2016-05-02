@@ -9,10 +9,11 @@ defmodule GroceryGnome.User do
     field :encrypted_password, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+		field :household, :integer
     timestamps
   end
 
-  @required_fields ~w(username password password_confirmation)
+  @required_fields ~w(username password password_confirmation household)
   @optional_fields ~w()
 
   @doc """
@@ -28,5 +29,7 @@ defmodule GroceryGnome.User do
     |> validate_length(:password, min: 1)
     |> validate_length(:password_confirmation, min: 1)
     |> validate_confirmation(:password)
+		|> validate_number(:household, greater_than: 0)
+
   end
 end
