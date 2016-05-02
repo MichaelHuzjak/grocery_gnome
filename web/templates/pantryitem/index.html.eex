@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Pantryquantity</th>
+      <th>Quantity</th>
       <th>Expiration</th>
 
       <th></th>
