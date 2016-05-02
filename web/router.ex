@@ -83,6 +83,7 @@ defmodule GroceryGnome.Router do
 		get "/shoppinglist", GroceryitemController, :shop_by_recipe
 		get "/shoppinglist/show/:id", GroceryitemController, :show_recipe
 		get "/shoppinglist/togrocery/:id", GroceryitemController, :recipe_to_grocery
+		get "/household", PageController, :household
 		post "/change_household", PageController, :change_household
   end
 

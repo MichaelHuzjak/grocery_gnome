@@ -67,20 +67,25 @@ defmodule GroceryGnome.PageController do
 	end
 
 
+	def household(conn, _params) do
+
+		render(conn, "household.html")
+	end
+	
 	def change_household(conn, _params) do
-			#userid = conn.assigns.current_user.id
-			#groceryitems = conn.params["household"]
-			#newsize = groceryitems["size"]
-			#changeset = User.changeset(conn.assigns.current_user, %{household: newsize})
-			#put_change(changeset, :household, newsize)
-			# case Repo.update(changeset) do
-			#	 {:ok, recipe} ->
-      #  conn
-      #  |> put_flash(:info, "User Household updated successfully.")
-      #  |> redirect(to: page_path(conn, :home))
-			#	 {:error, changeset} ->
-        render(conn, "home.html")
-    #end				
+			userid = conn.assigns.current_user.id
+			household = conn.params["household"]
+			newsize = household["size"]
+			changeset = User.changeset(conn.assigns.current_user, %{household: newsize})
+			put_change(changeset, :household, newsize)
+			 case Repo.update(changeset) do
+				 {:ok, recipe} ->
+        conn
+        |> put_flash(:info, "User Household updated successfully.")
+        |> redirect(to: page_path(conn, :home))
+				 {:error, changeset} ->
+        render(conn, "household.html")
+    end				
 
 	end
 		
