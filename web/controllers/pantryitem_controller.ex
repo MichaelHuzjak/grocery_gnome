@@ -147,7 +147,7 @@ import Ecto.Date
 				case pantryresult do
 					nil ->
 						changeset = Pantryitem.changeset(%Pantryitem{})
-						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog)
+						render(conn, "new.html", changeset: changeset, foodcatalog: foodcatalog, name: name)
 					pantryitem ->
 						foodcatalog = Repo.get!(Foodcatalog, pantryitem.foodcatalog_id)
 						changeset = Pantryitem.changeset(pantryitem,%{pantryquantity: pantryitem.pantryquantity, expiration: pantryitem.expiration, foodcatalog_id: pantryitem.foodcatalog_id, user_id: conn.assigns.current_user.id})
