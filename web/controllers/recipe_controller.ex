@@ -6,6 +6,7 @@ defmodule GroceryGnome.RecipeController do
 		alias GroceryGnome.Recipe
 		alias GroceryGnome.Ingredient
 		alias GroceryGnome.Foodcatalog
+		alias GroceryGnome.Meal
 		import Ecto.Query
 
   plug :scrub_params, "recipe" when action in [:create, :update]
@@ -133,6 +134,13 @@ defmodule GroceryGnome.RecipeController do
 
 		for ingredient <- ingredients do
 			Repo.delete!(ingredient)
+		end
+
+		mealquery = from m in Meal, where: m.recipe_id == ^id
+		meals = Repo.all(mealquery)
+
+		for meal <- meals do
+			Repo.delete!(meal)
 		end
 		
     # Here we use delete! (with a bang) because we expect
